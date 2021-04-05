@@ -3,6 +3,9 @@
 
 # IDE
 *.idea
+*.ipr
+*.iml
+.*iws
 
 # Log file
 *.log
