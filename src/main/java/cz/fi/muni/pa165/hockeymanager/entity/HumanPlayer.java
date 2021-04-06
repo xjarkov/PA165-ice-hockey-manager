@@ -40,6 +40,17 @@ public class HumanPlayer {
     @Setter
     private Team team;
 
+    public HumanPlayer() {
+    }
+
+    public HumanPlayer(String name, String email, String password, boolean isAdmin, Team team) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.isAdmin = isAdmin;
+        this.team = team;
+    }
+
     @Override
     public String toString() {
         return "Human player {" +
