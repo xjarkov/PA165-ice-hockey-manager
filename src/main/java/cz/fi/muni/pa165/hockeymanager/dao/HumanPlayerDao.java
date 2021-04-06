@@ -3,6 +3,9 @@ package cz.fi.muni.pa165.hockeymanager.dao;
 import cz.fi.muni.pa165.hockeymanager.entity.HumanPlayer;
 import java.util.List;
 
+/**
+ * @author Lukas Machalek (485196)
+ */
 public interface HumanPlayerDao {
     /**
      * Creates HumanPlayer object in database.
