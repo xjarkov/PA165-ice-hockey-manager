@@ -84,6 +84,10 @@ public class Match {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, homeTeam, visitingTeam, homeTeamScore, visitingTeamScore, date, time);
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + (int)id;
+        return result;
     }
+
 }
