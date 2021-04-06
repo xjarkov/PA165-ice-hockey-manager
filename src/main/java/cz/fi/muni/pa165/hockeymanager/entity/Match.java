@@ -24,6 +24,7 @@ public class Match {
     @Getter
     private Team homeTeam;
 
+
     @ManyToOne
     @Getter
     private Team visitingTeam;
@@ -58,22 +59,6 @@ public class Match {
         visitingTeamScore = 0;
     }
 
-    public void simulateMatch(){
-        int max = 5;
-        int min = 0;
-        visitingTeamScore = (int) (Math.random() * (max - min)) + min;
-        homeTeamScore = (int) (Math.random() * (max - min)) + min;
-
-    }
-
-    public void addHomeScore(){
-        homeTeamScore++;
-    }
-
-    public void addVisitingScore(){
-        visitingTeamScore++;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -90,4 +75,16 @@ public class Match {
         return result;
     }
 
+    @Override
+    public String toString() {
+        return "Match{" +
+                "id=" + id +
+                ", homeTeam=" + homeTeam +
+                ", visitingTeam=" + visitingTeam +
+                ", homeTeamScore=" + homeTeamScore +
+                ", visitingTeamScore=" + visitingTeamScore +
+                ", date=" + date +
+                ", time=" + time +
+                '}';
+    }
 }
