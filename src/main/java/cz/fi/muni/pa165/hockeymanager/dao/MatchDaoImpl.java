@@ -27,9 +27,7 @@ public class MatchDaoImpl implements MatchDao {
 
     @Override
     public Match findById(Long id) {
-        return em.createQuery("select m from Match m where m.id = :id", Match.class)
-                .setParameter("id", id)
-                .getSingleResult();
+        return em.find(Match.class, id);
     }
 
     @Override
