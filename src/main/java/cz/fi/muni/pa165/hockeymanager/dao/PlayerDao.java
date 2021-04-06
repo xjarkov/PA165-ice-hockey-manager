@@ -15,10 +15,10 @@ public interface PlayerDao {
     void create(Player player);
 
     /**
-     * Removes player by ID
-     * @param playerId Player ID
+     * Removes player
+     * @param player to remove
      */
-    void remove(Long playerId);
+    void remove(Player player);
 
     /**
      * @return List of all players
