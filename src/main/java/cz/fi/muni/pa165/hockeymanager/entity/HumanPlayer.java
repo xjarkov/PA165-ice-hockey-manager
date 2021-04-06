@@ -1,5 +1,6 @@
 package cz.fi.muni.pa165.hockeymanager.entity;
 
+import cz.fi.muni.pa165.hockeymanager.enums.Role;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -35,7 +36,7 @@ public class HumanPlayer {
     @Column(nullable = false)
     @Getter
     @Setter
-    private boolean isAdmin = false;
+    private Role role = Role.PLAYER;
 
     @Column
     @OneToOne
@@ -46,11 +47,11 @@ public class HumanPlayer {
     public HumanPlayer() {
     }
 
-    public HumanPlayer(String name, String email, String password, boolean isAdmin, Team team) {
+    public HumanPlayer(String name, String email, String password, Role role, Team team) {
         this.name = name;
         this.email = email;
         this.password = password;
-        this.isAdmin = isAdmin;
+        this.role = role;
         this.team = team;
     }
 
@@ -60,7 +61,7 @@ public class HumanPlayer {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", email=" + email +
-                ", isAdmin=" + isAdmin +
+                ", role=" + role +
                 '}';
     }
 
