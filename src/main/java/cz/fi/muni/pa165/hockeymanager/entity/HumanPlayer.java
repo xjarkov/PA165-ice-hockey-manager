@@ -5,6 +5,9 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
+/**
+ * @author Petr Šopf (506511)
+ */
 @Entity
 public class HumanPlayer {
     @Id
