@@ -9,9 +9,9 @@ import java.util.List;
 public interface HumanPlayerDao {
     /**
      * Creates HumanPlayer object in database.
-     * @param p HumanPlayer to be added into database.
+     * @param player HumanPlayer to be added into database.
      */
-    void create(HumanPlayer p);
+    void create(HumanPlayer player);
 
     /**
      * Finds all HumanPlayer saved in database.
@@ -28,7 +28,7 @@ public interface HumanPlayerDao {
 
     /**
      * Removes given HumanPlayer from database.
-     * @param p HumanPlayer to be removed.
+     * @param player HumanPlayer to be removed.
      */
-    void remove(HumanPlayer p);
+    void remove(HumanPlayer player);
 }
