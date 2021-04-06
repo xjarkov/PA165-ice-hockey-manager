@@ -6,7 +6,7 @@ import java.util.List;
 /*
 * Team table class
 *
-* @author Kristian Kosorin
+* @author Kristian Kosorin (456620)
 * */
 public interface TeamDao {
     /*
