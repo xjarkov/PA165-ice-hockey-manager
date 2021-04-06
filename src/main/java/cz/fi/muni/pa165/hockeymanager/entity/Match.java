@@ -11,7 +11,9 @@ import javax.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
-
+/**
+ * @author Lukas Machalek (485196)
+ */
 @Entity
 public class Match {
 
