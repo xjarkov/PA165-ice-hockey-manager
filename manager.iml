@@ -5,7 +5,9 @@
       <configuration>
         <setting name="validation-enabled" value="true" />
         <setting name="provider-name" value="Hibernate" />
-        <datasource-mapping />
+        <datasource-mapping>
+          <factory-entry name="default" />
+        </datasource-mapping>
         <naming-strategy-map />
         <deploymentDescriptor name="persistence.xml" url="file://$MODULE_DIR$/src/main/resources/META-INF/persistence.xml" />
       </configuration>
@@ -65,5 +67,6 @@
     <orderEntry type="library" scope="TEST" name="Maven: org.webjars:jquery:3.5.1" level="project" />
     <orderEntry type="library" name="Maven: javax.el:javax.el-api:3.0.0" level="project" />
     <orderEntry type="library" name="Maven: org.glassfish.web:javax.el:2.2.4" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.projectlombok:lombok:1.18.20" level="project" />
   </component>
 </module>
