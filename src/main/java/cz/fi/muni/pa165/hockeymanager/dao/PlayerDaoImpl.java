@@ -4,10 +4,12 @@ import cz.fi.muni.pa165.hockeymanager.entity.Player;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import org.springframework.stereotype.Repository;
 
 /**
  * @author Lukas Machalek (485196)
  */
+@Repository
 public class PlayerDaoImpl implements PlayerDao {
     @PersistenceContext
     private EntityManager em;
