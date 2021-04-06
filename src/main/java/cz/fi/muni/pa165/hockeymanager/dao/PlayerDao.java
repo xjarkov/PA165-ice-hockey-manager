@@ -26,7 +26,7 @@ public interface PlayerDao {
     List<Player> findAll();
 
     /**
-     * @return Player by it's id
+     * @return Player by its id
      */
     Player findById(Long id);
 }
