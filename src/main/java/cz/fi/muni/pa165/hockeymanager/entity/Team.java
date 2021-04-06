@@ -8,6 +8,9 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.*;
 
+/**
+ * @author Matus Jarkovic (456441)
+ */
 @Entity
 public class Team {
 
