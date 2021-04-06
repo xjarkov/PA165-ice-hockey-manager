@@ -19,9 +19,9 @@ public interface TeamDao {
     /*
     * Removes entity from Team table
     *
-    * @param remove
+    * @param team
     * */
-    void remove(Team remove);
+    void remove(Team team);
 
     /*
     * Find and return Team by name.
