@@ -43,6 +43,14 @@ public class Player {
 
     public Player() {}
 
+    public Player(String firstName, String lastName, Integer offStrength, Integer deffStrength, Team team) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.offensiveStrength = offStrength;
+        this.deffensiveStrength = deffStrength;
+        this.team = team;
+    }
+
     public String getFullName() {
         return this.firstName + this.lastName;
     }
