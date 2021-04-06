@@ -4,6 +4,9 @@ import cz.fi.muni.pa165.hockeymanager.entity.Player;
 
 import java.util.List;
 
+/**
+ * @author Petr Šopf (506511)
+ */
 public interface PlayerDao {
     /**
      * Creates new player
