@@ -6,9 +6,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 @Entity
 public class Team {
@@ -37,15 +35,28 @@ public class Team {
     @OneToOne
     @Getter
     @Setter
-    private HumanPlayer manager;
+    private HumanPlayer manager = null;
 
     @OneToMany
     @Getter
-    private List<Player> players = new ArrayList<>();
+    private Set<Player> players = new HashSet<>();
 
     @OneToMany
     @Getter
-    private Queue<Match> matches = new Queue<>();
+    private Queue<Match> matches = new PriorityQueue<>();
+
+    public Team(String name, Championship championship) {
+        this.name = name;
+        this.championship = championship;
+    }
+
+    public void addPlayer(Player player) {
+        players.add(player);
+    }
+
+    public void addMatch(Match match) {
+        matches.add(match);
+    }
 
     @Override
     public String toString() {
