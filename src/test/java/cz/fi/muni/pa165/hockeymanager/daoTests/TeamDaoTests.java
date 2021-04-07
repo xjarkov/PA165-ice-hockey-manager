@@ -14,6 +14,9 @@ import org.testng.annotations.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+/**
+ * @author Lukas Machalek (485196)
+ */
 @ContextConfiguration(classes = PersistenceApplicationContext.class)
 @Transactional
 @TestExecutionListeners(TransactionalTestExecutionListener.class)
