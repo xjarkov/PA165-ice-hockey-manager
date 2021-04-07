@@ -17,7 +17,6 @@ public class Team {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Getter
-    @Setter
     private Long id;
 
     @NotNull

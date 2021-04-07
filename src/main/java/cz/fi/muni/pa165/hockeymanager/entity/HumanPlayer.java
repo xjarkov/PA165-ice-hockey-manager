@@ -12,10 +12,10 @@ import javax.validation.constraints.NotNull;
  */
 @Entity
 public class HumanPlayer {
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Getter
-    @Setter
     private Long id;
 
     @Column(unique = true)

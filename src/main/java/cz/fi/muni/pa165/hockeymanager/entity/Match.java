@@ -39,6 +39,7 @@ public class Match {
 
     @NotNull
     @Getter
+    @Setter
     private Date dateTime;
 
     public Match(){}
