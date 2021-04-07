@@ -38,8 +38,7 @@ public class HumanPlayer {
     @Setter
     private Role role = Role.PLAYER;
 
-    @Column
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @Getter
     @Setter
     private Team team;
