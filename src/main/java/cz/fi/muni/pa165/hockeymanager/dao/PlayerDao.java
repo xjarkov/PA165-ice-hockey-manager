@@ -10,12 +10,14 @@ import java.util.List;
 public interface PlayerDao {
     /**
      * Creates new player
+     *
      * @param player Player entity
      */
     void create(Player player);
 
     /**
      * Removes player
+     *
      * @param player to remove
      */
     void remove(Player player);
