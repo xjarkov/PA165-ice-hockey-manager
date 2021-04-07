@@ -1,11 +1,14 @@
-cz/fi/muni/pa165/hockeymanager/entity/Admin.class
+cz/fi/muni/pa165/hockeymanager/enums/Role.class
 cz/fi/muni/pa165/hockeymanager/dao/PlayerDao.class
 cz/fi/muni/pa165/hockeymanager/PersistenceApplicationContext.class
 cz/fi/muni/pa165/hockeymanager/IceHockeyManager.class
+cz/fi/muni/pa165/hockeymanager/dao/HumanPlayerDao.class
+cz/fi/muni/pa165/hockeymanager/dao/HumanPlayerDaoImpl.class
 cz/fi/muni/pa165/hockeymanager/entity/HumanPlayer.class
 cz/fi/muni/pa165/hockeymanager/dao/PlayerDaoImpl.class
 cz/fi/muni/pa165/hockeymanager/dao/TeamDaoImpl.class
 cz/fi/muni/pa165/hockeymanager/dao/MatchDao.class
+cz/fi/muni/pa165/hockeymanager/enums/Championship.class
 cz/fi/muni/pa165/hockeymanager/entity/Player.class
 cz/fi/muni/pa165/hockeymanager/entity/Team.class
 cz/fi/muni/pa165/hockeymanager/entity/Match.class
