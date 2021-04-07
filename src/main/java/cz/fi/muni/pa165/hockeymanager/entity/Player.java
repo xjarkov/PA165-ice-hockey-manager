@@ -6,22 +6,23 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+/**
+* @author Kristian Kosorin (456620)
+*/
 @Entity
 public class Player {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Getter
     private Long id;
 
     @NotNull
-    @Column(nullable = false)
     @Getter
     @Setter
     private String firstName;
 
     @NotNull
-    @Column(nullable = false)
     @Getter
     @Setter
     private String lastName;
