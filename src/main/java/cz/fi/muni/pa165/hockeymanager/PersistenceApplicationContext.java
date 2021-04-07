@@ -1,5 +1,6 @@
 package cz.fi.muni.pa165.hockeymanager;
 
+import cz.fi.muni.pa165.hockeymanager.dao.HumanPlayerDao;
 import cz.fi.muni.pa165.hockeymanager.dao.MatchDao;
 import cz.fi.muni.pa165.hockeymanager.dao.PlayerDao;
 import cz.fi.muni.pa165.hockeymanager.dao.TeamDao;
@@ -7,10 +8,10 @@ import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.instrument.classloading.InstrumentationLoadTimeWeaver;
 import org.springframework.instrument.classloading.LoadTimeWeaver;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.orm.jpa.JpaTransactionManager;
@@ -23,8 +24,16 @@ import javax.sql.DataSource;
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories
-@ComponentScan(basePackageClasses = {MatchDao.class, PlayerDao.class, TeamDao.class}, basePackages = "cz.fi.muni.pa165.hockeymanager")
+@ComponentScan(basePackages = "cz.fi.muni.pa165.hockeymanager")
 public class PersistenceApplicationContext {
+
+    /**
+     * Enables automatic translation of exceptions to DataAccessExceptions.
+     */
+    @Bean
+    public PersistenceExceptionTranslationPostProcessor postProcessor() {
+        return new PersistenceExceptionTranslationPostProcessor();
+    }
 
     @Bean
     public JpaTransactionManager transactionManager() {
@@ -56,7 +65,6 @@ public class PersistenceApplicationContext {
     @Bean
     public DataSource db() {
         EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
-        EmbeddedDatabase db = builder.setType(EmbeddedDatabaseType.DERBY).build();
-        return db;
+        return builder.setType(EmbeddedDatabaseType.DERBY).build();
     }
 }
