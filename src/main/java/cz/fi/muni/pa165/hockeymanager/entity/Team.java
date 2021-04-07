@@ -61,8 +61,16 @@ public class Team {
         players.add(player);
     }
 
+    public void removePlayer(Player player) {
+        players.remove(player);
+    }
+
     public void addMatch(Match match) {
         matches.add(match);
+    }
+
+    public void removeMatch(Match match) {
+        matches.remove(match);
     }
 
     @Override
