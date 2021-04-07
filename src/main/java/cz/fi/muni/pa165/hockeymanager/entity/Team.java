@@ -13,6 +13,7 @@ import java.util.*;
  */
 @Entity
 public class Team {
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Getter
@@ -20,7 +21,7 @@ public class Team {
     private Long id;
 
     @NotNull
-    @Column(nullable = false, unique = true)
+    @Column(unique = true)
     @Getter
     @Setter
     private String name;

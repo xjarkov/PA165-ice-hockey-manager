@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 /**
  * @author Petr Šopf (506511)
@@ -17,23 +18,24 @@ public class HumanPlayer {
     @Setter
     private Long id;
 
-    @Column(nullable = false, unique = true)
+    @Column(unique = true)
+    @NotNull
     @Getter
     @Setter
-
     private String name;
 
-    @Column(nullable = false, unique = true)
+    @Column(unique = true)
+    @NotNull
     @Getter
     @Setter
     private String email;
 
-    @Column(nullable = false)
+    @NotNull
     @Getter
     @Setter
     private String password;
 
-    @Column(nullable = false)
+    @NotNull
     @Getter
     @Setter
     private Role role = Role.PLAYER;

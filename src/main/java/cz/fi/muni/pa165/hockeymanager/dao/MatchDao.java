@@ -11,6 +11,7 @@ public interface MatchDao {
 
     /**
      * Creates new match
+     *
      * @param match Match entity
      */
     void create(Match match);
