@@ -20,7 +20,6 @@ public class HumanPlayer {
     @Column(nullable = false, unique = true)
     @Getter
     @Setter
-
     private String name;
 
     @Column(nullable = false, unique = true)

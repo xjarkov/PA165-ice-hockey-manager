@@ -12,6 +12,8 @@ import org.testng.annotations.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 
+import javax.validation.ConstraintViolationException;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
@@ -60,7 +62,7 @@ public class HumanPlayerDaoTests extends AbstractTestNGSpringContextTests {
     }
 
     @Test
-    public void removeMatchTest() {
+    public void removeHumanPlayerTest() {
         HumanPlayer humanPlayer1 = new HumanPlayer("Jozef", "Mrkva", "password123", Role.PLAYER, null);
 
         HumanPlayerDao.create(humanPlayer1);
