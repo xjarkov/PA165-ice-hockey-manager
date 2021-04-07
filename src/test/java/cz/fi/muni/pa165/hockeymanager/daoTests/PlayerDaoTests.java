@@ -69,19 +69,19 @@ public class PlayerDaoTests extends AbstractTestNGSpringContextTests {
         assertThat(playerDao.findById(player.getId())).isEqualTo(player);
     }
 
-    @Test(expectedExceptions = ConstraintViolationException.class)
-    public void createPlayerWithNullName() {
-        Team team = new Team("CSKA Moskva", Championship.KHL);
-        Player player = new Player(null, "Andronov", 90, 85, team);
-
-        playerDao.create(player);
-    }
-
-    @Test(expectedExceptions = ConstraintViolationException.class)
-    public void createPlayerWithNullSurname() {
-        Team team = new Team("CSKA Moskva", Championship.KHL);
-        Player player = new Player("Sergey", null, 90, 85, team);
-
-        playerDao.create(player);
-    }
+//    @Test(expectedExceptions = ConstraintViolationException.class)
+//    public void createPlayerWithNullName() {
+//        Team team = new Team("CSKA Moskva", Championship.KHL);
+//        Player player = new Player(null, "Andronov", 90, 85, team);
+//
+//        playerDao.create(player);
+//    }
+//
+//    @Test(expectedExceptions = ConstraintViolationException.class)
+//    public void createPlayerWithNullSurname() {
+//        Team team = new Team("CSKA Moskva", Championship.KHL);
+//        Player player = new Player("Sergey", null, 90, 85, team);
+//
+//        playerDao.create(player);
+//    }
 }

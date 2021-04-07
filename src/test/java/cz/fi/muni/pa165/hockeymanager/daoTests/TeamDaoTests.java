@@ -101,16 +101,16 @@ public class TeamDaoTests extends AbstractTestNGSpringContextTests {
         assertThat(teamDao.findByName("team1")).isEqualTo(team1);
         assertThat(teamDao.findByName("team2")).isEqualTo(team2);
     }
-/*
-    @Test(expectedExceptions = ConstraintViolationException.class)
-    public void createTeamWithNullChampionship() {
-        Team team = new Team("team", null);
-        teamDao.create(team);
-    }
 
-    @Test(expectedExceptions = ConstraintViolationException.class)
-    public void createTeamWithNullName() {
-        Team team = new Team(null, Championship.SHL);
-        teamDao.create(team);
-    }*/
+//    @Test(expectedExceptions = ConstraintViolationException.class)
+//    public void createTeamWithNullChampionship() {
+//        Team team = new Team("team", null);
+//        teamDao.create(team);
+//    }
+//
+//    @Test(expectedExceptions = ConstraintViolationException.class)
+//    public void createTeamWithNullName() {
+//        Team team = new Team(null, Championship.SHL);
+//        teamDao.create(team);
+//    }
 }
