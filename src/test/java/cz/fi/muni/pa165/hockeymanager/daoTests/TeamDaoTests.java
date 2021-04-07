@@ -52,5 +52,25 @@ public class TeamDaoTests extends AbstractTestNGSpringContextTests {
         assertThat(teamDao.findAll().size()).isEqualTo(4);
     }
 
+    @Test
+    public void findTeamByIdTest(){
+        Team team1 = new Team("team1", Championship.SHL);
+        Team team2 = new Team("team2", Championship.SHL);
+        Team team3 = new Team("team3", Championship.SHL);
+        Team team4 = new Team("team4", Championship.SHL);
+
+        teamDao.create(team1);
+        teamDao.create(team2);
+        teamDao.create(team3);
+
+        assertThat(teamDao.findById(team1.getId())).isEqualTo(team1);
+        assertThat(teamDao.findById(team2.getId())).isEqualTo(team2);
+        assertThat(teamDao.findById(team3.getId())).isEqualTo(team3);
+
+        teamDao.create(team4);
+        assertThat(teamDao.findById(team4.getId())).isEqualTo(team4);
+    }
+
+
 
 }
