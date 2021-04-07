@@ -36,7 +36,7 @@ public class Player {
     @Setter
     private Integer deffensiveStrength;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @Getter
     @Setter
     private Team team;

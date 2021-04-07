@@ -2,11 +2,7 @@ package cz.fi.muni.pa165.hockeymanager.entity;
 
 import java.sql.Time;
 import java.util.Date;
-import java.util.Objects;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,6 +11,7 @@ import lombok.Setter;
  * @author Lukas Machalek (485196)
  */
 @Entity
+@Table(name = "IceHockeyMatch")
 public class Match {
 
     @Id
@@ -22,12 +19,12 @@ public class Match {
     @Getter
     private long id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @Getter
     private Team homeTeam;
 
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @Getter
     private Team visitingTeam;
 
@@ -43,19 +40,14 @@ public class Match {
 
     @NotNull
     @Getter
-    private Date date;
-
-    @NotNull
-    @Getter
-    private Time time;
+    private Date dateTime;
 
     public Match(){}
 
-    public Match(Team homeTeam, Team visitingTeam, Date date, Time time) {
+    public Match(Team homeTeam, Team visitingTeam, Date dateTime) {
         this.homeTeam = homeTeam;
         this.visitingTeam = visitingTeam;
-        this.date = date;
-        this.time = time;
+        this.dateTime = dateTime;
 
         homeTeamScore = 0;
         visitingTeamScore = 0;
@@ -85,8 +77,7 @@ public class Match {
                 ", visitingTeam=" + visitingTeam +
                 ", homeTeamScore=" + homeTeamScore +
                 ", visitingTeamScore=" + visitingTeamScore +
-                ", date=" + date +
-                ", time=" + time +
+                ", date=" + dateTime +
                 '}';
     }
 }

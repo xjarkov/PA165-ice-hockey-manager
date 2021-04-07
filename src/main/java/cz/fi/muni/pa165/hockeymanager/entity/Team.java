@@ -13,9 +13,10 @@ import java.util.*;
  */
 @Entity
 public class Team {
-
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Getter
+    @Setter
     private Long id;
 
     @NotNull
@@ -35,18 +36,21 @@ public class Team {
     @Setter
     private Long points = 0L;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @Getter
     @Setter
     private HumanPlayer manager = null;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @Getter
     private Set<Player> players = new HashSet<>();
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @Getter
-    private Queue<Match> matches = new PriorityQueue<>();
+    private Set<Match> matches = new HashSet<>();
+
+    public Team() {
+    }
 
     public Team(String name, Championship championship) {
         this.name = name;
