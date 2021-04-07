@@ -4,6 +4,7 @@ import cz.fi.muni.pa165.hockeymanager.PersistenceApplicationContext;
 import cz.fi.muni.pa165.hockeymanager.dao.TeamDao;
 import cz.fi.muni.pa165.hockeymanager.entity.Team;
 import cz.fi.muni.pa165.hockeymanager.enums.Championship;
+import javax.validation.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
@@ -100,4 +101,16 @@ public class TeamDaoTests extends AbstractTestNGSpringContextTests {
         assertThat(teamDao.findByName("team1")).isEqualTo(team1);
         assertThat(teamDao.findByName("team2")).isEqualTo(team2);
     }
+/*
+    @Test(expectedExceptions = ConstraintViolationException.class)
+    public void createTeamWithNullChampionship() {
+        Team team = new Team("team", null);
+        teamDao.create(team);
+    }
+
+    @Test(expectedExceptions = ConstraintViolationException.class)
+    public void createTeamWithNullName() {
+        Team team = new Team(null, Championship.SHL);
+        teamDao.create(team);
+    }*/
 }
