@@ -11,6 +11,7 @@ import lombok.Setter;
  * @author Lukas Machalek (485196)
  */
 @Entity
+@Table(name = "IceHockeyMatch")
 public class Match {
 
     @Id
