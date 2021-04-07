@@ -28,7 +28,7 @@ public class HumanPlayerDaoTests extends AbstractTestNGSpringContextTests {
 
     @Test
     public void createHumanPlayerTest() {
-        HumanPlayer humanPlayer = new HumanPlayer("Jozef", "Mrkva", "password123", Role.PLAYER, null);
+        HumanPlayer humanPlayer = new HumanPlayer("Jozef Mrkva", "jozef@muni.cz", "password123", Role.PLAYER, null);
 
         HumanPlayerDao.create(humanPlayer);
         assertThat(HumanPlayerDao.findById(humanPlayer.getId())).isEqualTo(humanPlayer);
@@ -36,9 +36,9 @@ public class HumanPlayerDaoTests extends AbstractTestNGSpringContextTests {
 
     @Test
     public void findAllHumanPlayersTest() {
-        HumanPlayer humanPlayer1 = new HumanPlayer("Jozef", "Mrkva", "password123", Role.PLAYER, null);
-        HumanPlayer humanPlayer2 = new HumanPlayer("Ján", "Petržlen", "password321", Role.PLAYER, null);
-        HumanPlayer humanPlayer3 = new HumanPlayer("Fero", "Kaleráb", "password", Role.ADMIN, null);
+        HumanPlayer humanPlayer1 = new HumanPlayer("Jozef Mrkva", "jozef@muni.cz", "password123", Role.PLAYER, null);
+        HumanPlayer humanPlayer2 = new HumanPlayer("Ján Petržlen", "jan@muni.cz", "password321", Role.PLAYER, null);
+        HumanPlayer humanPlayer3 = new HumanPlayer("Fero Novák", "fero@muni.cz", "password", Role.ADMIN, null);
 
         assertThat(HumanPlayerDao.findAll().size()).isEqualTo(0);
         HumanPlayerDao.create(humanPlayer1);
@@ -50,9 +50,9 @@ public class HumanPlayerDaoTests extends AbstractTestNGSpringContextTests {
 
     @Test
     public void findHumanPlayerByIdTest() {
-        HumanPlayer humanPlayer1 = new HumanPlayer("Jozef", "Mrkva", "password123", Role.PLAYER, null);
-        HumanPlayer humanPlayer2 = new HumanPlayer("Ján", "Petržlen", "password321", Role.PLAYER, null);
-        HumanPlayer humanPlayer3 = new HumanPlayer("Fero", "Kaleráb", "password", Role.ADMIN, null);
+        HumanPlayer humanPlayer1 = new HumanPlayer("Jozef Mrkva", "jozef@muni.cz", "password123", Role.PLAYER, null);
+        HumanPlayer humanPlayer2 = new HumanPlayer("Ján Petržlen", "jan@muni.cz", "password321", Role.PLAYER, null);
+        HumanPlayer humanPlayer3 = new HumanPlayer("Fero Novák", "fero@muni.cz", "password", Role.ADMIN, null);
 
         HumanPlayerDao.create(humanPlayer1);
         HumanPlayerDao.create(humanPlayer2);
@@ -63,11 +63,23 @@ public class HumanPlayerDaoTests extends AbstractTestNGSpringContextTests {
 
     @Test
     public void removeHumanPlayerTest() {
-        HumanPlayer humanPlayer1 = new HumanPlayer("Jozef", "Mrkva", "password123", Role.PLAYER, null);
+        HumanPlayer humanPlayer1 = new HumanPlayer("Jozef Mrkva", "jozef@muni.cz", "password123", Role.PLAYER, null);
 
         HumanPlayerDao.create(humanPlayer1);
         assertThat(HumanPlayerDao.findById(humanPlayer1.getId())).isEqualTo(humanPlayer1);
         HumanPlayerDao.remove(humanPlayer1);
         assertThat(HumanPlayerDao.findById(humanPlayer1.getId())).isEqualTo(null);
+    }
+
+    @Test(expectedExceptions = ConstraintViolationException.class)
+    public void nullNameExceptionTest() {
+        HumanPlayer humanPlayer1 = new HumanPlayer(null, "jozef@muni.cz", "password123", Role.PLAYER, null);
+        HumanPlayerDao.create(humanPlayer1);
+    }
+
+    @Test(expectedExceptions = ConstraintViolationException.class)
+    public void nullEmailExceptionTest() {
+        HumanPlayer humanPlayer1 = new HumanPlayer("Jozef Mrkva", null, "password123", Role.PLAYER, null);
+        HumanPlayerDao.create(humanPlayer1);
     }
 }
