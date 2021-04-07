@@ -2,10 +2,8 @@ package cz.fi.muni.pa165.hockeymanager.daoTests;
 
 import cz.fi.muni.pa165.hockeymanager.PersistenceApplicationContext;
 import cz.fi.muni.pa165.hockeymanager.dao.TeamDao;
-import cz.fi.muni.pa165.hockeymanager.entity.Match;
 import cz.fi.muni.pa165.hockeymanager.entity.Team;
 import cz.fi.muni.pa165.hockeymanager.enums.Championship;
-import java.util.Calendar;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
@@ -53,7 +51,7 @@ public class TeamDaoTests extends AbstractTestNGSpringContextTests {
     }
 
     @Test
-    public void findTeamByIdTest(){
+    public void findTeamByIdTest() {
         Team team1 = new Team("team1", Championship.SHL);
         Team team2 = new Team("team2", Championship.SHL);
         Team team3 = new Team("team3", Championship.SHL);
@@ -72,7 +70,7 @@ public class TeamDaoTests extends AbstractTestNGSpringContextTests {
     }
 
     @Test
-    public void removeTeamTest(){
+    public void removeTeamTest() {
         Team team1 = new Team("team1", Championship.SHL);
         Team team2 = new Team("team2", Championship.SHL);
 
@@ -89,7 +87,7 @@ public class TeamDaoTests extends AbstractTestNGSpringContextTests {
     }
 
     @Test
-    public void findTeamByNameTest(){
+    public void findTeamByNameTest() {
         Team team1 = new Team("team1", Championship.SHL);
         Team team2 = new Team("team2", Championship.SHL);
 
@@ -99,5 +97,4 @@ public class TeamDaoTests extends AbstractTestNGSpringContextTests {
         assertThat(teamDao.findByName("team1")).isEqualTo(team1);
         assertThat(teamDao.findByName("team2")).isEqualTo(team2);
     }
-
 }
