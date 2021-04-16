@@ -14,7 +14,7 @@ import javax.validation.constraints.NotNull;
 public class HumanPlayer {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter
     private Long id;
 
