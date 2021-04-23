@@ -36,16 +36,16 @@ public class Team {
     @Setter
     private Long points = 0L;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @Getter
     @Setter
     private HumanPlayer manager = null;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany
     @Getter
     private Set<Player> players = new HashSet<>();
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany
     @Getter
     private Set<Match> matches = new HashSet<>();
 
@@ -86,27 +86,15 @@ public class Team {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (!(obj instanceof Team))
-            return false;
-        Team other = (Team) obj;
-        if (name == null) {
-            if (other.name != null)
-                return false;
-        } else if (!name.equals(other.getName()))
-            return false;
-        return true;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Team team = (Team) o;
+        return name.equals(team.name);
     }
 
     @Override
     public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((name == null) ? 0 : name.hashCode());
-        return result;
+        return Objects.hash(name);
     }
 }

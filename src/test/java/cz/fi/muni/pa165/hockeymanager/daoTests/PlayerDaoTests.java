@@ -84,4 +84,20 @@ public class PlayerDaoTests extends AbstractTestNGSpringContextTests {
 
         playerDao.create(player);
     }
+
+    @Test(expectedExceptions = ConstraintViolationException.class)
+    public void createPlayerWithNullOffense() {
+        Team team = new Team("CSKA Moskva", Championship.KHL);
+        Player player = new Player("Sergey", "Andronov", null, 85, team);
+
+        playerDao.create(player);
+    }
+
+    @Test(expectedExceptions = ConstraintViolationException.class)
+    public void createPlayerWithNullDefence() {
+        Team team = new Team("CSKA Moskva", Championship.KHL);
+        Player player = new Player("Sergey", "Andronov", 90, null, team);
+
+        playerDao.create(player);
+    }
 }

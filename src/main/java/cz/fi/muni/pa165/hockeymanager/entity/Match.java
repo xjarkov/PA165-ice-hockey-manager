@@ -19,12 +19,12 @@ public class Match {
     @Getter
     private Long id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @Getter
     private Team homeTeam;
 
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @Getter
     private Team visitingTeam;
 
@@ -53,16 +53,6 @@ public class Match {
         homeTeamScore = 0;
         visitingTeamScore = 0;
     }
-
-//    @Override
-//    public int hashCode() {
-//        final int prime = 31;
-//        int result = 1;
-//        result = prime * result + ((homeTeam == null) ? 0 : homeTeam.hashCode());
-//        result = prime * result + ((visitingTeam == null) ? 0 : visitingTeam.hashCode());
-//        result = prime * result + ((dateTime == null) ? 0 : dateTime.hashCode());
-//        return result;
-//    }
 
     @Override
     public boolean equals(Object o) {

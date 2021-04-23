@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Objects;
 
 /**
  * @author Petr Šopf (506511)
@@ -40,7 +41,7 @@ public class HumanPlayer {
     @Setter
     private Role role = Role.PLAYER;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @Getter
     @Setter
     private Team team;
@@ -67,35 +68,15 @@ public class HumanPlayer {
     }
 
     @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((name == null) ? 0 : name.hashCode());
-        return result;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        HumanPlayer that = (HumanPlayer) o;
+        return name.equals(that.name) && email.equals(that.email);
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (!(obj instanceof HumanPlayer))
-            return false;
-
-        HumanPlayer other = (HumanPlayer) obj;
-        if (name == null) {
-            if (other.getName() != null)
-                return false;
-        } else if (!name.equals(other.getName()))
-            return false;
-
-        if (email == null) {
-            if (other.getEmail() != null)
-                return false;
-        } else if (!email.equals(other.getEmail()))
-            return false;
-
-        return true;
+    public int hashCode() {
+        return Objects.hash(name, email);
     }
 }

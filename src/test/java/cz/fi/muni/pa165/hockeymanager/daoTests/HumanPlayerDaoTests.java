@@ -8,6 +8,8 @@ import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.transaction.annotation.Transactional;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -25,6 +27,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class HumanPlayerDaoTests extends AbstractTestNGSpringContextTests {
     @Autowired
     private HumanPlayerDao HumanPlayerDao;
+
+    @BeforeMethod
+    public void setup() {
+        HumanPlayer humanPlayer1 = new HumanPlayer("Jozef Mrkva", "jozef@muni.cz", "password123", Role.PLAYER, null);
+        HumanPlayer humanPlayer2 = new HumanPlayer("Ján Petržlen", "jan@muni.cz", "password321", Role.PLAYER, null);
+        HumanPlayer humanPlayer3 = new HumanPlayer("Fero Novák", "fero@muni.cz", "password", Role.ADMIN, null);
+    }
 
     @Test
     public void createHumanPlayerTest() {

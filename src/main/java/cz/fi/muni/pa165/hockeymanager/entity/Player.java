@@ -38,7 +38,7 @@ public class Player {
     @Setter
     private Integer deffensiveStrength;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @Getter
     @Setter
     private Team team;
@@ -57,46 +57,16 @@ public class Player {
         return this.firstName + this.lastName;
     }
 
-//    @Override
-//    public boolean equals(Object obj) {
-//        if (this == obj)
-//            return true;
-//        if (obj == null)
-//            return false;
-//        if (!(obj instanceof Player))
-//            return false;
-//        Player other = (Player) obj;
-//        if (id == null) {
-//            if (other.id != null)
-//                return false;
-//        } else if (!id.equals(other.getId()))
-//            return false;
-//        return true;
-//    }
-//
-//    @Override
-//    public int hashCode() {
-//        final int prime = 31;
-//        int result = 1;
-//        result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
-//        result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
-//        result = prime * result + ((offensiveStrength == null) ? 0 : offensiveStrength.hashCode());
-//        result = prime * result + ((deffensiveStrength == null) ? 0 : deffensiveStrength.hashCode());
-//        result = prime * result + ((team == null) ? 0 : team.hashCode());
-//        return result;
-//    }
-
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Player player = (Player) o;
-        return firstName.equals(player.firstName) && lastName.equals(player.lastName) && offensiveStrength.equals(player.offensiveStrength) && deffensiveStrength.equals(player.deffensiveStrength) && Objects.equals(team, player.team);
+        return firstName.equals(player.firstName) && lastName.equals(player.lastName) && offensiveStrength.equals(player.offensiveStrength) && deffensiveStrength.equals(player.deffensiveStrength);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(firstName, lastName, offensiveStrength, deffensiveStrength, team);
+        return Objects.hash(firstName, lastName, offensiveStrength, deffensiveStrength);
     }
 }
