@@ -1,6 +1,7 @@
 package cz.fi.muni.pa165.hockeymanager.entity;
 
-import java.util.Date;
+import java.time.*;
+import java.util.Objects;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import lombok.Getter;
@@ -40,11 +41,11 @@ public class Match {
     @NotNull
     @Getter
     @Setter
-    private Date dateTime;
+    private LocalDateTime dateTime;
 
     public Match(){}
 
-    public Match(Team homeTeam, Team visitingTeam, Date dateTime) {
+    public Match(Team homeTeam, Team visitingTeam, LocalDateTime dateTime) {
         this.homeTeam = homeTeam;
         this.visitingTeam = visitingTeam;
         this.dateTime = dateTime;
@@ -53,20 +54,27 @@ public class Match {
         visitingTeamScore = 0;
     }
 
+//    @Override
+//    public int hashCode() {
+//        final int prime = 31;
+//        int result = 1;
+//        result = prime * result + ((homeTeam == null) ? 0 : homeTeam.hashCode());
+//        result = prime * result + ((visitingTeam == null) ? 0 : visitingTeam.hashCode());
+//        result = prime * result + ((dateTime == null) ? 0 : dateTime.hashCode());
+//        return result;
+//    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Match)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         Match match = (Match) o;
-        return id == match.getId();
+        return homeTeam.equals(match.homeTeam) && visitingTeam.equals(match.visitingTeam) && dateTime.equals(match.dateTime);
     }
 
     @Override
     public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
-        return result;
+        return Objects.hash(homeTeam, visitingTeam, dateTime);
     }
 
     @Override
@@ -80,4 +88,6 @@ public class Match {
                 ", date=" + dateTime +
                 '}';
     }
+
+
 }
