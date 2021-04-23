@@ -39,7 +39,7 @@ public class Team {
     @OneToOne
     @Getter
     @Setter
-    private HumanPlayer manager = null;
+    private User manager = null;
 
     @OneToMany
     @Getter

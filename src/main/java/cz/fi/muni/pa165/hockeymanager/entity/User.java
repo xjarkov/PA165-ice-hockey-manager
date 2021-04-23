@@ -12,7 +12,7 @@ import java.util.Objects;
  * @author Petr Šopf (506511)
  */
 @Entity
-public class HumanPlayer {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,10 +46,10 @@ public class HumanPlayer {
     @Setter
     private Team team;
 
-    public HumanPlayer() {
+    public User() {
     }
 
-    public HumanPlayer(String name, String email, String password, Role role, Team team) {
+    public User(String name, String email, String password, Role role, Team team) {
         this.name = name;
         this.email = email;
         this.password = password;
@@ -71,7 +71,7 @@ public class HumanPlayer {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        HumanPlayer that = (HumanPlayer) o;
+        User that = (User) o;
         return name.equals(that.name) && email.equals(that.email);
     }
 

@@ -1,9 +1,5 @@
 package cz.fi.muni.pa165.hockeymanager;
 
-import cz.fi.muni.pa165.hockeymanager.dao.HumanPlayerDao;
-import cz.fi.muni.pa165.hockeymanager.dao.MatchDao;
-import cz.fi.muni.pa165.hockeymanager.dao.PlayerDao;
-import cz.fi.muni.pa165.hockeymanager.dao.TeamDao;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;

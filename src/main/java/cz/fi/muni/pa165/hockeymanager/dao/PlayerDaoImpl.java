@@ -26,7 +26,7 @@ public class PlayerDaoImpl implements PlayerDao {
 
     @Override
     public List<Player> findAll() {
-        return em.createQuery("select p from Player p").getResultList();
+        return em.createQuery("select p from Player p", Player.class).getResultList();
     }
 
     @Override
