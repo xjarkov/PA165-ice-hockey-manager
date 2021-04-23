@@ -11,7 +11,7 @@ import java.util.Objects;
 * @author Kristian Kosorin (456620)
 */
 @Entity
-public class Player {
+public class HockeyPlayer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,9 +43,9 @@ public class Player {
     @Setter
     private Team team;
 
-    public Player() {}
+    public HockeyPlayer() {}
 
-    public Player(String firstName, String lastName, Integer offStrength, Integer deffStrength, Team team) {
+    public HockeyPlayer(String firstName, String lastName, Integer offStrength, Integer deffStrength, Team team) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.offensiveStrength = offStrength;
@@ -61,8 +61,8 @@ public class Player {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Player player = (Player) o;
-        return firstName.equals(player.firstName) && lastName.equals(player.lastName) && offensiveStrength.equals(player.offensiveStrength) && deffensiveStrength.equals(player.deffensiveStrength);
+        HockeyPlayer hockeyPlayer = (HockeyPlayer) o;
+        return firstName.equals(hockeyPlayer.firstName) && lastName.equals(hockeyPlayer.lastName) && offensiveStrength.equals(hockeyPlayer.offensiveStrength) && deffensiveStrength.equals(hockeyPlayer.deffensiveStrength);
     }
 
     @Override

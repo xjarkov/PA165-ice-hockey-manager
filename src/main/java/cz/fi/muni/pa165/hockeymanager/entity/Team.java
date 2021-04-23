@@ -43,7 +43,7 @@ public class Team {
 
     @OneToMany
     @Getter
-    private Set<Player> players = new HashSet<>();
+    private Set<HockeyPlayer> hockeyPlayers = new HashSet<>();
 
     @OneToMany
     @Getter
@@ -57,12 +57,12 @@ public class Team {
         this.championship = championship;
     }
 
-    public void addPlayer(Player player) {
-        players.add(player);
+    public void addPlayer(HockeyPlayer hockeyPlayer) {
+        hockeyPlayers.add(hockeyPlayer);
     }
 
-    public void removePlayer(Player player) {
-        players.remove(player);
+    public void removePlayer(HockeyPlayer hockeyPlayer) {
+        hockeyPlayers.remove(hockeyPlayer);
     }
 
     public void addMatch(Match match) {
@@ -81,7 +81,7 @@ public class Team {
                 ", championship=" + championship +
                 ", points=" + points +
                 ", manager=" + manager +
-                ", players=" + players +
+                ", players=" + hockeyPlayers +
                 '}';
     }
 
