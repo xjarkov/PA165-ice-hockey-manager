@@ -23,6 +23,12 @@ public interface HockeyPlayerDao {
     void remove(HockeyPlayer hockeyPlayer);
 
     /**
+     * Updates entity with the same ID in the table
+     * @param hockeyPlayer to update
+     */
+    void update(HockeyPlayer hockeyPlayer);
+
+    /**
      * @return List of all players
      */
     List<HockeyPlayer> findAll();
