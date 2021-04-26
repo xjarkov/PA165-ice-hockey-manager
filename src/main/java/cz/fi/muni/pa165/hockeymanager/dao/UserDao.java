@@ -22,12 +22,19 @@ public interface UserDao {
     List<User> findAll();
 
     /**
-     * Finds HumanPlayer in database by id.
+     * Finds User in database by id.
      *
      * @param id of User searched for.
      * @return found User.
      */
     User findById(Long id);
+
+    /**
+     * Updates User object.
+     *
+     * @param user updated User object.
+     */
+    void update(User user);
 
     /**
      * Removes given User from database.
