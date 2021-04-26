@@ -39,14 +39,14 @@ public class UserDaoTests extends AbstractTestNGSpringContextTests {
 
     @BeforeMethod
     public void setup() {
-        user1 = new User("Jozef Mrkva", "jozef@muni.cz", "password123", Role.PLAYER, null);
+        user1 = new User("Jozef Mrkva", "jozef@muni.cz", "password123", Role.PLAYER);
         em.persist(user1);
 
-        user2 = new User("Ján Petržlen", "jan@muni.cz", "password321", Role.PLAYER, null);
+        user2 = new User("Ján Petržlen", "jan@muni.cz", "password321", Role.PLAYER);
         em.persist(user2);
 
         //Not persisted user object.
-        user3 = new User("Fero Novák", "fero@muni.cz", "password", Role.ADMIN, null);
+        user3 = new User("Fero Novák", "fero@muni.cz", "password", Role.PLAYER);
     }
 
     @Test
@@ -129,19 +129,19 @@ public class UserDaoTests extends AbstractTestNGSpringContextTests {
 
     @Test(expectedExceptions = ConstraintViolationException.class)
     public void nullUserNameExceptionTest() {
-        User userErrorName = new User(null, "jozef@muni.cz", "password123", Role.PLAYER, null);
+        User userErrorName = new User(null, "jozef@muni.cz", "password123", Role.PLAYER);
         UserDao.create(userErrorName);
     }
 
     @Test(expectedExceptions = ConstraintViolationException.class)
     public void nullUserEmailExceptionTest() {
-        User userErrorMail = new User("Jozef Mrkva", null, "password123", Role.PLAYER, null);
+        User userErrorMail = new User("Jozef Mrkva", null, "password123", Role.PLAYER);
         UserDao.create(userErrorMail);
     }
 
     @Test(expectedExceptions = ConstraintViolationException.class)
     public void nullUserPasswordExceptionTest() {
-        User userErrorPassword = new User("Jozef Mrkva", "jozef@muni.cz", null, Role.PLAYER, null);
+        User userErrorPassword = new User("Jozef Mrkva", "jozef@muni.cz", null, Role.PLAYER);
         UserDao.create(userErrorPassword);
     }
 }
