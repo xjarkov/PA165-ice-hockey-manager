@@ -12,6 +12,7 @@ import java.util.Objects;
  * @author Petr Šopf (506511)
  */
 @Entity
+@Table(name = "UserTable")
 public class User {
 
     @Id
@@ -41,7 +42,7 @@ public class User {
     @Setter
     private Role role = Role.PLAYER;
 
-    @OneToOne
+    @OneToOne(fetch= FetchType.LAZY)
     @Getter
     @Setter
     private Team team;

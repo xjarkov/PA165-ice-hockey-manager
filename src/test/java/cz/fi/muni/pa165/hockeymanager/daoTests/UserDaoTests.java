@@ -26,28 +26,25 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class UserDaoTests extends AbstractTestNGSpringContextTests {
     @Autowired
     private UserDao UserDao;
+    private User user1;
+    private User user2;
+    private User user3;
 
     @BeforeMethod
     public void setup() {
-        User user1 = new User("Jozef Mrkva", "jozef@muni.cz", "password123", Role.PLAYER, null);
-        User user2 = new User("Ján Petržlen", "jan@muni.cz", "password321", Role.PLAYER, null);
-        User user3 = new User("Fero Novák", "fero@muni.cz", "password", Role.ADMIN, null);
+        user1 = new User("Jozef Mrkva", "jozef@muni.cz", "password123", Role.PLAYER, null);
+        user2 = new User("Ján Petržlen", "jan@muni.cz", "password321", Role.PLAYER, null);
+        user3 = new User("Fero Novák", "fero@muni.cz", "password", Role.ADMIN, null);
     }
 
     @Test
     public void createHumanPlayerTest() {
-        User user = new User("Jozef Mrkva", "jozef@muni.cz", "password123", Role.PLAYER, null);
-
-        UserDao.create(user);
-        assertThat(UserDao.findById(user.getId())).isEqualTo(user);
+        UserDao.create(user1);
+        assertThat(UserDao.findById(user1.getId())).isEqualTo(user1);
     }
 
     @Test
     public void findAllHumanPlayersTest() {
-        User user1 = new User("Jozef Mrkva", "jozef@muni.cz", "password123", Role.PLAYER, null);
-        User user2 = new User("Ján Petržlen", "jan@muni.cz", "password321", Role.PLAYER, null);
-        User user3 = new User("Fero Novák", "fero@muni.cz", "password", Role.ADMIN, null);
-
         assertThat(UserDao.findAll().size()).isEqualTo(0);
         UserDao.create(user1);
         UserDao.create(user2);
@@ -58,10 +55,6 @@ public class UserDaoTests extends AbstractTestNGSpringContextTests {
 
     @Test
     public void findHumanPlayerByIdTest() {
-        User user1 = new User("Jozef Mrkva", "jozef@muni.cz", "password123", Role.PLAYER, null);
-        User user2 = new User("Ján Petržlen", "jan@muni.cz", "password321", Role.PLAYER, null);
-        User user3 = new User("Fero Novák", "fero@muni.cz", "password", Role.ADMIN, null);
-
         UserDao.create(user1);
         UserDao.create(user2);
         UserDao.create(user3);
@@ -71,8 +64,6 @@ public class UserDaoTests extends AbstractTestNGSpringContextTests {
 
     @Test
     public void removeHumanPlayerTest() {
-        User user1 = new User("Jozef Mrkva", "jozef@muni.cz", "password123", Role.PLAYER, null);
-
         UserDao.create(user1);
         assertThat(UserDao.findById(user1.getId())).isEqualTo(user1);
         UserDao.remove(user1);
@@ -81,13 +72,13 @@ public class UserDaoTests extends AbstractTestNGSpringContextTests {
 
     @Test(expectedExceptions = ConstraintViolationException.class)
     public void nullNameExceptionTest() {
-        User user1 = new User(null, "jozef@muni.cz", "password123", Role.PLAYER, null);
-        UserDao.create(user1);
+        User userErrorName = new User(null, "jozef@muni.cz", "password123", Role.PLAYER, null);
+        UserDao.create(userErrorName);
     }
 
     @Test(expectedExceptions = ConstraintViolationException.class)
     public void nullEmailExceptionTest() {
-        User user1 = new User("Jozef Mrkva", null, "password123", Role.PLAYER, null);
-        UserDao.create(user1);
+        User userErrorMail = new User("Jozef Mrkva", null, "password123", Role.PLAYER, null);
+        UserDao.create(userErrorMail);
     }
 }
