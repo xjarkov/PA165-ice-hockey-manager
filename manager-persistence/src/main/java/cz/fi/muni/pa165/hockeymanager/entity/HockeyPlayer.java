@@ -2,7 +2,6 @@ package cz.fi.muni.pa165.hockeymanager.entity;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.engine.profile.Fetch;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;

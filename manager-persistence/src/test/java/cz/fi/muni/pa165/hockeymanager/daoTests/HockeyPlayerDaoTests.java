@@ -2,10 +2,7 @@ package cz.fi.muni.pa165.hockeymanager.daoTests;
 
 import cz.fi.muni.pa165.hockeymanager.PersistenceApplicationContext;
 import cz.fi.muni.pa165.hockeymanager.dao.HockeyPlayerDao;
-import cz.fi.muni.pa165.hockeymanager.dao.TeamDao;
 import cz.fi.muni.pa165.hockeymanager.entity.HockeyPlayer;
-import cz.fi.muni.pa165.hockeymanager.entity.Team;
-import cz.fi.muni.pa165.hockeymanager.enums.Championship;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.test.context.ContextConfiguration;
@@ -13,14 +10,11 @@ import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.transaction.annotation.Transactional;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceUnit;
 import javax.validation.ConstraintViolationException;
 import static org.assertj.core.api.Assertions.assertThat;
 
