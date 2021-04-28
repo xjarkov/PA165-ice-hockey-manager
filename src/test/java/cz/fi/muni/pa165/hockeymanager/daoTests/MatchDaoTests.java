@@ -92,6 +92,18 @@ public class MatchDaoTests extends AbstractTestNGSpringContextTests {
         assertThat(matchDao.findById(match.getId())).isEqualTo(null);
     }
 
+    @Test
+    public void updateMatchTest() {
+        matchDao.create(match);
+
+        assertThat(matchDao.findById(match.getId()).getDateTime()).isEqualTo(match.getDateTime());
+
+        match.setDateTime(LocalDateTime.of(2021, Month.DECEMBER, 10, 12, 35));
+        matchDao.update(match);
+
+        assertThat(matchDao.findById(match.getId()).getDateTime()).isEqualTo(match.getDateTime());
+    }
+
     @Test(expectedExceptions = ConstraintViolationException.class)
     public void nullDateTimeExceptionTest() {
         match.setDateTime(null);

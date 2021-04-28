@@ -34,4 +34,9 @@ public class MatchDaoImpl implements MatchDao {
     public void remove(Match match) {
         em.remove(match);
     }
+
+    @Override
+    public void update(Match match) {
+        em.merge(match);
+    }
 }
