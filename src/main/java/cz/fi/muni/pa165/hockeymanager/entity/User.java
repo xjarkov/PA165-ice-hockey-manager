@@ -50,20 +50,16 @@ public class User {
     public User() {
     }
 
-    public User(String name, String email, String password, Role role) {
-        this.name = name;
-        this.email = email;
-        this.password = password;
-        this.role = role;
-        this.team = null;
-    }
-
     public User(String name, String email, String password, Role role, Team team) {
         this.name = name;
         this.email = email;
         this.password = password;
         this.role = role;
         this.team = team;
+    }
+
+    public User(String name, String email, String password, Role role) {
+        this(name, email, password, role, null);
     }
 
     @Override
