@@ -19,11 +19,12 @@ public class Match {
     @Getter
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @Getter
     private Team homeTeam;
 
-    @ManyToOne
+
+    @ManyToOne(cascade = CascadeType.ALL)
     @Getter
     private Team visitingTeam;
 

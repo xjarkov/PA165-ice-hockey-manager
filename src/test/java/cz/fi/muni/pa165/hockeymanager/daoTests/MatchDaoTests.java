@@ -9,14 +9,14 @@ import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.transaction.annotation.Transactional;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 
+import javax.validation.ConstraintViolationException;
 import java.time.LocalDateTime;
 import java.time.Month;
-import java.util.Calendar;
-import java.util.Date;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -30,60 +30,83 @@ public class MatchDaoTests extends AbstractTestNGSpringContextTests {
     @Autowired
     private MatchDao matchDao;
 
+    private Team omskTeam;
+    private Team moskvaTeam;
+    private Team petersburgTeam;
+    private Team sochiTeam;
+
+    private Match match;
+    private Match match2;
+    private Match match3;
+    private Match match4;
+    private Match match5;
+
+    @BeforeMethod
+    public void setup() {
+        omskTeam = new Team("team1", Championship.SHL);
+        moskvaTeam = new Team("team2", Championship.SHL);
+        petersburgTeam = new Team("SKA Petersburg", Championship.KHL);
+        sochiTeam = new Team("Sochi", Championship.KHL);
+
+        match = new Match(omskTeam, moskvaTeam, LocalDateTime.of(2021, Month.AUGUST, 24, 18, 0));
+        match2 = new Match(omskTeam, petersburgTeam, LocalDateTime.of(2021, Month.AUGUST, 26, 18, 0));
+        match3 = new Match(moskvaTeam, petersburgTeam, LocalDateTime.of(2021, Month.AUGUST, 27, 18, 0));
+        match4 = new Match(petersburgTeam, omskTeam, LocalDateTime.of(2021, Month.AUGUST, 21, 19, 0));
+        match5 = new Match(moskvaTeam, sochiTeam, LocalDateTime.of(2021, Month.AUGUST, 28, 18, 0));
+    }
+
     @Test
     public void createMatchTest() {
-        Team omskTeam = new Team("Omsk", Championship.KHL);
-        Team moskvaTeam = new Team("CSKA Moskva", Championship.KHL);
-        Match match = new Match(omskTeam, moskvaTeam, LocalDateTime.of(2021, Month.AUGUST, 24, 18, 0));
-
         matchDao.create(match);
         assertThat(matchDao.findById(match.getId())).isEqualTo(match);
     }
 
     @Test
     public void findAllMatchesTest() {
-        Team omskTeam = new Team("Omsk", Championship.KHL);
-        Team moskvaTeam = new Team("CSKA Moskva", Championship.KHL);
-        Team petersburgTeam = new Team("SKA Petersburg", Championship.KHL);
-        Team sochiTeam = new Team("Sochi", Championship.KHL);
-
         assertThat(matchDao.findAll().size()).isEqualTo(0);
-        matchDao.create(new Match(omskTeam, moskvaTeam, LocalDateTime.of(2021, Month.AUGUST, 24, 18, 0)));
-        matchDao.create(new Match(petersburgTeam, sochiTeam, LocalDateTime.of(2021, Month.AUGUST, 25, 18, 0)));
-        matchDao.create(new Match(omskTeam, petersburgTeam, LocalDateTime.of(2021, Month.AUGUST, 26, 18, 0)));
+        matchDao.create(match);
+        matchDao.create(match2);
+        matchDao.create(match3);
         assertThat(matchDao.findAll().size()).isEqualTo(3);
-        matchDao.create(new Match(moskvaTeam, petersburgTeam, LocalDateTime.of(2021, Month.AUGUST, 27, 18, 0)));
-        matchDao.create(new Match(moskvaTeam, sochiTeam, LocalDateTime.of(2021, Month.AUGUST, 28, 18, 0)));
+        matchDao.create(match4);
+        matchDao.create(match5);
         assertThat(matchDao.findAll().size()).isEqualTo(5);
     }
 
     @Test
     public void findMatchesByIdTest() {
-        Team omskTeam = new Team("Omsk", Championship.KHL);
-        Team moskvaTeam = new Team("CSKA Moskva", Championship.KHL);
-        Team petersburgTeam = new Team("SKA Petersburg", Championship.KHL);
-        Team sochiTeam = new Team("Sochi", Championship.KHL);
+        matchDao.create(match);
+        matchDao.create(match2);
+        matchDao.create(match3);
+        matchDao.create(match4);
+        matchDao.create(match5);
 
-        Match lookupMatch = new Match(omskTeam, petersburgTeam, LocalDateTime.of(2021, Month.AUGUST, 26, 18, 0));
-
-        matchDao.create(new Match(omskTeam, moskvaTeam, LocalDateTime.of(2021, Month.AUGUST, 24, 18, 0)));
-        matchDao.create(new Match(petersburgTeam, sochiTeam, LocalDateTime.of(2021, Month.AUGUST, 25, 18, 0)));
-        matchDao.create(lookupMatch);
-        matchDao.create(new Match(moskvaTeam, petersburgTeam, LocalDateTime.of(2021, Month.AUGUST, 27, 18, 0)));
-        matchDao.create(new Match(moskvaTeam, sochiTeam, LocalDateTime.of(2021, Month.AUGUST, 28, 18, 0)));
-
-        assertThat(matchDao.findById(lookupMatch.getId())).isEqualTo(lookupMatch);
+        assertThat(matchDao.findById(match2.getId())).isEqualTo(match2);
     }
 
     @Test
     public void removeMatchTest() {
-        Team omskTeam = new Team("Omsk", Championship.KHL);
-        Team moskvaTeam = new Team("CSKA Moskva", Championship.KHL);
-        Match match = new Match(omskTeam, moskvaTeam, LocalDateTime.of(2021, Month.AUGUST, 24, 18, 0));
-
         matchDao.create(match);
         assertThat(matchDao.findById(match.getId())).isEqualTo(match);
         matchDao.remove(match);
         assertThat(matchDao.findById(match.getId())).isEqualTo(null);
+    }
+
+    @Test
+    public void updateMatchTest() {
+        matchDao.create(match);
+
+        assertThat(matchDao.findById(match.getId()).getDateTime()).isEqualTo(match.getDateTime());
+
+        match.setDateTime(LocalDateTime.of(2021, Month.DECEMBER, 10, 12, 35));
+        matchDao.update(match);
+
+        assertThat(matchDao.findById(match.getId()).getDateTime()).isEqualTo(match.getDateTime());
+    }
+
+    @Test(expectedExceptions = ConstraintViolationException.class)
+    public void nullDateTimeExceptionTest() {
+        match.setDateTime(null);
+        matchDao.create(match);
     }
 }

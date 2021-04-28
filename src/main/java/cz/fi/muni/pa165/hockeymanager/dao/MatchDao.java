@@ -32,4 +32,10 @@ public interface MatchDao {
      * @param match Match entity
      */
     void remove(Match match);
+
+    /**
+     * Updates match
+     * @param match Match entity
+     */
+    void update(Match match);
 }
