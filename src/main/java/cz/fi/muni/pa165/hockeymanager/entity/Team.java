@@ -41,7 +41,7 @@ public class Team {
     @Setter
     private User manager = null;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "team")
     @Getter
     private Set<HockeyPlayer> hockeyPlayers = new HashSet<>();
 

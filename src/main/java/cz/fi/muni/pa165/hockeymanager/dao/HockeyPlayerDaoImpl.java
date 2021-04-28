@@ -25,6 +25,9 @@ public class HockeyPlayerDaoImpl implements HockeyPlayerDao {
     }
 
     @Override
+    public void update(HockeyPlayer hockeyPlayer) { em.merge(hockeyPlayer); }
+
+    @Override
     public List<HockeyPlayer> findAll() {
         return em.createQuery("select p from HockeyPlayer p", HockeyPlayer.class).getResultList();
     }

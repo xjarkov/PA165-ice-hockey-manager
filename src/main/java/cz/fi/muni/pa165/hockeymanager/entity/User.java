@@ -12,6 +12,7 @@ import java.util.Objects;
  * @author Petr Šopf (506511)
  */
 @Entity
+@Table(name = "UserTable")
 public class User {
 
     @Id
@@ -41,7 +42,7 @@ public class User {
     @Setter
     private Role role = Role.PLAYER;
 
-    @OneToOne
+    @OneToOne(fetch= FetchType.LAZY)
     @Getter
     @Setter
     private Team team;
@@ -55,6 +56,10 @@ public class User {
         this.password = password;
         this.role = role;
         this.team = team;
+    }
+
+    public User(String name, String email, String password, Role role) {
+        this(name, email, password, role, null);
     }
 
     @Override
