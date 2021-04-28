@@ -11,6 +11,7 @@ import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.transaction.annotation.Transactional;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -26,21 +27,28 @@ public class TeamDaoTests extends AbstractTestNGSpringContextTests {
     @Autowired
     private TeamDao teamDao;
 
+    private Team team1;
+    private Team team2;
+    private Team team3;
+    private Team team4;
+
+
+    @BeforeMethod
+    public void setup() {
+        team1 = new Team("team1", Championship.SHL);
+        team2 = new Team("team2", Championship.SHL);
+        team3 = new Team("team3", Championship.SHL);
+        team4 = new Team("team4", Championship.SHL);
+    }
+
     @Test
     public void createTeamTest() {
-        Team team = new Team("team", Championship.SHL);
-
-        teamDao.create(team);
-        assertThat(teamDao.findById(team.getId())).isEqualTo(team);
+        teamDao.create(team1);
+        assertThat(teamDao.findById(team1.getId())).isEqualTo(team1);
     }
 
     @Test
     public void findAllTeamsTest() {
-        Team team1 = new Team("team1", Championship.SHL);
-        Team team2 = new Team("team2", Championship.SHL);
-        Team team3 = new Team("team3", Championship.SHL);
-        Team team4 = new Team("team4", Championship.SHL);
-
         assertThat(teamDao.findAll().size()).isEqualTo(0);
 
         teamDao.create(team1);
@@ -56,11 +64,6 @@ public class TeamDaoTests extends AbstractTestNGSpringContextTests {
 
     @Test
     public void findTeamByIdTest() {
-        Team team1 = new Team("team1", Championship.SHL);
-        Team team2 = new Team("team2", Championship.SHL);
-        Team team3 = new Team("team3", Championship.SHL);
-        Team team4 = new Team("team4", Championship.SHL);
-
         teamDao.create(team1);
         teamDao.create(team2);
         teamDao.create(team3);
@@ -75,9 +78,6 @@ public class TeamDaoTests extends AbstractTestNGSpringContextTests {
 
     @Test
     public void removeTeamTest() {
-        Team team1 = new Team("team1", Championship.SHL);
-        Team team2 = new Team("team2", Championship.SHL);
-
         teamDao.create(team1);
         teamDao.create(team2);
 
@@ -92,9 +92,6 @@ public class TeamDaoTests extends AbstractTestNGSpringContextTests {
 
     @Test
     public void findTeamByNameTest() {
-        Team team1 = new Team("team1", Championship.SHL);
-        Team team2 = new Team("team2", Championship.SHL);
-
         teamDao.create(team1);
         teamDao.create(team2);
 
