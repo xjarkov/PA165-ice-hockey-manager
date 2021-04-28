@@ -8,31 +8,38 @@ import java.util.List;
  */
 public interface UserDao {
     /**
-     * Creates HumanPlayer object in database.
+     * Creates User object in database.
      *
-     * @param user HumanPlayer to be added into database.
+     * @param user User to be added into database.
      */
     void create(User user);
 
     /**
-     * Finds all HumanPlayer saved in database.
+     * Finds all Users saved in database.
      *
-     * @return List of HumanPlayer.
+     * @return List of Users.
      */
     List<User> findAll();
 
     /**
-     * Finds HumanPlayer in database by id.
+     * Finds User in database by id.
      *
-     * @param id of HumanPlayer searched for.
-     * @return found HumanPlayer.
+     * @param id of User searched for.
+     * @return found User.
      */
     User findById(Long id);
 
     /**
-     * Removes given HumanPlayer from database.
+     * Updates User object.
      *
-     * @param player HumanPlayer to be removed.
+     * @param user updated User object.
+     */
+    void update(User user);
+
+    /**
+     * Removes given User from database.
+     *
+     * @param user User to be removed.
      */
     void remove(User user);
 }
