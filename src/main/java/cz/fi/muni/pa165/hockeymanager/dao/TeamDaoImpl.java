@@ -42,4 +42,9 @@ public class TeamDaoImpl implements TeamDao {
     public List<Team> findAll() {
         return em.createQuery("select t from Team t", Team.class).getResultList();
     }
+
+    @Override
+    public void update(Team team) {
+        em.merge(team);
+    }
 }
