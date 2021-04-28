@@ -16,6 +16,11 @@ public class MatchServiceImpl implements MatchService {
     }
 
     @Override
+    public void updateMatch(Match match) {
+        matchDao.update(match);
+    }
+
+    @Override
     public void removeMatch(Match match) {
         matchDao.remove(match);
     }
