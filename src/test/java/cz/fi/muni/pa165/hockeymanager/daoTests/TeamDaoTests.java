@@ -110,4 +110,16 @@ public class TeamDaoTests extends AbstractTestNGSpringContextTests {
         Team team = new Team(null, Championship.SHL);
         teamDao.create(team);
     }
+
+    @Test
+    public void updateTeamTest(){
+        teamDao.create(team1);
+
+        assertThat(teamDao.findById(team1.getId()).getName()).isEqualTo(team1.getName());
+
+        team1.setName("changed name");
+        teamDao.update(team1);
+
+        assertThat(teamDao.findById(team1.getId()).getName()).isEqualTo(team1.getName());
+    }
 }
