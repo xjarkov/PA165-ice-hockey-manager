@@ -2,6 +2,7 @@ package cz.fi.muni.pa165.hockeymanager.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.engine.profile.Fetch;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -38,12 +39,17 @@ public class HockeyPlayer {
     @Setter
     private Integer deffensiveStrength;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "teamId")
     @Getter
     @Setter
     private Team team;
 
     public HockeyPlayer() {}
+
+    public HockeyPlayer(String firstName, String lastName, Integer offStrength, Integer deffStrength) {
+        this(firstName, lastName, offStrength, deffStrength, null);
+    }
 
     public HockeyPlayer(String firstName, String lastName, Integer offStrength, Integer deffStrength, Team team) {
         this.firstName = firstName;

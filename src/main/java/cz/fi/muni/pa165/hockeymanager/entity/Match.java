@@ -23,7 +23,6 @@ public class Match {
     @Getter
     private Team homeTeam;
 
-
     @ManyToOne
     @Getter
     private Team visitingTeam;
