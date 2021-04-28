@@ -39,4 +39,11 @@ public interface TeamDao {
     * Find and return all Teams.
     */
     List<Team> findAll();
+
+    /**
+     * Update team in database.
+     *
+     * @param team Team to be updated
+     */
+    void update(Team team);
 }
