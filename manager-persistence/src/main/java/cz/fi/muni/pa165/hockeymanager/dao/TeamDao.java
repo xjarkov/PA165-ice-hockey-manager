@@ -10,9 +10,9 @@ public interface TeamDao {
     /**
     * Adds new entity to Team table.
     *
-    * @param entity Team entity to be added to DB.
+    * @param team Team entity to be added to DB.
     */
-    void create(Team entity);
+    void create(Team team);
 
     /**
     * Removes entity from Team table.
