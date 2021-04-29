@@ -1,64 +1,38 @@
 package cz.fi.muni.pa165.hockeymanager.dto;
 
+import cz.fi.muni.pa165.hockeymanager.enums.Role;
 import java.util.Objects;
-import javax.management.relation.Role;
+import lombok.Getter;
+import lombok.Setter;
+
 
 /**
  * @author Lukas Machalek (485196)
  */
 public class UserDto {
 
+    @Setter
     private Long id;
 
+    @Getter
+    @Setter
     private String name;
 
+    @Getter
+    @Setter
     private String email;
 
+    @Getter
+    @Setter
     private String password;
 
+    @Getter
+    @Setter
     private Role role;
 
+    @Getter
+    @Setter
     private TeamDto team;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
-
-    public TeamDto getTeam() {
-        return team;
-    }
-
-    public void setTeam(TeamDto team) {
-        this.team = team;
-    }
 
     @Override
     public boolean equals(Object o) {
