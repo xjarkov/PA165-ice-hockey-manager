@@ -1,6 +1,7 @@
 package cz.fi.muni.pa165.hockeymanager.dao;
 
 import cz.fi.muni.pa165.hockeymanager.entity.Match;
+import cz.fi.muni.pa165.hockeymanager.entity.Team;
 
 import java.util.List;
 
@@ -26,6 +27,12 @@ public interface MatchDao {
      * @return Match with id
      */
     Match findById(Long id);
+
+    /**
+     * @param team Team
+     * @return List of Matches
+     */
+    List<Match> findByTeam(Team team);
 
     /**
      * Removes match
