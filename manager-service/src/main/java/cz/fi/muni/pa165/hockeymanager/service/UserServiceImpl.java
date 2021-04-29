@@ -2,16 +2,18 @@ package cz.fi.muni.pa165.hockeymanager.service;
 
 import cz.fi.muni.pa165.hockeymanager.dao.UserDao;
 import cz.fi.muni.pa165.hockeymanager.entity.User;
-import org.dozer.inject.Inject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 /**
  * @author Kristian Kosorin (456620)
  */
+@Service
 public class UserServiceImpl implements UserService {
 
-    @Inject
+    @Autowired
     private UserDao userDao;
 
     @Override
