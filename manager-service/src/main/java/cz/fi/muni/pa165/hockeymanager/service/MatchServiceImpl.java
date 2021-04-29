@@ -5,6 +5,9 @@ import cz.fi.muni.pa165.hockeymanager.entity.Match;
 import java.util.List;
 import org.dozer.inject.Inject;
 
+/**
+ * @author Lukas Machalek (485196)
+ */
 public class MatchServiceImpl implements MatchService {
 
     @Inject
