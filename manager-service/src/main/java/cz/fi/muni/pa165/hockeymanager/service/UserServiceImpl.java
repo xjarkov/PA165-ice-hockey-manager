@@ -6,6 +6,9 @@ import org.dozer.inject.Inject;
 
 import java.util.List;
 
+/**
+ * @author Kristian Kosorin (456620)
+ */
 public class UserServiceImpl implements UserService {
 
     @Inject

@@ -3,8 +3,10 @@ package cz.fi.muni.pa165.hockeymanager.service;
 import cz.fi.muni.pa165.hockeymanager.entity.User;
 
 import java.util.List;
-import java.util.Optional;
 
+/**
+ * @author Kristian Kosorin (456620)
+ */
 public interface UserService {
     void create(User user);
     void update(User user);
