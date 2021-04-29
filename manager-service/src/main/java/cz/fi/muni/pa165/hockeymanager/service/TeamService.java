@@ -3,12 +3,14 @@ package cz.fi.muni.pa165.hockeymanager.service;
 import cz.fi.muni.pa165.hockeymanager.entity.HockeyPlayer;
 import cz.fi.muni.pa165.hockeymanager.entity.Match;
 import cz.fi.muni.pa165.hockeymanager.entity.Team;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 /**
  * @author Matus Jarkovic 456441
  */
+@Service
 public interface TeamService {
     /**
      * Creates a team

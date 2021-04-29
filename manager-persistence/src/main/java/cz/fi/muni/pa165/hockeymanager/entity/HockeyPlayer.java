@@ -36,7 +36,7 @@ public class HockeyPlayer {
     @NotNull
     @Getter
     @Setter
-    private Integer deffensiveStrength;
+    private Integer defensiveStrength;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "teamId")
@@ -54,7 +54,7 @@ public class HockeyPlayer {
         this.firstName = firstName;
         this.lastName = lastName;
         this.offensiveStrength = offStrength;
-        this.deffensiveStrength = deffStrength;
+        this.defensiveStrength = deffStrength;
         this.team = team;
     }
 
@@ -67,11 +67,11 @@ public class HockeyPlayer {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         HockeyPlayer hockeyPlayer = (HockeyPlayer) o;
-        return firstName.equals(hockeyPlayer.firstName) && lastName.equals(hockeyPlayer.lastName) && offensiveStrength.equals(hockeyPlayer.offensiveStrength) && deffensiveStrength.equals(hockeyPlayer.deffensiveStrength);
+        return firstName.equals(hockeyPlayer.firstName) && lastName.equals(hockeyPlayer.lastName) && offensiveStrength.equals(hockeyPlayer.offensiveStrength) && defensiveStrength.equals(hockeyPlayer.defensiveStrength);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(firstName, lastName, offensiveStrength, deffensiveStrength);
+        return Objects.hash(firstName, lastName, offensiveStrength, defensiveStrength);
     }
 }
