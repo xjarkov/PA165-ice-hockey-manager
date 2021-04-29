@@ -10,7 +10,7 @@ import java.util.List;
  */
 @Service
 public interface UserService {
-    void create(User user);
+    User create(User user);
     void update(User user);
     void remove(User user);
 
