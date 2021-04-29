@@ -33,20 +33,6 @@ public class HockeyPlayerDto {
     @Setter
     private TeamDto team;
 
-    public HockeyPlayerDto() {}
-
-    public HockeyPlayerDto(String firstName, String lastName, Integer offStrength, Integer deffStrength) {
-        this(firstName, lastName, offStrength, deffStrength, null);
-    }
-
-    public HockeyPlayerDto(String firstName, String lastName, Integer offStrength, Integer deffStrength, TeamDto team) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.offensiveStrength = offStrength;
-        this.deffensiveStrength = deffStrength;
-        this.team = team;
-    }
-
     public String getFullName() {
         return this.firstName + this.lastName;
     }
