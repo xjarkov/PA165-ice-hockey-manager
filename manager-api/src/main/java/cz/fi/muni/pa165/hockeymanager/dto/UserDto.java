@@ -11,6 +11,7 @@ import lombok.Setter;
  */
 public class UserDto {
 
+    @Getter
     @Setter
     private Long id;
 
