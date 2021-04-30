@@ -30,6 +30,22 @@ public interface UserDao {
     User findById(Long id);
 
     /**
+     * Finds User in database by name.
+     *
+     * @param name of User searched for.
+     * @return found User.
+     */
+    User findByName(String name);
+
+    /**
+     * Finds User in database by email.
+     *
+     * @param email of User searched for.
+     * @return found User.
+     */
+    User findByEmail(String email);
+
+    /**
      * Updates User object.
      *
      * @param user updated User object.
