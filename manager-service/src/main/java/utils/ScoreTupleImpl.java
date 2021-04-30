@@ -1,10 +1,11 @@
 package utils;
 
-import cz.fi.muni.pa165.hockeymanager.utils.ScoreTuple;
+import lombok.Data;
 
 import java.util.Objects;
 
-public class ScoreTupleImpl implements ScoreTuple {
+@Data
+public class ScoreTupleImpl implements cz.fi.muni.pa165.hockeymanager.utils.ScoreTuple {
     public final int homeScore;
     public final int visitingScore;
 

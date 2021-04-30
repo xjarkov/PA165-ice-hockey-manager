@@ -2,6 +2,9 @@ package cz.fi.muni.pa165.hockeymanager.service;
 
 import cz.fi.muni.pa165.hockeymanager.dao.MatchDao;
 import cz.fi.muni.pa165.hockeymanager.entity.Match;
+
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import org.dozer.inject.Inject;
 
@@ -36,5 +39,10 @@ public class MatchServiceImpl implements MatchService {
     @Override
     public List<Match> getAllMatches() {
         return matchDao.findAll();
+    }
+
+    @Override
+    public Match getNearestMatch() {
+        return Collections.min(matchDao.findAll(), Comparator.comparing(Match::getDateTime));
     }
 }
