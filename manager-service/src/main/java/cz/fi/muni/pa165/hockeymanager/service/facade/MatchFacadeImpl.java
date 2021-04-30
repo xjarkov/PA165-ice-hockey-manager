@@ -33,7 +33,7 @@ public class MatchFacadeImpl implements MatchFacade {
     }
 
     @Override
-    public ScoreTuple getScoreOfMatch(long matchId) {
+    public ScoreTuple getScoreOfMatch(Long matchId) {
         return null;
     }
 }
