@@ -1,6 +1,7 @@
 package cz.fi.muni.pa165.hockeymanager.facade;
 
 import cz.fi.muni.pa165.hockeymanager.dto.MatchDto;
+import cz.fi.muni.pa165.hockeymanager.dto.TeamDto;
 import cz.fi.muni.pa165.hockeymanager.utils.ScoreTuple;
 
 import java.util.List;
@@ -45,4 +46,11 @@ public interface MatchFacade {
      * @return
      */
     ScoreTuple getScoreOfMatch(Long matchId);
+
+    /**
+     * Gets the winning team of the match
+     * @param matchId of the match
+     * @return winning team or null if draw
+     */
+    TeamDto getWinningTeam(Long matchId);
 }

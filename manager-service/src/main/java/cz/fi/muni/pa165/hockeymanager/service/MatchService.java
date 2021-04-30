@@ -39,4 +39,10 @@ public interface MatchService {
      * @return List of all matches.
      */
     List<Match> getAllMatches();
+
+    /**
+     * Find nearest match according to date
+     * @return Found match
+     */
+    Match getNearestMatch();
 }
