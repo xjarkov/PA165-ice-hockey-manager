@@ -13,14 +13,14 @@ public interface UserFacade {
      *
      * @param user to create
      */
-    public Long create(UserDto user);
+    Long create(UserDto user);
 
     /**
      * Removes an user
      *
      * @param id of the user to remove
      */
-    public void remove(Long id);
+    void remove(Long id);
 
     /**
      * Finds user by ID
@@ -28,12 +28,12 @@ public interface UserFacade {
      * @param id of the user
      * @return User
      */
-    public UserDto getMatchById(Long id);
+    UserDto getMatchById(Long id);
 
     /**
      * Finds all users
      *
      * @return all users
      */
-    public List<UserDto> getAllUsers();
+    List<UserDto> getAllUsers();
 }
