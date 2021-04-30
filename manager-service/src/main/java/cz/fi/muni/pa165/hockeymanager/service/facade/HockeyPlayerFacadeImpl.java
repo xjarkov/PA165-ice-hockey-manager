@@ -40,7 +40,6 @@ public class HockeyPlayerFacadeImpl implements HockeyPlayerFacade {
 
     @Override
     public void removeHockeyPlayer(long hockeyPlayerId) {
-        //This also needs a touch inside hockeyPLayerService i guess.. this doesn't look good.
         hockeyPlayerService.remove(hockeyPlayerService.findById(hockeyPlayerId));
     }
 
@@ -53,5 +52,11 @@ public class HockeyPlayerFacadeImpl implements HockeyPlayerFacade {
             hockeyPlayerDtos.add(pDto);
         }
         return hockeyPlayerDtos;
+    }
+
+    @Override
+    public void updateHockeyPlayer(HockeyPlayerDto hockeyPlayerDto) {
+        HockeyPlayer mappedHockeyPlayer = beanMappingService.mapTo(hockeyPlayerDto, HockeyPlayer.class);
+        hockeyPlayerService.update(mappedHockeyPlayer);
     }
 }
