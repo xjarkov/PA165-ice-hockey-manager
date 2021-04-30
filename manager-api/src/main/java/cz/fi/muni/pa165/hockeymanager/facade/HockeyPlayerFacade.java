@@ -28,7 +28,7 @@ public interface HockeyPlayerFacade {
      *
      * @return List of HockeyPlayer.
      */
-    List<HockeyPlayerDto> FindAllHockeyPlayers();
+    List<HockeyPlayerDto> findAllHockeyPlayers();
 
     /**
      * Update HockeyPlayer in database.

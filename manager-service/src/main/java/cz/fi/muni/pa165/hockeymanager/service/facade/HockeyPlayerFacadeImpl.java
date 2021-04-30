@@ -44,7 +44,7 @@ public class HockeyPlayerFacadeImpl implements HockeyPlayerFacade {
     }
 
     @Override
-    public List<HockeyPlayerDto> FindAllHockeyPlayers() {
+    public List<HockeyPlayerDto> findAllHockeyPlayers() {
         List<HockeyPlayer> hockeyPlayers = hockeyPlayerService.getAllPlayers();
         List<HockeyPlayerDto> hockeyPlayerDtos = new ArrayList<>();
         for(HockeyPlayer p : hockeyPlayers){
