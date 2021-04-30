@@ -10,18 +10,21 @@ public interface MatchService {
 
     /**
      * Create match in database.
+     *
      * @param match Match to be created in database.
      */
     void createMatch(Match match);
 
     /**
      * Update match that's already in database.
+     *
      * @param match Match to be updated.
      */
     void updateMatch(Match match);
 
     /**
      * Remove match from database.
+     *
      * @param match Match to be removed.
      */
     void removeMatch(Match match);
@@ -29,6 +32,7 @@ public interface MatchService {
 
     /**
      * Find match in database by it's ID.
+     *
      * @param matchId Id of the match.
      * @return Found match.
      */
@@ -36,6 +40,7 @@ public interface MatchService {
 
     /**
      * Find all matches that were added to database.
+     *
      * @return List of all matches.
      */
     List<Match> getAllMatches();

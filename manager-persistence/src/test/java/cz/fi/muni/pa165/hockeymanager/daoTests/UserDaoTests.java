@@ -122,6 +122,36 @@ public class UserDaoTests extends AbstractTestNGSpringContextTests {
         assertThat(UserDao.findById(user2.getId())).isEqualTo(user2);
     }
 
+    @Test
+    public void findUserByNameTest() {
+        assertThat(UserDao.findByName("Ján Petržlen")).isEqualTo(user2);
+    }
+
+    @Test(expectedExceptions = InvalidDataAccessApiUsageException.class)
+    public void findUserByNullNameTest() {
+        UserDao.findByName(null);
+    }
+
+    @Test
+    public void findUserByNonExistingNameTest() {
+        assertThat(UserDao.findByName("Jožko Ferko")).isEqualTo(null);
+    }
+
+    @Test
+    public void findUserByEmailTest() {
+        assertThat(UserDao.findByEmail("jozef@muni.cz")).isEqualTo(user1);
+    }
+
+    @Test(expectedExceptions = InvalidDataAccessApiUsageException.class)
+    public void findUserByNullEmailTest() {
+        UserDao.findByEmail(null);
+    }
+
+    @Test
+    public void findUserByNonExistingEmailTest() {
+        assertThat(UserDao.findByName("test@email.cz")).isEqualTo(null);
+    }
+
     @Test(expectedExceptions = InvalidDataAccessApiUsageException.class)
     public void findNonExistingUserByIdTest() {
         assertThat(UserDao.findById(user3.getId())).isEqualTo(null);

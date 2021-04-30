@@ -12,18 +12,21 @@ import java.util.List;
 public interface MatchFacade {
     /**
      * Creates a match
+     *
      * @param match to create
      */
     Long create(MatchDto match);
 
     /**
      * Removes a match
+     *
      * @param matchId of the match to remove
      */
     void remove(Long matchId);
 
     /**
      * Finds match by id
+     *
      * @param id of the match
      * @return match
      */
@@ -31,19 +34,22 @@ public interface MatchFacade {
 
     /**
      * Finds all matches
+     *
      * @return all matches
      */
     List<MatchDto> findAllMatches();
 
     /**
      * Finds nearest match by date
+     *
      * @return nearest match
      */
     MatchDto findNearestMatch();
 
     /**
      * Gets score of a match
-     * @return
+     *
+     * @return score tuple of match
      */
     ScoreTuple getScoreOfMatch(Long matchId);
 
