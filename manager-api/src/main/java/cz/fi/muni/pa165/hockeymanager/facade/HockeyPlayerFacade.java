@@ -14,27 +14,27 @@ public interface HockeyPlayerFacade {
      * @param hockeyPlayerDto HockeyPlayer to be saved in database.
      * @return Id of the newly saved player.
      */
-    long createHockeyPlayer(HockeyPlayerDto hockeyPlayerDto);
+    long create(HockeyPlayerDto hockeyPlayerDto);
 
     /**
      * Delete HockeyPlayer from database by it's id.
      *
      * @param hockeyPlayerId Id of HockeyPlayer you want to delete.
      */
-    void removeHockeyPlayer(long hockeyPlayerId);
+    void remove(long hockeyPlayerId);
 
     /**
      * Get List of all HockeyPlayers saved in database.
      *
      * @return List of HockeyPlayer.
      */
-    List<HockeyPlayerDto> getAllHockeyPlayers();
+    List<HockeyPlayerDto> FindAllHockeyPlayers();
 
     /**
      * Update HockeyPlayer in database.
      *
      * @param hockeyPlayerDto Dto of HockeyPlayer that we want to update.
      */
-    void updateHockeyPlayer(HockeyPlayerDto hockeyPlayerDto);
+    void update(HockeyPlayerDto hockeyPlayerDto);
 
 }

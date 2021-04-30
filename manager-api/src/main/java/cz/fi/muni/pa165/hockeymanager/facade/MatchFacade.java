@@ -11,38 +11,44 @@ import java.util.List;
 public interface MatchFacade {
     /**
      * Creates a match
+     *
      * @param match to create
      */
-    public Long create(MatchDto match);
+    Long create(MatchDto match);
 
     /**
      * Removes a match
+     *
      * @param matchId of the match to remove
      */
-    public void remove(Long matchId);
+    void remove(Long matchId);
 
     /**
      * Finds match by id
+     *
      * @param id of the match
      * @return match
      */
-    public MatchDto findMatchById(Long id);
+    MatchDto findMatchById(Long id);
 
     /**
      * Finds all matches
+     *
      * @return all matches
      */
-    public List<MatchDto> findAllMatches();
+    List<MatchDto> findAllMatches();
 
     /**
      * Finds nearest match by date
+     *
      * @return nearest match
      */
-    public MatchDto findNearestMatch();
+    MatchDto findNearestMatch();
 
     /**
      * Gets score of a match
-     * @return
+     *
+     * @return score tuple of match
      */
-    public ScoreTuple getScoreOfMatch(long matchId);
+    ScoreTuple getScoreOfMatch(long matchId);
 }

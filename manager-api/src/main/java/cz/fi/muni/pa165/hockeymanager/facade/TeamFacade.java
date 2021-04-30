@@ -10,6 +10,7 @@ import java.util.List;
 public interface TeamFacade {
     /**
      * Creates a team.
+     *
      * @param team object to create.
      * @return Long ID of object.
      */
@@ -17,12 +18,14 @@ public interface TeamFacade {
 
     /**
      * Removes team.
+     *
      * @param team object to remove.
      */
     void remove(TeamDto team);
 
     /**
      * Finds team by ID.
+     *
      * @param teamId ID of team to find.
      * @return TeamDto object of found team.
      */
@@ -30,6 +33,7 @@ public interface TeamFacade {
 
     /**
      * Finds all teams.
+     *
      * @return List of all teams.
      */
     List<TeamDto> findAllTeams();
