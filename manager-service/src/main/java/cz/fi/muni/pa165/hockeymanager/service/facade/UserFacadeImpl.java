@@ -40,13 +40,13 @@ public class UserFacadeImpl implements UserFacade {
     }
 
     @Override
-    public UserDto getMatchById(Long id) {
+    public UserDto findMatchById(Long id) {
         User user = userService.findById(id);
         return (user == null) ? null : beanMappingService.mapTo(user, UserDto.class);
     }
 
     @Override
-    public List<UserDto> getAllUsers() {
+    public List<UserDto> findAllUsers() {
         return beanMappingService.mapTo(userService.findAll(), UserDto.class);
     }
 }

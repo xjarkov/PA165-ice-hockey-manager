@@ -27,7 +27,7 @@ public class HockeyPlayerFacadeImpl implements HockeyPlayerFacade {
     private TeamService teamService;
 
     @Override
-    public long createHockeyPlayer(HockeyPlayerDto hockeyPlayerDto) {
+    public long create(HockeyPlayerDto hockeyPlayerDto) {
         HockeyPlayer mappedHockeyPlayer = beanMappingService.mapTo(hockeyPlayerDto, HockeyPlayer.class);
         Team playerTeam = beanMappingService.mapTo(hockeyPlayerDto.getTeam(), Team.class);
         if(teamService.findById(playerTeam.getId()) != null){
@@ -39,12 +39,12 @@ public class HockeyPlayerFacadeImpl implements HockeyPlayerFacade {
     }
 
     @Override
-    public void removeHockeyPlayer(long hockeyPlayerId) {
+    public void remove(long hockeyPlayerId) {
         hockeyPlayerService.remove(hockeyPlayerService.findById(hockeyPlayerId));
     }
 
     @Override
-    public List<HockeyPlayerDto> getAllHockeyPlayers() {
+    public List<HockeyPlayerDto> findAllHockeyPlayers() {
         List<HockeyPlayer> hockeyPlayers = hockeyPlayerService.getAllPlayers();
         List<HockeyPlayerDto> hockeyPlayerDtos = new ArrayList<>();
         for(HockeyPlayer p : hockeyPlayers){
@@ -55,7 +55,7 @@ public class HockeyPlayerFacadeImpl implements HockeyPlayerFacade {
     }
 
     @Override
-    public void updateHockeyPlayer(HockeyPlayerDto hockeyPlayerDto) {
+    public void update(HockeyPlayerDto hockeyPlayerDto) {
         HockeyPlayer mappedHockeyPlayer = beanMappingService.mapTo(hockeyPlayerDto, HockeyPlayer.class);
         hockeyPlayerService.update(mappedHockeyPlayer);
     }

@@ -28,12 +28,12 @@ public interface UserFacade {
      * @param id of the user
      * @return User
      */
-    UserDto getMatchById(Long id);
+    UserDto findMatchById(Long id);
 
     /**
      * Finds all users
      *
      * @return all users
      */
-    List<UserDto> getAllUsers();
+    List<UserDto> findAllUsers();
 }
