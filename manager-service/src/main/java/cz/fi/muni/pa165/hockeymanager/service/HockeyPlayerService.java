@@ -45,7 +45,7 @@ public interface HockeyPlayerService {
      *
      * @param player hockey player entity
      */
-    void create(HockeyPlayer player);
+    HockeyPlayer create(HockeyPlayer player);
 
     /**
      * Returns all matches of player's team
