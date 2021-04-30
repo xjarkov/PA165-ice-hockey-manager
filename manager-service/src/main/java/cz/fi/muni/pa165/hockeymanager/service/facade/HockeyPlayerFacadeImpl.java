@@ -34,11 +34,8 @@ public class HockeyPlayerFacadeImpl implements HockeyPlayerFacade {
             teamService.create(playerTeam);
         }
         mappedHockeyPlayer.setTeam(playerTeam);
-        hockeyPlayerService.create(mappedHockeyPlayer);
-        //hockeyPlayerService has void as return type for create. Im not sure if this returns the correct id.
-        //It can be reworked to work as the model project, but hockeyPlayerService has to be changed for that.
-        //Tell me in PR and i will rework it if needed.
-        return mappedHockeyPlayer.getId();
+        HockeyPlayer createdPlayer = hockeyPlayerService.create(mappedHockeyPlayer);
+        return createdPlayer.getId();
     }
 
     @Override
