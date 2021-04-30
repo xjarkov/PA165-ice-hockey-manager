@@ -2,11 +2,8 @@ package cz.fi.muni.pa165.hockeymanager.dto;
 
 import cz.fi.muni.pa165.hockeymanager.enums.Championship;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
 /**

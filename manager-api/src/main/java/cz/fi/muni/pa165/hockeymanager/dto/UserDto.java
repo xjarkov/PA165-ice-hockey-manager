@@ -1,11 +1,8 @@
 package cz.fi.muni.pa165.hockeymanager.dto;
 
 import cz.fi.muni.pa165.hockeymanager.enums.Role;
-import java.util.Objects;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 
 /**
