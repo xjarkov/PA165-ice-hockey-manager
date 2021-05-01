@@ -1,10 +1,6 @@
 package cz.fi.muni.pa165.hockeymanager.dto;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-
-import java.util.Objects;
 
 /**
  * @author Matus Jarkovic 456441
