@@ -23,8 +23,13 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public List<User> findAll() {
-        return em.createQuery("select u from User u", User.class).getResultList();
+    public void remove(User user) {
+        em.remove(user);
+    }
+
+    @Override
+    public void update(User user) {
+        em.merge(user);
     }
 
     @Override
@@ -63,12 +68,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void update(User user) {
-        em.merge(user);
-    }
-
-    @Override
-    public void remove(User user) {
-        em.remove(user);
+    public List<User> findAll() {
+        return em.createQuery("select u from User u", User.class).getResultList();
     }
 }
