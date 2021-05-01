@@ -39,7 +39,6 @@ public class MatchDaoImpl implements MatchDao {
                     .setParameter("team", team).getResultList();
         } catch (NoResultException nfr) {
             return null;
-
         }
     }
 

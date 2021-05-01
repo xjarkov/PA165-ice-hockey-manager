@@ -33,6 +33,12 @@ public class TeamFacadeImpl implements TeamFacade {
     }
 
     @Override
+    public TeamDto findTeamByName(String name) {
+        Team team = teamService.findByName(name);
+        return (team == null) ? null : beanMappingService.mapTo(team, TeamDto.class);
+    }
+
+    @Override
     public List<TeamDto> findAllTeams() {
         return beanMappingService.mapTo(teamService.findAll(), TeamDto.class);
     }

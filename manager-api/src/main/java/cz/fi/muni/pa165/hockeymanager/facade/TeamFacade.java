@@ -32,6 +32,14 @@ public interface TeamFacade {
     TeamDto findTeamById(Long teamId);
 
     /**
+     * Finds team by name.
+     *
+     * @param teamName name of team to find.
+     * @return TeamDto object of found team.
+     */
+    TeamDto findTeamByName(String teamName);
+
+    /**
      * Finds all teams.
      *
      * @return List of all teams.
