@@ -20,18 +20,18 @@ public interface UserService {
     User create(User user);
 
     /**
-     * Updates a user.
-     *
-     * @param user object to update.
-     */
-    void update(User user);
-
-    /**
      * Removes a user.
      *
      * @param user object to be removed.
      */
     void remove(User user);
+
+    /**
+     * Updates a user.
+     *
+     * @param user object to update.
+     */
+    void update(User user);
 
     /**
      * Finds all users.

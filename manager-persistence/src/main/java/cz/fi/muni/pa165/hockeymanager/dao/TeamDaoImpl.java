@@ -27,10 +27,8 @@ public class TeamDaoImpl implements TeamDao {
     }
 
     @Override
-    public Team findByName(String name) {
-        return em.createQuery("select t from Team t where t.name = :name", Team.class)
-                .setParameter("name", name)
-                .getSingleResult();
+    public void update(Team team) {
+        em.merge(team);
     }
 
     @Override
@@ -39,12 +37,14 @@ public class TeamDaoImpl implements TeamDao {
     }
 
     @Override
-    public List<Team> findAll() {
-        return em.createQuery("select t from Team t", Team.class).getResultList();
+    public Team findByName(String name) {
+        return em.createQuery("select t from Team t where t.name = :name", Team.class)
+                .setParameter("name", name)
+                .getSingleResult();
     }
 
     @Override
-    public void update(Team team) {
-        em.merge(team);
+    public List<Team> findAll() {
+        return em.createQuery("select t from Team t", Team.class).getResultList();
     }
 }

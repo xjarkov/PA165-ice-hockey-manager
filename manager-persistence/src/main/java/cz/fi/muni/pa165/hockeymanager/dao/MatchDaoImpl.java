@@ -23,8 +23,13 @@ public class MatchDaoImpl implements MatchDao {
     }
 
     @Override
-    public List<Match> findAll() {
-        return em.createQuery("select m from Match m", Match.class).getResultList();
+    public void remove(Match match) {
+        em.remove(match);
+    }
+
+    @Override
+    public void update(Match match) {
+        em.merge(match);
     }
 
     @Override
@@ -39,17 +44,11 @@ public class MatchDaoImpl implements MatchDao {
                     .setParameter("team", team).getResultList();
         } catch (NoResultException nfr) {
             return null;
-
         }
     }
 
     @Override
-    public void remove(Match match) {
-        em.remove(match);
-    }
-
-    @Override
-    public void update(Match match) {
-        em.merge(match);
+    public List<Match> findAll() {
+        return em.createQuery("select m from Match m", Match.class).getResultList();
     }
 }
