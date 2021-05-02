@@ -34,30 +34,10 @@ public class HockeyPlayerServiceTest extends AbstractTestNGSpringContextTests {
     @Mock
     private MatchDao matchDao;
 
-    private HockeyPlayer player1;
-    private HockeyPlayer player2;
+    private HockeyPlayer player1 = new HockeyPlayer("Jozef", "Novák", 85, 90);
+    private HockeyPlayer player2 = new HockeyPlayer("Fero", "Horniak", 93, 95);
 
     @BeforeMethod
-    public void resetMock() {
-        reset(playerDao);
-    }
-
-    @BeforeMethod
-    public void preparePlayers() {
-        player1 = new HockeyPlayer();
-        player1.setFirstName("Jozef");
-        player1.setLastName("Novák");
-        player1.setOffensiveStrength(85);
-        player1.setDefensiveStrength(90);
-
-        player2 = new HockeyPlayer();
-        player2.setFirstName("Fero");
-        player2.setLastName("Slovák");
-        player2.setOffensiveStrength(85);
-        player2.setDefensiveStrength(90);
-    }
-
-    @BeforeClass
     public void setup() throws ServiceException {
         MockitoAnnotations.openMocks(this);
     }
