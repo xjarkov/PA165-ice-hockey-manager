@@ -50,4 +50,47 @@ public class TeamServiceTest extends AbstractTestNGSpringContextTests{
         team1 = new Team("team1", Championship.SHL);
         team2 = new Team("team2", Championship.DEL);
     }
+    @Test
+    public void createTeams(){
+        teamService.create(team1);
+        verify(teamDao).create(team1);
+    }
+
+    @Test
+    public void removeTeamTest(){
+        Team createdTeam = teamService.create(team1);
+        verify(teamDao).create(team1);
+        teamService.remove(createdTeam);
+        verify(teamDao).remove(createdTeam);
+    }
+
+    @Test
+    public void findTeamByNameTest(){
+        Team createdTeam = teamService.create(team1);
+        verify(teamDao).create(team1);
+        when(teamDao.findByName("team1")).thenReturn(team1);
+
+        assertThat(teamService.findByName(createdTeam.getName())).isEqualTo(createdTeam);
+    }
+
+    @Test
+    public void findTeamByIdTest(){
+        Team createdTeam = teamService.create(team1);
+        verify(teamDao).create(team1);
+        when(teamDao.findById(team1.getId())).thenReturn(team1);
+
+        assertThat(teamService.findById(createdTeam.getId())).isEqualTo(createdTeam);
+    }
+
+    @Test
+    public void findAllTeamsTest(){
+        Team createdTeam1 = teamService.create(team1);
+        Team createdTeam2 = teamService.create(team2);
+        verify(teamDao).create(team1);
+        verify(teamDao).create(team2);
+
+        when(teamDao.findAll()).thenReturn(asList(createdTeam1, createdTeam2));
+
+        assertThat(teamService.findAll()).isEqualTo(asList(createdTeam1, createdTeam2));
+    }
 }
