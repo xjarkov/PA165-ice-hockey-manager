@@ -117,4 +117,24 @@ public class TeamServiceTest extends AbstractTestNGSpringContextTests{
 
         teamService.addPlayer(team1, player);
     }
+
+    @Test
+    public void removePlayerCorrect(){
+        HockeyPlayer player = new HockeyPlayer("fName", "lName", 1,1);
+        teamService.addPlayer(team1, player);
+
+        assertThat(player.getTeam()).isEqualTo(team1);
+        assertThat(team1.getHockeyPlayers()).contains(player);
+
+        teamService.removePlayer(team1, player);
+
+        assertThat(player.getTeam()).isEqualTo(null);
+        assertThat(team1.getHockeyPlayers().size()).isEqualTo(0);
+    }
+
+    @Test(expectedExceptions = ManagerServiceException.class)
+    public void removeMissingPlayer(){
+        HockeyPlayer player = new HockeyPlayer("fName", "lName", 1,1);
+        teamService.removePlayer(team1, player);
+    }
 }
