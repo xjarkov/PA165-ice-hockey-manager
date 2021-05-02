@@ -34,11 +34,11 @@ public class UserFacadeTest extends AbstractTransactionalTestNGSpringContextTest
     @InjectMocks
     private UserFacadeImpl userFacade = new UserFacadeImpl();
 
-    private User user1 = new User("user1", "user1@muni.cz", "user1pwd", Role.PLAYER);
-    private UserDto userDto1 = new UserDto("user1", "user1@muni.cz", "user1pwd", Role.PLAYER);
+    final private User user1 = new User("user1", "user1@muni.cz", "user1pwd", Role.PLAYER);
+    final private UserDto userDto1 = new UserDto("user1", "user1@muni.cz", "user1pwd", Role.PLAYER);
 
-    private List<User> userList = List.of(user1);
-    private List<UserDto> userDtoList = List.of(userDto1);
+    final private List<User> userList = List.of(user1);
+    final private List<UserDto> userDtoList = List.of(userDto1);
 
     @BeforeMethod
     public void setup() {
