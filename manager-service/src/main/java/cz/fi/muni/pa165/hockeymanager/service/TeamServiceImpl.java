@@ -16,8 +16,9 @@ public class TeamServiceImpl implements TeamService {
     private TeamDao teamDao;
 
     @Override
-    public void create(Team team) {
+    public Team create(Team team) {
         teamDao.create(team);
+        return team;
     }
 
     @Override

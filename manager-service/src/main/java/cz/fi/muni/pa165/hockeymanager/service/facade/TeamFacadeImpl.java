@@ -12,13 +12,15 @@ import java.util.List;
 public class TeamFacadeImpl implements TeamFacade {
     @Autowired
     private BeanMappingService beanMappingService;
+
+    @Autowired
     private TeamService teamService;
 
     @Override
     public Long create(TeamDto team) {
         Team mappedTeam = beanMappingService.mapTo(team, Team.class);
-        teamService.create(mappedTeam);
-        return mappedTeam.getId();
+        Team createdTeam = teamService.create(mappedTeam);
+        return createdTeam.getId();
     }
 
     @Override
