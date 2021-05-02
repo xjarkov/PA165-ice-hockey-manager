@@ -9,32 +9,33 @@ import java.util.List;
  */
 public interface HockeyPlayerDao {
     /**
-     * Creates new player
+     * Creates new player.
      *
-     * @param hockeyPlayer Player entity
+     * @param hockeyPlayer Player entity.
      */
     void create(HockeyPlayer hockeyPlayer);
 
     /**
-     * Removes player
+     * Removes player.
      *
-     * @param hockeyPlayer to remove
+     * @param hockeyPlayer to remove.
      */
     void remove(HockeyPlayer hockeyPlayer);
 
     /**
-     * Updates entity with the same ID in the table
-     * @param hockeyPlayer to update
+     * Updates entity with the same ID in the table.
+     *
+     * @param hockeyPlayer to update.
      */
     void update(HockeyPlayer hockeyPlayer);
 
     /**
-     * @return List of all players
+     * @return List of all players.
      */
     List<HockeyPlayer> findAll();
 
     /**
-     * @return Player by its id
+     * @return Player by its id.
      */
     HockeyPlayer findById(Long id);
 }

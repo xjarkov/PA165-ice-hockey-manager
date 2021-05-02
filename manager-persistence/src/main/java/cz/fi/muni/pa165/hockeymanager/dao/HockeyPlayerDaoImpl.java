@@ -28,12 +28,12 @@ public class HockeyPlayerDaoImpl implements HockeyPlayerDao {
     public void update(HockeyPlayer hockeyPlayer) { em.merge(hockeyPlayer); }
 
     @Override
-    public List<HockeyPlayer> findAll() {
-        return em.createQuery("select p from HockeyPlayer p", HockeyPlayer.class).getResultList();
+    public HockeyPlayer findById(Long id) {
+        return em.find(HockeyPlayer.class, id);
     }
 
     @Override
-    public HockeyPlayer findById(Long id) {
-        return em.find(HockeyPlayer.class, id);
+    public List<HockeyPlayer> findAll() {
+        return em.createQuery("select p from HockeyPlayer p", HockeyPlayer.class).getResultList();
     }
 }

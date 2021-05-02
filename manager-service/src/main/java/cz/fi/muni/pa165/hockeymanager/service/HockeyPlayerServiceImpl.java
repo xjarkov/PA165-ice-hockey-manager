@@ -21,13 +21,9 @@ public class HockeyPlayerServiceImpl implements HockeyPlayerService {
     private MatchDao matchDao;
 
     @Override
-    public HockeyPlayer findById(Long id) {
-        return hockeyPlayerDao.findById(id);
-    }
-
-    @Override
-    public List<HockeyPlayer> getAllPlayers() {
-        return hockeyPlayerDao.findAll();
+    public HockeyPlayer create(HockeyPlayer player) {
+        hockeyPlayerDao.create(player);
+        return player;
     }
 
     @Override
@@ -41,9 +37,13 @@ public class HockeyPlayerServiceImpl implements HockeyPlayerService {
     }
 
     @Override
-    public HockeyPlayer create(HockeyPlayer player) {
-        hockeyPlayerDao.create(player);
-        return player;
+    public HockeyPlayer findById(Long id) {
+        return hockeyPlayerDao.findById(id);
+    }
+
+    @Override
+    public List<HockeyPlayer> getAllPlayers() {
+        return hockeyPlayerDao.findAll();
     }
 
     @Override

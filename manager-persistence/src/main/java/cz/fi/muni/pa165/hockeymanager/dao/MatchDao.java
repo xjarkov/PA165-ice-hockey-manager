@@ -9,40 +9,41 @@ import java.util.List;
  * @author Matus Jarkovic (456441)
  */
 public interface MatchDao {
-
     /**
-     * Creates new match
+     * Creates new match.
      *
-     * @param match Match entity
+     * @param match Match entity.
      */
     void create(Match match);
 
     /**
-     * @return List of all matches
+     * @return List of all matches.
      */
     List<Match> findAll();
 
     /**
-     * @param id Long ID
-     * @return Match with id
+     * @param id Long ID.
+     * @return Match with id.
      */
     Match findById(Long id);
 
     /**
-     * @param team Team
-     * @return List of Matches
+     * @param team Team.
+     * @return List of Matches.
      */
     List<Match> findByTeam(Team team);
 
     /**
-     * Removes match
-     * @param match Match entity
+     * Removes match.
+     *
+     * @param match Match entity.
      */
     void remove(Match match);
 
     /**
-     * Updates match
-     * @param match Match entity
+     * Updates match.
+     *
+     * @param match Match entity.
      */
     void update(Match match);
 }

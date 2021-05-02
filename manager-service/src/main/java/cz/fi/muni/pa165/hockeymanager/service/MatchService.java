@@ -16,18 +16,18 @@ public interface MatchService {
     void createMatch(Match match);
 
     /**
-     * Update match that's already in database.
-     *
-     * @param match Match to be updated.
-     */
-    void updateMatch(Match match);
-
-    /**
      * Remove match from database.
      *
      * @param match Match to be removed.
      */
     void removeMatch(Match match);
+
+    /**
+     * Update match that's already in database.
+     *
+     * @param match Match to be updated.
+     */
+    void updateMatch(Match match);
 
 
     /**

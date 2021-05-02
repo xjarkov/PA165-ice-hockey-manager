@@ -7,7 +7,6 @@ import java.time.LocalDateTime;
 /**
  * @author Kristian Kosorin (456620)
  */
-
 @Data
 public class MatchDto {
 

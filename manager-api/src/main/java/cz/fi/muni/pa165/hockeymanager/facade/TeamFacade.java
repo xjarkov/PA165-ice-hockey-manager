@@ -19,9 +19,9 @@ public interface TeamFacade {
     /**
      * Removes team.
      *
-     * @param team object to remove.
+     * @param id object to remove.
      */
-    void remove(TeamDto team);
+    void remove(Long id);
 
     /**
      * Finds team by ID.
@@ -30,6 +30,14 @@ public interface TeamFacade {
      * @return TeamDto object of found team.
      */
     TeamDto findTeamById(Long teamId);
+
+    /**
+     * Finds team by name.
+     *
+     * @param teamName name of team to find.
+     * @return TeamDto object of found team.
+     */
+    TeamDto findTeamByName(String teamName);
 
     /**
      * Finds all teams.

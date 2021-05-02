@@ -10,10 +10,41 @@ import java.util.List;
  */
 @Service
 public interface UserService {
+
+    /**
+     * Creates a user.
+     *
+     * @param user object to create.
+     * @return created User object.
+     */
     User create(User user);
-    void update(User user);
+
+    /**
+     * Removes a user.
+     *
+     * @param user object to be removed.
+     */
     void remove(User user);
 
+    /**
+     * Updates a user.
+     *
+     * @param user object to update.
+     */
+    void update(User user);
+
+    /**
+     * Finds all users.
+     *
+     * @return List of all users.
+     */
     List<User> findAll();
+
+    /**
+     * Finds user by its ID.
+     *
+     * @param id of the user.
+     * @return User object.
+     */
     User findById(Long id);
 }
