@@ -28,7 +28,7 @@ import static org.mockito.Mockito.*;
 
 
 @ContextConfiguration(classes = ServiceConfiguration.class)
-public class TeamServiceTest extends AbstractTestNGSpringContextTests{
+public class TeamServiceTest extends AbstractTestNGSpringContextTests {
 
     @Mock
     private TeamDao teamDao;
@@ -46,23 +46,24 @@ public class TeamServiceTest extends AbstractTestNGSpringContextTests{
     }
 
     @BeforeMethod
-    public void resetMock(){
+    public void resetMock() {
         reset(teamDao);
     }
 
     @BeforeMethod
-    public void prepareTeams(){
+    public void prepareTeams() {
         team1 = new Team("team1", Championship.SHL);
         team2 = new Team("team2", Championship.DEL);
     }
+
     @Test
-    public void createTeams(){
+    public void createTeams() {
         teamService.create(team1);
         verify(teamDao).create(team1);
     }
 
     @Test
-    public void removeTeamTest(){
+    public void removeTeamTest() {
         Team createdTeam = teamService.create(team1);
         verify(teamDao).create(team1);
         teamService.remove(createdTeam);
@@ -70,7 +71,7 @@ public class TeamServiceTest extends AbstractTestNGSpringContextTests{
     }
 
     @Test
-    public void findTeamByNameTest(){
+    public void findTeamByNameTest() {
         Team createdTeam = teamService.create(team1);
         verify(teamDao).create(team1);
         when(teamDao.findByName("team1")).thenReturn(team1);
@@ -79,7 +80,7 @@ public class TeamServiceTest extends AbstractTestNGSpringContextTests{
     }
 
     @Test
-    public void findTeamByIdTest(){
+    public void findTeamByIdTest() {
         Team createdTeam = teamService.create(team1);
         verify(teamDao).create(team1);
         when(teamDao.findById(team1.getId())).thenReturn(team1);
@@ -88,7 +89,7 @@ public class TeamServiceTest extends AbstractTestNGSpringContextTests{
     }
 
     @Test
-    public void findAllTeamsTest(){
+    public void findAllTeamsTest() {
         Team createdTeam1 = teamService.create(team1);
         Team createdTeam2 = teamService.create(team2);
         verify(teamDao).create(team1);
@@ -100,8 +101,8 @@ public class TeamServiceTest extends AbstractTestNGSpringContextTests{
     }
 
     @Test
-    public void addPlayerToTeamCorrect(){
-        HockeyPlayer player = new HockeyPlayer("fName", "lName", 1,1);
+    public void addPlayerToTeamCorrectTest() {
+        HockeyPlayer player = new HockeyPlayer("fName", "lName", 1, 1);
 
         teamService.addPlayer(team1, player);
 
@@ -110,22 +111,22 @@ public class TeamServiceTest extends AbstractTestNGSpringContextTests{
     }
 
     @Test(expectedExceptions = ManagerServiceException.class)
-    public void addPlayerWithTeamToTeam(){
-        HockeyPlayer player = new HockeyPlayer("fName", "lName", 1,1, new Team("tean3", Championship.KHL));
+    public void addPlayerWithTeamToTeamTest() {
+        HockeyPlayer player = new HockeyPlayer("fName", "lName", 1, 1, new Team("tean3", Championship.KHL));
 
         teamService.addPlayer(team1, player);
     }
 
     @Test(expectedExceptions = ManagerServiceException.class)
-    public void addAlreadyPresentPlayerToTeam(){
-        HockeyPlayer player = new HockeyPlayer("fName", "lName", 1,1, team1);
+    public void addAlreadyPresentPlayerToTeamTest() {
+        HockeyPlayer player = new HockeyPlayer("fName", "lName", 1, 1, team1);
 
         teamService.addPlayer(team1, player);
     }
 
     @Test
-    public void removePlayerCorrect(){
-        HockeyPlayer player = new HockeyPlayer("fName", "lName", 1,1);
+    public void removePlayerCorrectTest() {
+        HockeyPlayer player = new HockeyPlayer("fName", "lName", 1, 1);
         teamService.addPlayer(team1, player);
 
         assertThat(player.getTeam()).isEqualTo(team1);
@@ -138,34 +139,34 @@ public class TeamServiceTest extends AbstractTestNGSpringContextTests{
     }
 
     @Test(expectedExceptions = ManagerServiceException.class)
-    public void removeMissingPlayer(){
-        HockeyPlayer player = new HockeyPlayer("fName", "lName", 1,1);
+    public void removeMissingPlayerTest() {
+        HockeyPlayer player = new HockeyPlayer("fName", "lName", 1, 1);
         teamService.removePlayer(team1, player);
     }
 
     @Test
-    public void addMatchCorrectTest(){
-        LocalDateTime dateTime = LocalDateTime.of(2000,1,1,1,1);
+    public void addMatchCorrectTest() {
+        LocalDateTime dateTime = LocalDateTime.of(2000, 1, 1, 1, 1);
         Match match = new Match(team1, team2, dateTime);
 
-        teamService.addMatch(team1,match);
+        teamService.addMatch(team1, match);
         assertThat(team1.getMatches()).contains(match);
     }
 
     @Test(expectedExceptions = ManagerServiceException.class)
-    public void addMatchIncorrectTest(){
-        LocalDateTime dateTime = LocalDateTime.of(2000,1,1,1,1);
+    public void addMatchIncorrectTest() {
+        LocalDateTime dateTime = LocalDateTime.of(2000, 1, 1, 1, 1);
         Match match = new Match(new Team("team3", Championship.KHL), team2, dateTime);
 
         teamService.addMatch(team1, match);
     }
 
     @Test
-    public void removeNearestMatchTest(){
-        LocalDateTime dateTimeFar = LocalDateTime.of(2000,1,1,1,1);
-        Match matchFar = new Match(team1,new Team("team3", Championship.KHL), dateTimeFar);
-        LocalDateTime dateTimeNear = LocalDateTime.of(2020,1,1,1,1);
-        Match matchNear = new Match(team1,team2, dateTimeNear);
+    public void removeNearestMatchTest() {
+        LocalDateTime dateTimeFar = LocalDateTime.of(2000, 1, 1, 1, 1);
+        Match matchFar = new Match(team1, new Team("team3", Championship.KHL), dateTimeFar);
+        LocalDateTime dateTimeNear = LocalDateTime.of(2020, 1, 1, 1, 1);
+        Match matchNear = new Match(team1, team2, dateTimeNear);
 
         teamService.addMatch(team1, matchFar);
         teamService.addMatch(team1, matchNear);
@@ -179,7 +180,7 @@ public class TeamServiceTest extends AbstractTestNGSpringContextTests{
     }
 
     @Test(expectedExceptions = ManagerServiceException.class)
-    public void removeNearestMatchIncorrectTest(){
+    public void removeNearestMatchIncorrectTest() {
         teamService.removeTheNearestMatch(team1);
     }
 }
