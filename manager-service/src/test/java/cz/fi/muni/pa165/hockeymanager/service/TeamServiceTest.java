@@ -7,10 +7,7 @@ import cz.fi.muni.pa165.hockeymanager.entity.Team;
 import cz.fi.muni.pa165.hockeymanager.enums.Championship;
 import cz.fi.muni.pa165.hockeymanager.exceptions.ManagerServiceException;
 import cz.fi.muni.pa165.hockeymanager.service.config.ServiceConfiguration;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
-import net.bytebuddy.asm.Advice;
 import org.hibernate.service.spi.ServiceException;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -26,7 +23,9 @@ import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 
-
+/**
+ * @author Lukas Machalek(485196)
+ */
 @ContextConfiguration(classes = ServiceConfiguration.class)
 public class TeamServiceTest extends AbstractTestNGSpringContextTests {
 
