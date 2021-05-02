@@ -2,7 +2,9 @@ package cz.fi.muni.pa165.hockeymanager.service;
 
 import cz.fi.muni.pa165.hockeymanager.dao.UserDao;
 import cz.fi.muni.pa165.hockeymanager.entity.User;
+import cz.fi.muni.pa165.hockeymanager.exceptions.ManagerServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,27 +20,51 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User create(User user) {
-        userDao.create(user);
+        try {
+            userDao.create(user);
+        } catch (DataAccessException e) {
+            throw new ManagerServiceException("Could not create user " + user + " exc: " + e);
+        }
         return user;
     }
 
     @Override
     public void update(User user) {
-        userDao.update(user);
+        try {
+            userDao.update(user);
+        } catch (DataAccessException e) {
+            throw new ManagerServiceException("Could not update user " + user + " exc: " + e);
+        }
     }
 
     @Override
     public void remove(User user) {
-        userDao.remove(user);
+        try {
+            userDao.remove(user);
+        } catch (DataAccessException e) {
+            throw new ManagerServiceException("Could not remove user " + user + " exc: " + e);
+        }
     }
 
     @Override
     public List<User> findAll() {
-        return userDao.findAll();
+        List<User> userList;
+        try {
+            userList = userDao.findAll();
+        } catch (DataAccessException e) {
+            throw new ManagerServiceException("Could not find all users exc: " + e);
+        }
+        return userList;
     }
 
     @Override
     public User findById(Long id) {
-        return userDao.findById(id);
+        User user;
+        try {
+            user = userDao.findById(id);
+        } catch (DataAccessException e) {
+            throw new ManagerServiceException("Could not find user with id: " + id + "exc: " + e);
+        }
+        return user;
     }
 }
