@@ -60,7 +60,7 @@ public class HockeyPlayerServiceTest extends AbstractTestNGSpringContextTests {
 
     @BeforeClass
     public void setup() throws ServiceException {
-        MockitoAnnotations.initMocks(this);
+        MockitoAnnotations.openMocks(this);
     }
 
     @Test
