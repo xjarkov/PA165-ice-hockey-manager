@@ -8,18 +8,13 @@ import cz.fi.muni.pa165.hockeymanager.service.TeamService;
 import cz.fi.muni.pa165.hockeymanager.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.inject.Inject;
 import java.util.List;
 
 public class UserFacadeImpl implements UserFacade {
-    @Inject
-    UserService userService;
-
-    @Inject
-    TeamService teamService;
-
     @Autowired
     private BeanMappingService beanMappingService;
+    TeamService teamService;
+    UserService userService;
 
     @Override
     public Long create(UserDto user) {

@@ -11,7 +11,6 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -82,15 +81,15 @@ public class HockeyPlayerServiceTest extends AbstractTestNGSpringContextTests {
         List<HockeyPlayer> list = asList(player1, player2);
         when(playerDao.findAll()).thenReturn(list);
 
-        List<HockeyPlayer> found = service.getAllPlayers();
+        List<HockeyPlayer> found = service.findAll();
         verify(playerDao).findAll();
         assertThat(found).contains(player1, player2);
         assertThat(found).hasSize(2);
     }
 
     @Test
-    public void getPlayerTeamMatches() {
-        service.getPlayerTeamMatches(player1);
+    public void findPlayerTeamMatchesTest() {
+        service.findPlayerTeamMatches(player1);
         verify(matchDao).findByTeam(player1.getTeam());
     }
 }
