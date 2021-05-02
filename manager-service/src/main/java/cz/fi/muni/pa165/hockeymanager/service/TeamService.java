@@ -74,4 +74,11 @@ public interface TeamService {
      * @param team to remove the match from
      */
     void removeTheNearestMatch(Team team);
+
+    /**
+     * Find the best player of the team according to the sum of player's ratings.
+     *
+     * @param team to be searched through.
+     */
+    HockeyPlayer findBestPlayer(Team team);
 }
