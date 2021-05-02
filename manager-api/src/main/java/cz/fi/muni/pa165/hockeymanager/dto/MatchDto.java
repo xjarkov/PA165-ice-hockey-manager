@@ -21,4 +21,13 @@ public class MatchDto {
     private int visitingScore;
 
     private LocalDateTime dateTime;
+
+    public MatchDto(TeamDto homeTeam, TeamDto visitingTeam, LocalDateTime dateTime) {
+        this.homeTeam = homeTeam;
+        this.visitingTeam = visitingTeam;
+        this.dateTime = dateTime;
+    }
+
+    public MatchDto() {
+    }
 }

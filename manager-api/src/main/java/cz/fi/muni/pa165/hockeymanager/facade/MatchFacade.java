@@ -22,7 +22,7 @@ public interface MatchFacade {
      *
      * @param matchId of the match to remove
      */
-    void remove(Long matchId);
+    void remove(MatchDto match);
 
     /**
      * Finds match by id

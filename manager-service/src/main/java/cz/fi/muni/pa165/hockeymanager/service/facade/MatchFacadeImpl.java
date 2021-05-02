@@ -3,6 +3,7 @@ package cz.fi.muni.pa165.hockeymanager.service.facade;
 import cz.fi.muni.pa165.hockeymanager.dto.MatchDto;
 import cz.fi.muni.pa165.hockeymanager.dto.TeamDto;
 import cz.fi.muni.pa165.hockeymanager.entity.Match;
+import cz.fi.muni.pa165.hockeymanager.entity.User;
 import cz.fi.muni.pa165.hockeymanager.facade.MatchFacade;
 import cz.fi.muni.pa165.hockeymanager.service.BeanMappingService;
 import cz.fi.muni.pa165.hockeymanager.service.MatchService;
@@ -28,8 +29,8 @@ public class MatchFacadeImpl implements MatchFacade {
     }
 
     @Override
-    public void remove(Long matchId) {
-        matchService.removeMatch(matchService.getById(matchId));
+    public void remove(MatchDto match) {
+        matchService.removeMatch(beanMappingService.mapTo(match, Match.class));
     }
 
     @Override
