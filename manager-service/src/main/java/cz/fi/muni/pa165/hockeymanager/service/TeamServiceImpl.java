@@ -79,7 +79,7 @@ public class TeamServiceImpl implements TeamService {
 
     @Override
     public void addMatch(Team team, Match match) {
-        if (!(match.getHomeTeam().equals(team) && match.getVisitingTeam().equals(team))) {
+        if (!(match.getHomeTeam().equals(team) || match.getVisitingTeam().equals(team))) {
             throw new ManagerServiceException(String.format(
                     "The match with ID %d does not contain %s team",
                     match.getId(),
