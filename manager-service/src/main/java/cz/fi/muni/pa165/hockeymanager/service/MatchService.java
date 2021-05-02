@@ -14,7 +14,7 @@ public interface MatchService {
      *
      * @param match Match to be created in database.
      */
-    void createMatch(Match match);
+    Match createMatch(Match match);
 
     /**
      * Remove match from database.
