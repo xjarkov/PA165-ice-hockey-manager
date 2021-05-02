@@ -6,10 +6,8 @@ import cz.fi.muni.pa165.hockeymanager.entity.Team;
 import cz.fi.muni.pa165.hockeymanager.facade.HockeyPlayerFacade;
 import cz.fi.muni.pa165.hockeymanager.service.BeanMappingService;
 import cz.fi.muni.pa165.hockeymanager.service.HockeyPlayerService;
-import cz.fi.muni.pa165.hockeymanager.service.TeamService;
 import java.util.ArrayList;
 import java.util.List;
-import javax.inject.Inject;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -19,21 +17,12 @@ public class HockeyPlayerFacadeImpl implements HockeyPlayerFacade {
 
     @Autowired
     private BeanMappingService beanMappingService;
-
-    @Inject
     private HockeyPlayerService hockeyPlayerService;
-
-    @Inject
-    private TeamService teamService;
 
     @Override
     public long create(HockeyPlayerDto hockeyPlayerDto) {
         HockeyPlayer mappedHockeyPlayer = beanMappingService.mapTo(hockeyPlayerDto, HockeyPlayer.class);
-        Team playerTeam = beanMappingService.mapTo(hockeyPlayerDto.getTeam(), Team.class);
-        if(teamService.findById(playerTeam.getId()) != null){
-            teamService.create(playerTeam);
-        }
-        mappedHockeyPlayer.setTeam(playerTeam);
+        mappedHockeyPlayer.setTeam(beanMappingService.mapTo(hockeyPlayerDto.getTeam(), Team.class));
         HockeyPlayer createdPlayer = hockeyPlayerService.create(mappedHockeyPlayer);
         return createdPlayer.getId();
     }
