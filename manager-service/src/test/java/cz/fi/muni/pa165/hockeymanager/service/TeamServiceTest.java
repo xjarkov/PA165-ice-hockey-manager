@@ -2,10 +2,15 @@ package cz.fi.muni.pa165.hockeymanager.service;
 
 import cz.fi.muni.pa165.hockeymanager.dao.TeamDao;
 import cz.fi.muni.pa165.hockeymanager.entity.HockeyPlayer;
+import cz.fi.muni.pa165.hockeymanager.entity.Match;
 import cz.fi.muni.pa165.hockeymanager.entity.Team;
 import cz.fi.muni.pa165.hockeymanager.enums.Championship;
 import cz.fi.muni.pa165.hockeymanager.exceptions.ManagerServiceException;
 import cz.fi.muni.pa165.hockeymanager.service.config.ServiceConfiguration;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import net.bytebuddy.asm.Advice;
 import org.hibernate.service.spi.ServiceException;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -136,5 +141,45 @@ public class TeamServiceTest extends AbstractTestNGSpringContextTests{
     public void removeMissingPlayer(){
         HockeyPlayer player = new HockeyPlayer("fName", "lName", 1,1);
         teamService.removePlayer(team1, player);
+    }
+
+    @Test
+    public void addMatchCorrectTest(){
+        LocalDateTime dateTime = LocalDateTime.of(2000,1,1,1,1);
+        Match match = new Match(team1, team2, dateTime);
+
+        teamService.addMatch(team1,match);
+        assertThat(team1.getMatches()).contains(match);
+    }
+
+    @Test(expectedExceptions = ManagerServiceException.class)
+    public void addMatchIncorrectTest(){
+        LocalDateTime dateTime = LocalDateTime.of(2000,1,1,1,1);
+        Match match = new Match(new Team("team3", Championship.KHL), team2, dateTime);
+
+        teamService.addMatch(team1, match);
+    }
+
+    @Test
+    public void removeNearestMatchTest(){
+        LocalDateTime dateTimeFar = LocalDateTime.of(2000,1,1,1,1);
+        Match matchFar = new Match(team1,new Team("team3", Championship.KHL), dateTimeFar);
+        LocalDateTime dateTimeNear = LocalDateTime.of(2020,1,1,1,1);
+        Match matchNear = new Match(team1,team2, dateTimeNear);
+
+        teamService.addMatch(team1, matchFar);
+        teamService.addMatch(team1, matchNear);
+
+        assertThat(team1.getMatches().size()).isEqualTo(2);
+
+        teamService.removeTheNearestMatch(team1);
+
+        assertThat(team1.getMatches().size()).isEqualTo(1);
+        assertThat(team1.getMatches()).contains(matchNear);
+    }
+
+    @Test(expectedExceptions = ManagerServiceException.class)
+    public void removeNearestMatchIncorrectTest(){
+        teamService.removeTheNearestMatch(team1);
     }
 }
