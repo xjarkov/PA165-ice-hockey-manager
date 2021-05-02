@@ -2,14 +2,12 @@ package cz.fi.muni.pa165.hockeymanager.service;
 
 import cz.fi.muni.pa165.hockeymanager.entity.HockeyPlayer;
 import cz.fi.muni.pa165.hockeymanager.entity.Match;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 /**
  * @author Petr Šopf (506511)
  */
-@Service
 public interface HockeyPlayerService {
     /**
      * Creates new hockey player.
@@ -46,7 +44,6 @@ public interface HockeyPlayerService {
      * @return list of all hockey players.
      */
     List<HockeyPlayer> getAllPlayers();
-
 
     /**
      * Returns all matches of player's team.
