@@ -43,12 +43,12 @@ public interface HockeyPlayerService {
      *
      * @return list of all hockey players.
      */
-    List<HockeyPlayer> getAllPlayers();
+    List<HockeyPlayer> findAll();
 
     /**
      * Returns all matches of player's team.
      *
      * @return list of all player's team matches.
      */
-    List<Match> getPlayerTeamMatches(HockeyPlayer player);
+    List<Match> findPlayerTeamMatches(HockeyPlayer player);
 }

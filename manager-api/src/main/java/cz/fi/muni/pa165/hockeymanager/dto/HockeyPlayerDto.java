@@ -7,20 +7,21 @@ import lombok.Data;
  */
 @Data
 public class HockeyPlayerDto {
-
     private Long id;
-
     private String firstName;
-
     private String lastName;
-
     private Integer offensiveStrength;
-
     private Integer defensiveStrength;
-
     private TeamDto team;
 
     public String getFullName() {
         return this.firstName + this.lastName;
+    }
+
+    public HockeyPlayerDto(String firstName, String lastName, Integer offensiveStrength, Integer defensiveStrength) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.offensiveStrength = offensiveStrength;
+        this.defensiveStrength = defensiveStrength;
     }
 }

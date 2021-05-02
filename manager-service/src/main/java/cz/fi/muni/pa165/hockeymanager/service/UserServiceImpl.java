@@ -14,7 +14,6 @@ import java.util.List;
  */
 @Service
 public class UserServiceImpl implements UserService {
-
     @Autowired
     private UserDao userDao;
 
@@ -66,5 +65,16 @@ public class UserServiceImpl implements UserService {
             throw new ManagerServiceException("Could not find user with id: " + id + "exc: " + e);
         }
         return user;
+
+    @Override
+    public List<User> findAll() {
+        try{
+            return userDao.findAll();
+        }catch(DataAccessException e){
+            throw new ManagerServiceException(String.format(
+                    "DataAccessException caught while finding all users with message: %s",
+                    e.getMessage()
+            ));
+        }
     }
 }

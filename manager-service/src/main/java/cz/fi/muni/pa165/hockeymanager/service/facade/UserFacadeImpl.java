@@ -21,6 +21,8 @@ public class UserFacadeImpl implements UserFacade {
 
     @Autowired
     private BeanMappingService beanMappingService;
+    TeamService teamService;
+    UserService userService;
 
     @Override
     public Long create(UserDto user) {
