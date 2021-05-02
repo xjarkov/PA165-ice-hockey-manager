@@ -28,7 +28,7 @@ public interface UserFacade {
      * @param id of the user
      * @return User
      */
-    UserDto findMatchById(Long id);
+    UserDto findUserById(Long id);
 
     /**
      * Finds all users

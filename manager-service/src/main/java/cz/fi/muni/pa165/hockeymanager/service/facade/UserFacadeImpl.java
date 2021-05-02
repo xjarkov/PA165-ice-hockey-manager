@@ -1,22 +1,23 @@
 package cz.fi.muni.pa165.hockeymanager.service.facade;
 
 import cz.fi.muni.pa165.hockeymanager.dto.UserDto;
+import cz.fi.muni.pa165.hockeymanager.entity.Team;
 import cz.fi.muni.pa165.hockeymanager.entity.User;
 import cz.fi.muni.pa165.hockeymanager.facade.UserFacade;
 import cz.fi.muni.pa165.hockeymanager.service.BeanMappingService;
 import cz.fi.muni.pa165.hockeymanager.service.TeamService;
 import cz.fi.muni.pa165.hockeymanager.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import javax.inject.Inject;
+import javax.transaction.Transactional;
 import java.util.List;
 
+@Service
+@Transactional
 public class UserFacadeImpl implements UserFacade {
-    @Inject
+    @Autowired
     UserService userService;
-
-    @Inject
-    TeamService teamService;
 
     @Autowired
     private BeanMappingService beanMappingService;
@@ -29,7 +30,7 @@ public class UserFacadeImpl implements UserFacade {
         mappedUser.setEmail(user.getEmail());
         mappedUser.setPassword(user.getPassword());
         mappedUser.setRole(user.getRole());
-        mappedUser.setTeam(teamService.findById(user.getTeam().getId()));
+        mappedUser.setTeam(beanMappingService.mapTo(user.getTeam(), Team.class));
         User newUser = userService.create(mappedUser);
         return newUser.getId();
     }
@@ -40,7 +41,7 @@ public class UserFacadeImpl implements UserFacade {
     }
 
     @Override
-    public UserDto findMatchById(Long id) {
+    public UserDto findUserById(Long id) {
         User user = userService.findById(id);
         return (user == null) ? null : beanMappingService.mapTo(user, UserDto.class);
     }
