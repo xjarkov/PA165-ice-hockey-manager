@@ -6,6 +6,7 @@ import cz.fi.muni.pa165.hockeymanager.entity.Match;
 import cz.fi.muni.pa165.hockeymanager.entity.Team;
 import cz.fi.muni.pa165.hockeymanager.exceptions.ManagerServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -17,28 +18,66 @@ public class TeamServiceImpl implements TeamService {
 
     @Override
     public Team create(Team team) {
-        teamDao.create(team);
+        try {
+            teamDao.create(team);
+        }catch(DataAccessException e){
+            throw new ManagerServiceException(String.format(
+                    "DataAccessException caught while creating team with message: %s",
+                    e.getMessage()
+            ));
+        }
         return team;
     }
 
     @Override
     public void remove(Team team) {
-        teamDao.remove(team);
+        try {
+            teamDao.remove(team);
+        }catch(DataAccessException e){
+            throw new ManagerServiceException(String.format(
+                    "DataAccessException caught while removing team with name: %s, with message: %s",
+                    team.getName(),
+                    e.getMessage()
+            ));
+        }
     }
 
     @Override
     public Team findByName(String name) {
-        return teamDao.findByName(name);
+        try{
+            return teamDao.findByName(name);
+        }catch(DataAccessException e){
+            throw new ManagerServiceException(String.format(
+                    "DataAccessException caught while finding team by name: %s, with message: %s",
+                    name,
+                    e.getMessage()
+            ));
+        }
     }
 
     @Override
     public Team findById(Long id) {
-        return teamDao.findById(id);
+        try{
+            return teamDao.findById(id);
+        }catch(DataAccessException e){
+            throw new ManagerServiceException(String.format(
+                    "DataAccessException caught while finding team by id: %d, with message: %s",
+                    id,
+                    e.getMessage()
+            ));
+        }
     }
 
     @Override
     public List<Team> findAll() {
-        return teamDao.findAll();
+        try{
+            return teamDao.findAll();
+        }catch(DataAccessException e){
+            throw new ManagerServiceException(String.format(
+                    "DataAccessException caught while finding all teams with message: %s",
+                    e.getMessage()
+            ));
+        }
     }
 
     @Override
