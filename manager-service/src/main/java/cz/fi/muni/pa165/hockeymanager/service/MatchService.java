@@ -1,6 +1,7 @@
 package cz.fi.muni.pa165.hockeymanager.service;
 
 import cz.fi.muni.pa165.hockeymanager.entity.Match;
+
 import java.util.List;
 
 /**
