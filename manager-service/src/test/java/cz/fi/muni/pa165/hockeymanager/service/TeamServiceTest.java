@@ -93,4 +93,28 @@ public class TeamServiceTest extends AbstractTestNGSpringContextTests{
 
         assertThat(teamService.findAll()).isEqualTo(asList(createdTeam1, createdTeam2));
     }
+
+    @Test
+    public void addPlayerToTeamCorrect(){
+        HockeyPlayer player = new HockeyPlayer("fName", "lName", 1,1);
+
+        teamService.addPlayer(team1, player);
+
+        assertThat(player.getTeam()).isEqualTo(team1);
+        assertThat(team1.getHockeyPlayers()).contains(player);
+    }
+
+    @Test(expectedExceptions = ManagerServiceException.class)
+    public void addPlayerWithTeamToTeam(){
+        HockeyPlayer player = new HockeyPlayer("fName", "lName", 1,1, new Team("tean3", Championship.KHL));
+
+        teamService.addPlayer(team1, player);
+    }
+
+    @Test(expectedExceptions = ManagerServiceException.class)
+    public void addAlreadyPresentPlayerToTeam(){
+        HockeyPlayer player = new HockeyPlayer("fName", "lName", 1,1, team1);
+
+        teamService.addPlayer(team1, player);
+    }
 }
