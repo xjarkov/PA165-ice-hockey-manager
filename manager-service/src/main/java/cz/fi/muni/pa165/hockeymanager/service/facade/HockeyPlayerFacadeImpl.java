@@ -6,21 +6,20 @@ import cz.fi.muni.pa165.hockeymanager.entity.Team;
 import cz.fi.muni.pa165.hockeymanager.facade.HockeyPlayerFacade;
 import cz.fi.muni.pa165.hockeymanager.service.BeanMappingService;
 import cz.fi.muni.pa165.hockeymanager.service.HockeyPlayerService;
-import java.util.ArrayList;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * @author Lukas Machalek
  */
 public class HockeyPlayerFacadeImpl implements HockeyPlayerFacade {
-
     @Autowired
     private BeanMappingService beanMappingService;
     private HockeyPlayerService hockeyPlayerService;
 
     @Override
-    public long create(HockeyPlayerDto hockeyPlayerDto) {
+    public Long create(HockeyPlayerDto hockeyPlayerDto) {
         HockeyPlayer mappedHockeyPlayer = beanMappingService.mapTo(hockeyPlayerDto, HockeyPlayer.class);
         mappedHockeyPlayer.setTeam(beanMappingService.mapTo(hockeyPlayerDto.getTeam(), Team.class));
         HockeyPlayer createdPlayer = hockeyPlayerService.create(mappedHockeyPlayer);
@@ -28,24 +27,17 @@ public class HockeyPlayerFacadeImpl implements HockeyPlayerFacade {
     }
 
     @Override
-    public void remove(long hockeyPlayerId) {
-        hockeyPlayerService.remove(hockeyPlayerService.findById(hockeyPlayerId));
-    }
-
-    @Override
-    public List<HockeyPlayerDto> findAllHockeyPlayers() {
-        List<HockeyPlayer> hockeyPlayers = hockeyPlayerService.getAllPlayers();
-        List<HockeyPlayerDto> hockeyPlayerDtos = new ArrayList<>();
-        for(HockeyPlayer p : hockeyPlayers){
-            HockeyPlayerDto pDto = beanMappingService.mapTo(p, HockeyPlayerDto.class);
-            hockeyPlayerDtos.add(pDto);
-        }
-        return hockeyPlayerDtos;
+    public void remove(HockeyPlayerDto hockeyPlayerDto) {
+        hockeyPlayerService.remove(beanMappingService.mapTo(hockeyPlayerDto, HockeyPlayer.class));
     }
 
     @Override
     public void update(HockeyPlayerDto hockeyPlayerDto) {
-        HockeyPlayer mappedHockeyPlayer = beanMappingService.mapTo(hockeyPlayerDto, HockeyPlayer.class);
-        hockeyPlayerService.update(mappedHockeyPlayer);
+        hockeyPlayerService.update(beanMappingService.mapTo(hockeyPlayerDto, HockeyPlayer.class));
+    }
+
+    @Override
+    public List<HockeyPlayerDto> findAllHockeyPlayers() {
+        return beanMappingService.mapTo(hockeyPlayerService.getAllPlayers(), HockeyPlayerDto.class);
     }
 }

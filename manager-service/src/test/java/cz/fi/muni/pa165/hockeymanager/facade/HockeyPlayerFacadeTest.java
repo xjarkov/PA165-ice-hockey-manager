@@ -13,6 +13,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTransactionalTestNGSpringContextTests;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 import static org.mockito.Mockito.*;
@@ -21,7 +24,7 @@ import static org.mockito.Mockito.*;
 @ContextConfiguration(classes = ServiceConfiguration.class)
 public class HockeyPlayerFacadeTest extends AbstractTransactionalTestNGSpringContextTests {
     @Mock
-    private HockeyPlayerService service;
+    private HockeyPlayerService hockeyPlayerService;
 
     @Mock
     private BeanMappingService beanMappingService;
@@ -29,21 +32,35 @@ public class HockeyPlayerFacadeTest extends AbstractTransactionalTestNGSpringCon
     @InjectMocks
     private HockeyPlayerFacadeImpl hockeyPlayerFacade = new HockeyPlayerFacadeImpl();
 
-    private HockeyPlayer player1;
-    private HockeyPlayerDto dto;
+    private HockeyPlayer player1 = new HockeyPlayer("Jozef", "Novák", 85, 90);
+    private HockeyPlayerDto player1Dto = new HockeyPlayerDto("Jozef", "Novák", 85, 90);
+
+    private List<HockeyPlayer> hockeyPlayerList = List.of(player1);
+    private List<HockeyPlayerDto> hockeyPlayerDtoList = List.of(player1Dto);
 
     @BeforeMethod
     public void setup() {
         MockitoAnnotations.openMocks(this);
-
-        player1 = new HockeyPlayer("Jozef", "Novák", 85, 90);
-        dto = new HockeyPlayerDto("Jozef", "Novák", 85, 90);
     }
 
     @Test
     public void createPlayerTest() {
-        when(beanMappingService.mapTo(dto, HockeyPlayer.class)).thenReturn(player1);
-        when(service.create(player1)).thenReturn(player1);
-        assertThat(hockeyPlayerFacade.create(dto)).isEqualTo(player1.getId());
+        when(beanMappingService.mapTo(player1Dto, HockeyPlayer.class)).thenReturn(player1);
+        when(hockeyPlayerService.create(player1)).thenReturn(player1);
+        assertThat(hockeyPlayerFacade.create(player1Dto)).isEqualTo(player1.getId());
+    }
+
+    @Test
+    public void removePlayerTest() {
+        when(beanMappingService.mapTo(player1Dto, HockeyPlayer.class)).thenReturn(player1);
+        hockeyPlayerFacade.remove(player1Dto);
+        verify(hockeyPlayerService).remove(player1);
+    }
+
+    @Test
+    public void findAllTest() {
+        when(hockeyPlayerService.getAllPlayers()).thenReturn(hockeyPlayerList);
+        when(beanMappingService.mapTo(hockeyPlayerList, HockeyPlayerDto.class)).thenReturn(hockeyPlayerDtoList);
+        assertThat(hockeyPlayerFacade.findAllHockeyPlayers()).isEqualTo(hockeyPlayerDtoList);
     }
 }
