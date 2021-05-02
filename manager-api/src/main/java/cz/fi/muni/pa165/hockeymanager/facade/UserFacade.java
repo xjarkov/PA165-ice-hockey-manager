@@ -18,9 +18,9 @@ public interface UserFacade {
     /**
      * Removes an user
      *
-     * @param id of the user to remove
+     * @param user to be removed
      */
-    void remove(Long id);
+    void remove(UserDto user);
 
     /**
      * Finds user by ID
@@ -28,7 +28,7 @@ public interface UserFacade {
      * @param id of the user
      * @return User
      */
-    UserDto findMatchById(Long id);
+    UserDto findUserById(Long id);
 
     /**
      * Finds all users

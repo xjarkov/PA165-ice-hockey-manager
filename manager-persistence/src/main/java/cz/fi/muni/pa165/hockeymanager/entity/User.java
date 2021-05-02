@@ -1,6 +1,7 @@
 package cz.fi.muni.pa165.hockeymanager.entity;
 
 import cz.fi.muni.pa165.hockeymanager.enums.Role;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,38 +14,28 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "UserTable")
+@Data
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter
     private Long id;
 
     @Column(unique = true)
     @NotNull
-    @Getter
-    @Setter
     private String name;
 
     @Column(unique = true)
     @NotNull
-    @Getter
-    @Setter
     private String email;
 
     @NotNull
-    @Getter
-    @Setter
     private String password;
 
     @NotNull
-    @Getter
-    @Setter
     private Role role = Role.PLAYER;
 
     @OneToOne(fetch= FetchType.LAZY)
-    @Getter
-    @Setter
     private Team team;
 
     public User() {

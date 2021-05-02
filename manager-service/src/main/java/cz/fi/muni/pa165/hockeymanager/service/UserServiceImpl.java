@@ -20,62 +20,50 @@ public class UserServiceImpl implements UserService {
     @Override
     public User create(User user) {
         try {
-        userDao.create(user);
-        } catch(DataAccessException e) {
-            throw new ManagerServiceException(String.format(
-                    "DataAccessException caught while creating user with message: %s",
-                    e.getMessage()
-            ));
+            userDao.create(user);
+        } catch (DataAccessException e) {
+            throw new ManagerServiceException("Could not create user " + user + " exc: " + e);
         }
         return user;
-    }
-
-    @Override
-    public void remove(User user) {
-        try {
-            userDao.remove(user);
-        } catch(DataAccessException e) {
-            throw new ManagerServiceException(String.format(
-                    "DataAccessException caught while removing user with message: %s",
-                    e.getMessage()
-            ));
-        }
     }
 
     @Override
     public void update(User user) {
         try {
             userDao.update(user);
-        } catch(DataAccessException e) {
-            throw new ManagerServiceException(String.format(
-                    "DataAccessException caught while updating user with message: %s",
-                    e.getMessage()
-            ));
+        } catch (DataAccessException e) {
+            throw new ManagerServiceException("Could not update user " + user + " exc: " + e);
         }
     }
 
     @Override
-    public User findById(Long id) {
+    public void remove(User user) {
         try {
-            return userDao.findById(id);
-        } catch(DataAccessException e) {
-            throw new ManagerServiceException(String.format(
-                    "DataAccessException caught while finding user by id: %d, with message: %s",
-                    id,
-                    e.getMessage()
-            ));
+            userDao.remove(user);
+        } catch (DataAccessException e) {
+            throw new ManagerServiceException("Could not remove user " + user + " exc: " + e);
         }
     }
 
     @Override
     public List<User> findAll() {
-        try{
-            return userDao.findAll();
-        }catch(DataAccessException e){
-            throw new ManagerServiceException(String.format(
-                    "DataAccessException caught while finding all users with message: %s",
-                    e.getMessage()
-            ));
+        List<User> userList;
+        try {
+            userList = userDao.findAll();
+        } catch (DataAccessException e) {
+            throw new ManagerServiceException("Could not find all users exc: " + e);
         }
+        return userList;
+    }
+
+    @Override
+    public User findById(Long id) {
+        User user;
+        try {
+            user = userDao.findById(id);
+        } catch (DataAccessException e) {
+            throw new ManagerServiceException("Could not find user with id: " + id + "exc: " + e);
+        }
+        return user;
     }
 }
