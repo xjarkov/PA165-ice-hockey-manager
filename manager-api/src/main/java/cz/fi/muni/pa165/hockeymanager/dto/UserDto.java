@@ -23,4 +23,7 @@ public class UserDto {
         this.password = password;
         this.role = role;
     }
+
+    public UserDto() {
+    }
 }

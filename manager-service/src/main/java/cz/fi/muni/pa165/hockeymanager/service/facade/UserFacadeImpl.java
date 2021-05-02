@@ -5,7 +5,6 @@ import cz.fi.muni.pa165.hockeymanager.entity.Team;
 import cz.fi.muni.pa165.hockeymanager.entity.User;
 import cz.fi.muni.pa165.hockeymanager.facade.UserFacade;
 import cz.fi.muni.pa165.hockeymanager.service.BeanMappingService;
-import cz.fi.muni.pa165.hockeymanager.service.TeamService;
 import cz.fi.muni.pa165.hockeymanager.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,8 +20,6 @@ public class UserFacadeImpl implements UserFacade {
 
     @Autowired
     private BeanMappingService beanMappingService;
-    TeamService teamService;
-    UserService userService;
 
     @Override
     public Long create(UserDto user) {
