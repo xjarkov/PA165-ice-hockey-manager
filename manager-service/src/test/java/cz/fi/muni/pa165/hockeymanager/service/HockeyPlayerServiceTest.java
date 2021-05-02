@@ -20,7 +20,6 @@ import java.util.List;
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
-import static org.testng.Assert.assertThrows;
 
 @ContextConfiguration(classes = ServiceConfiguration.class)
 public class HockeyPlayerServiceTest extends AbstractTestNGSpringContextTests {
@@ -52,10 +51,10 @@ public class HockeyPlayerServiceTest extends AbstractTestNGSpringContextTests {
         player1.setDefensiveStrength(90);
 
         player2 = new HockeyPlayer();
-        player1.setFirstName("Fero");
-        player1.setLastName("Slovák");
-        player1.setOffensiveStrength(85);
-        player1.setDefensiveStrength(90);
+        player2.setFirstName("Fero");
+        player2.setLastName("Slovák");
+        player2.setOffensiveStrength(85);
+        player2.setDefensiveStrength(90);
     }
 
     @BeforeClass
