@@ -140,4 +140,23 @@ public class TeamServiceImpl implements TeamService {
 
         team.removeMatch(Collections.min(team.getMatches(), Comparator.comparing(Match::getDateTime)));
     }
+
+    @Override
+    public HockeyPlayer findBestPlayer(Team team){
+        if(team.getHockeyPlayers().isEmpty()){
+            throw new ManagerServiceException(String.format(
+                    "The %s team does not have any players",
+                    team.getName()
+            ));
+        }
+        Set<HockeyPlayer> players = team.getHockeyPlayers();
+        HockeyPlayer bestPlayer = new HockeyPlayer("","",0,0);
+        for(HockeyPlayer p : players){
+            if((p.getDefensiveStrength() + p.getOffensiveStrength()) >
+                    (bestPlayer.getDefensiveStrength() + bestPlayer.getOffensiveStrength())){
+                bestPlayer = p;
+            }
+        }
+        return bestPlayer;
+    }
 }

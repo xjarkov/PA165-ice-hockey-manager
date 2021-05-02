@@ -182,4 +182,29 @@ public class TeamServiceTest extends AbstractTestNGSpringContextTests {
     public void removeNearestMatchIncorrectTest() {
         teamService.removeTheNearestMatch(team1);
     }
+
+    @Test
+    public void findBestPlayerTest(){
+        HockeyPlayer p1 = new HockeyPlayer("", "", 1,0);
+        HockeyPlayer p2 = new HockeyPlayer("","",1,1);
+        HockeyPlayer p3 = new HockeyPlayer("","",1,2);
+
+        teamService.addPlayer(team1,p1);
+        teamService.addPlayer(team1,p3);
+
+        assertThat(teamService.findBestPlayer(team1)).isEqualTo(p3);
+
+        teamService.addPlayer(team1,p2);
+
+        assertThat(teamService.findBestPlayer(team1)).isEqualTo(p3);
+
+        teamService.removePlayer(team1, p3);
+
+        assertThat(teamService.findBestPlayer(team1)).isEqualTo(p2);
+    }
+
+    @Test(expectedExceptions = ManagerServiceException.class)
+    public void findBestPlayerIncorrectTest(){
+        teamService.findBestPlayer(team1);
+    }
 }
