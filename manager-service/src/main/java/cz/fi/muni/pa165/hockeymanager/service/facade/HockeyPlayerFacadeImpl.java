@@ -37,7 +37,7 @@ public class HockeyPlayerFacadeImpl implements HockeyPlayerFacade {
     }
 
     @Override
-    public List<HockeyPlayerDto> findAllHockeyPlayers() {
-        return beanMappingService.mapTo(hockeyPlayerService.getAllPlayers(), HockeyPlayerDto.class);
+    public List<HockeyPlayerDto> findAll() {
+        return beanMappingService.mapTo(hockeyPlayerService.findAll(), HockeyPlayerDto.class);
     }
 }

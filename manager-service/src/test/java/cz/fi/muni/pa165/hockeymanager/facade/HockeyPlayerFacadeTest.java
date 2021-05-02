@@ -59,8 +59,8 @@ public class HockeyPlayerFacadeTest extends AbstractTransactionalTestNGSpringCon
 
     @Test
     public void findAllTest() {
-        when(hockeyPlayerService.getAllPlayers()).thenReturn(hockeyPlayerList);
+        when(hockeyPlayerService.findAll()).thenReturn(hockeyPlayerList);
         when(beanMappingService.mapTo(hockeyPlayerList, HockeyPlayerDto.class)).thenReturn(hockeyPlayerDtoList);
-        assertThat(hockeyPlayerFacade.findAllHockeyPlayers()).isEqualTo(hockeyPlayerDtoList);
+        assertThat(hockeyPlayerFacade.findAll()).isEqualTo(hockeyPlayerDtoList);
     }
 }
