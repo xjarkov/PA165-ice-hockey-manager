@@ -6,6 +6,7 @@ import cz.fi.muni.pa165.hockeymanager.service.BeanMappingService;
 import cz.fi.muni.pa165.hockeymanager.service.HockeyPlayerService;
 import cz.fi.muni.pa165.hockeymanager.service.config.ServiceConfiguration;
 import cz.fi.muni.pa165.hockeymanager.service.facade.HockeyPlayerFacadeImpl;
+
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -13,14 +14,14 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTransactionalTestNGSpringContextTests;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-
 import static org.mockito.Mockito.*;
 
-
+/**
+ * @author Kristian Kosorin (456620)
+ */
 @ContextConfiguration(classes = ServiceConfiguration.class)
 public class HockeyPlayerFacadeTest extends AbstractTransactionalTestNGSpringContextTests {
     @Mock

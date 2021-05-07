@@ -8,7 +8,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import cz.fi.muni.pa165.hockeymanager.exceptions.ManagerServiceException;
-import org.dozer.inject.Inject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
@@ -17,12 +17,11 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class MatchServiceImpl implements MatchService {
-
-    @Inject
+    @Autowired
     private MatchDao matchDao;
 
     @Override
-    public Match createMatch(Match match) {
+    public Match create(Match match) {
         try {
             matchDao.create(match);
         } catch (DataAccessException e) {
@@ -33,7 +32,7 @@ public class MatchServiceImpl implements MatchService {
     }
 
     @Override
-    public void removeMatch(Match match) {
+    public void remove(Match match) {
         try {
             matchDao.remove(match);
         } catch (DataAccessException e) {
@@ -42,7 +41,7 @@ public class MatchServiceImpl implements MatchService {
     }
 
     @Override
-    public void updateMatch(Match match) {
+    public void update(Match match) {
         try {
             matchDao.update(match);
         } catch (DataAccessException e) {
@@ -51,7 +50,7 @@ public class MatchServiceImpl implements MatchService {
     }
 
     @Override
-    public Match getById(Long matchId) {
+    public Match findById(Long matchId) {
         try {
             return matchDao.findById(matchId);
         } catch (DataAccessException e) {
@@ -60,7 +59,7 @@ public class MatchServiceImpl implements MatchService {
     }
 
     @Override
-    public List<Match> getAllMatches() {
+    public List<Match> findAll() {
         try {
             return matchDao.findAll();
         } catch (DataAccessException e) {
@@ -69,7 +68,7 @@ public class MatchServiceImpl implements MatchService {
     }
 
     @Override
-    public Match getNearestMatch() {
+    public Match findNearest() {
         try {
             return Collections.min(matchDao.findAll(), Comparator.comparing(Match::getDateTime));
         } catch (DataAccessException e) {

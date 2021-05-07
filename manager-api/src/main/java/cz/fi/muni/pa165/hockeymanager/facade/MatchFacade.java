@@ -20,7 +20,7 @@ public interface MatchFacade {
     /**
      * Removes a match
      *
-     * @param matchId of the match to remove
+     * @param match of the match to remove
      */
     void remove(MatchDto match);
 

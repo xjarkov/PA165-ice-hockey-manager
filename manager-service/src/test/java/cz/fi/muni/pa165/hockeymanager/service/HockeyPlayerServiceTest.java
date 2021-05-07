@@ -4,6 +4,7 @@ import cz.fi.muni.pa165.hockeymanager.dao.HockeyPlayerDao;
 import cz.fi.muni.pa165.hockeymanager.dao.MatchDao;
 import cz.fi.muni.pa165.hockeymanager.entity.HockeyPlayer;
 import cz.fi.muni.pa165.hockeymanager.service.config.ServiceConfiguration;
+
 import org.hibernate.service.spi.ServiceException;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -13,13 +14,15 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
 import java.util.List;
 
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 
+/**
+ * @author Kristian Kosorin (456620)
+ */
 @ContextConfiguration(classes = ServiceConfiguration.class)
 public class HockeyPlayerServiceTest extends AbstractTestNGSpringContextTests {
 

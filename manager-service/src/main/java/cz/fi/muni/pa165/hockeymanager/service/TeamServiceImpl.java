@@ -43,6 +43,15 @@ public class TeamServiceImpl implements TeamService {
     }
 
     @Override
+    public void update(Team team) {
+        try {
+            teamDao.update(team);
+        } catch (DataAccessException e) {
+            throw new ManagerServiceException("Could not update match " + team + " exception: " + e);
+        }
+    }
+
+    @Override
     public Team findByName(String name) {
         try{
             return teamDao.findByName(name);

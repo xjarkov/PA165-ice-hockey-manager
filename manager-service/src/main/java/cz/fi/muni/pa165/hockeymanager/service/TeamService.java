@@ -26,6 +26,13 @@ public interface TeamService {
     void remove(Team team);
 
     /**
+     * Updates a team
+     *
+     * @param team to update
+     */
+    void update(Team team);
+
+    /**
      * Returns team by name
      *
      * @param name of the team

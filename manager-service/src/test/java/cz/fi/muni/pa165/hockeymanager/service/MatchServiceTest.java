@@ -54,13 +54,13 @@ public class MatchServiceTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void createTest() {
-        service.createMatch(match1);
+        service.create(match1);
         verify(matchDao).create(match1);
     }
 
     @Test
     public void removeTest() {
-        service.removeMatch(match1);
+        service.remove(match1);
         verify(matchDao).remove(match1);
     }
 
@@ -68,13 +68,13 @@ public class MatchServiceTest extends AbstractTestNGSpringContextTests {
     public void removeNullTest() {
         when(matchDao.findById(match1.getId())).thenReturn(null);
         doNothing().when(matchDao).remove(match1);
-        service.removeMatch(match1);
+        service.remove(match1);
         verify(matchDao).remove(match1);
     }
 
     @Test
     public void updateTest() {
-        service.updateMatch(match1);
+        service.update(match1);
         verify(matchDao).update(match1);
     }
 
@@ -82,7 +82,7 @@ public class MatchServiceTest extends AbstractTestNGSpringContextTests {
     public void findByIdTest() {
         when(matchDao.findById(69L)).thenReturn(match1);
 
-        Match found = service.getById(69L);
+        Match found = service.findById(69L);
         verify(matchDao).findById(69L);
         assertThat(found).isEqualTo(match1);
     }
@@ -92,7 +92,7 @@ public class MatchServiceTest extends AbstractTestNGSpringContextTests {
         List<Match> list = asList(match1, match2);
         when(matchDao.findAll()).thenReturn(list);
 
-        List<Match> found = service.getAllMatches();
+        List<Match> found = service.findAll();
         verify(matchDao).findAll();
         assertThat(found).contains(match1, match2);
         assertThat(found).hasSize(2);

@@ -1,6 +1,7 @@
 package cz.fi.muni.pa165.hockeymanager.dao;
 
 import cz.fi.muni.pa165.hockeymanager.entity.HockeyPlayer;
+
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

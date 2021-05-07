@@ -8,27 +8,26 @@ import java.util.List;
  * @author Lukas Machalek (485196)
  */
 public interface MatchService {
-
     /**
      * Create match in database.
      *
      * @param match Match to be created in database.
      */
-    Match createMatch(Match match);
+    Match create(Match match);
 
     /**
      * Remove match from database.
      *
      * @param match Match to be removed.
      */
-    void removeMatch(Match match);
+    void remove(Match match);
 
     /**
      * Update match that's already in database.
      *
      * @param match Match to be updated.
      */
-    void updateMatch(Match match);
+    void update(Match match);
 
 
     /**
@@ -37,18 +36,18 @@ public interface MatchService {
      * @param matchId Id of the match.
      * @return Found match.
      */
-    Match getById(Long matchId);
+    Match findById(Long matchId);
 
     /**
      * Find all matches that were added to database.
      *
      * @return List of all matches.
      */
-    List<Match> getAllMatches();
+    List<Match> findAll();
 
     /**
      * Find nearest match according to date
      * @return Found match
      */
-    Match getNearestMatch();
+    Match findNearest();
 }

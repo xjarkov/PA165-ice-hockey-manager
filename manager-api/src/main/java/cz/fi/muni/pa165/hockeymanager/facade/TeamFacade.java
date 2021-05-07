@@ -19,9 +19,16 @@ public interface TeamFacade {
     /**
      * Removes team.
      *
-     * @param id object to remove.
+     * @param team object to remove.
      */
-    void remove(Long id);
+    void remove(TeamDto team);
+
+    /**
+     * Updates team.
+     *
+     * @param team object to update.
+     */
+    void update(TeamDto team);
 
     /**
      * Finds team by ID.

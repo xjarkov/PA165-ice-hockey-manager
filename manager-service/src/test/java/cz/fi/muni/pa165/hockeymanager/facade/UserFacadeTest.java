@@ -7,6 +7,7 @@ import cz.fi.muni.pa165.hockeymanager.service.BeanMappingService;
 import cz.fi.muni.pa165.hockeymanager.service.UserService;
 import cz.fi.muni.pa165.hockeymanager.service.config.ServiceConfiguration;
 import cz.fi.muni.pa165.hockeymanager.service.facade.UserFacadeImpl;
+
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -14,7 +15,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTransactionalTestNGSpringContextTests;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;

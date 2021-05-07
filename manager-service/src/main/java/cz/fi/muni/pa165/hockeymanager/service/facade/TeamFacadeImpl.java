@@ -5,10 +5,13 @@ import cz.fi.muni.pa165.hockeymanager.entity.Team;
 import cz.fi.muni.pa165.hockeymanager.facade.TeamFacade;
 import cz.fi.muni.pa165.hockeymanager.service.BeanMappingService;
 import cz.fi.muni.pa165.hockeymanager.service.TeamService;
-import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
+/**
+ * @author Kristian Kosorin (456620)
+ */
 public class TeamFacadeImpl implements TeamFacade {
     @Autowired
     private BeanMappingService beanMappingService;
@@ -24,8 +27,13 @@ public class TeamFacadeImpl implements TeamFacade {
     }
 
     @Override
-    public void remove(Long id) {
-        teamService.remove(teamService.findById(id));
+    public void remove(TeamDto team) {
+        teamService.remove(beanMappingService.mapTo(team, Team.class));
+    }
+
+    @Override
+    public void update(TeamDto team) {
+        teamService.update(beanMappingService.mapTo(team, Team.class));
     }
 
     @Override

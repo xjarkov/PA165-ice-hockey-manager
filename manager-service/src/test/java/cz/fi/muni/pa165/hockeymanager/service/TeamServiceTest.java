@@ -7,6 +7,7 @@ import cz.fi.muni.pa165.hockeymanager.entity.Team;
 import cz.fi.muni.pa165.hockeymanager.enums.Championship;
 import cz.fi.muni.pa165.hockeymanager.exceptions.ManagerServiceException;
 import cz.fi.muni.pa165.hockeymanager.service.config.ServiceConfiguration;
+
 import java.time.LocalDateTime;
 import org.hibernate.service.spi.ServiceException;
 import org.mockito.InjectMocks;

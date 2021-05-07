@@ -3,10 +3,10 @@ package cz.fi.muni.pa165.hockeymanager.service;
 import cz.fi.muni.pa165.hockeymanager.dao.UserDao;
 import cz.fi.muni.pa165.hockeymanager.entity.User;
 import cz.fi.muni.pa165.hockeymanager.exceptions.ManagerServiceException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 /**
