@@ -9,6 +9,7 @@ import cz.fi.muni.pa165.hockeymanager.service.BeanMappingService;
 import cz.fi.muni.pa165.hockeymanager.service.TeamService;
 import cz.fi.muni.pa165.hockeymanager.service.config.ServiceConfiguration;
 import cz.fi.muni.pa165.hockeymanager.service.facade.TeamFacadeImpl;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import org.hibernate.service.spi.ServiceException;
@@ -83,10 +84,8 @@ public class TeamFacadeTest {
 
     @Test
     public void removeTeamTest() {
-        when(teamService.findById(team.getId())).thenReturn(team);
-        teamFacade.remove(team.getId());
-
-        verify(teamService).findById(team.getId());
+        when(beanMappingService.mapTo(teamDto, Team.class)).thenReturn(team);
+        teamFacade.remove(teamDto);
         verify(teamService).remove(team);
     }
 
