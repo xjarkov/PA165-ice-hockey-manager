@@ -21,7 +21,7 @@ public class MatchServiceImpl implements MatchService {
     private MatchDao matchDao;
 
     @Override
-    public Match createMatch(Match match) {
+    public Match create(Match match) {
         try {
             matchDao.create(match);
         } catch (DataAccessException e) {
@@ -32,7 +32,7 @@ public class MatchServiceImpl implements MatchService {
     }
 
     @Override
-    public void removeMatch(Match match) {
+    public void remove(Match match) {
         try {
             matchDao.remove(match);
         } catch (DataAccessException e) {
@@ -41,7 +41,7 @@ public class MatchServiceImpl implements MatchService {
     }
 
     @Override
-    public void updateMatch(Match match) {
+    public void update(Match match) {
         try {
             matchDao.update(match);
         } catch (DataAccessException e) {
@@ -50,7 +50,7 @@ public class MatchServiceImpl implements MatchService {
     }
 
     @Override
-    public Match getById(Long matchId) {
+    public Match findById(Long matchId) {
         try {
             return matchDao.findById(matchId);
         } catch (DataAccessException e) {
@@ -59,7 +59,7 @@ public class MatchServiceImpl implements MatchService {
     }
 
     @Override
-    public List<Match> getAllMatches() {
+    public List<Match> findAll() {
         try {
             return matchDao.findAll();
         } catch (DataAccessException e) {
@@ -68,7 +68,7 @@ public class MatchServiceImpl implements MatchService {
     }
 
     @Override
-    public Match getNearestMatch() {
+    public Match findNearest() {
         try {
             return Collections.min(matchDao.findAll(), Comparator.comparing(Match::getDateTime));
         } catch (DataAccessException e) {
