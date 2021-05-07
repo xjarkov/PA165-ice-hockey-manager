@@ -8,7 +8,6 @@ import java.util.List;
  * @author Lukas Machalek (485196)
  */
 public interface MatchService {
-
     /**
      * Create match in database.
      *

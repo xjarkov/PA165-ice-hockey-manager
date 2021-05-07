@@ -1,6 +1,7 @@
 package cz.fi.muni.pa165.hockeymanager.dao;
 
 import cz.fi.muni.pa165.hockeymanager.entity.User;
+
 import java.util.List;
 
 /**

@@ -8,7 +8,6 @@ import java.util.List;
  * @author Kristian Kosorin (456620)
  */
 public interface UserService {
-
     /**
      * Creates a user.
      *

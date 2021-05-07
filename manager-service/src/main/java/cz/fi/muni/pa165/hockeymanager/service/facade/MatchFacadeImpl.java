@@ -3,17 +3,15 @@ package cz.fi.muni.pa165.hockeymanager.service.facade;
 import cz.fi.muni.pa165.hockeymanager.dto.MatchDto;
 import cz.fi.muni.pa165.hockeymanager.dto.TeamDto;
 import cz.fi.muni.pa165.hockeymanager.entity.Match;
-import cz.fi.muni.pa165.hockeymanager.entity.User;
 import cz.fi.muni.pa165.hockeymanager.facade.MatchFacade;
 import cz.fi.muni.pa165.hockeymanager.service.BeanMappingService;
 import cz.fi.muni.pa165.hockeymanager.service.MatchService;
-import org.springframework.beans.factory.annotation.Autowired;
 import utils.ScoreTupleImpl;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
 public class MatchFacadeImpl implements MatchFacade {
-
     @Autowired
     private MatchService matchService;
 

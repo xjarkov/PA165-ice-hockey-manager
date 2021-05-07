@@ -8,7 +8,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import cz.fi.muni.pa165.hockeymanager.exceptions.ManagerServiceException;
-import org.dozer.inject.Inject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
@@ -17,8 +17,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class MatchServiceImpl implements MatchService {
-
-    @Inject
+    @Autowired
     private MatchDao matchDao;
 
     @Override

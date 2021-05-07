@@ -6,8 +6,8 @@ import cz.fi.muni.pa165.hockeymanager.entity.Team;
 import cz.fi.muni.pa165.hockeymanager.facade.HockeyPlayerFacade;
 import cz.fi.muni.pa165.hockeymanager.service.BeanMappingService;
 import cz.fi.muni.pa165.hockeymanager.service.HockeyPlayerService;
-import java.util.List;
 
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -16,6 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class HockeyPlayerFacadeImpl implements HockeyPlayerFacade {
     @Autowired
     private BeanMappingService beanMappingService;
+
+    @Autowired
     private HockeyPlayerService hockeyPlayerService;
 
     @Override

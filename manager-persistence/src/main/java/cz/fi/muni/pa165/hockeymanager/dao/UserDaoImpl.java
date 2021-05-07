@@ -1,8 +1,8 @@
 package cz.fi.muni.pa165.hockeymanager.dao;
 
 import cz.fi.muni.pa165.hockeymanager.entity.User;
-import org.springframework.stereotype.Repository;
 
+import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
