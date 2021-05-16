@@ -6,7 +6,7 @@ import cz.fi.muni.pa165.hockeymanager.entity.Match;
 import cz.fi.muni.pa165.hockeymanager.facade.MatchFacade;
 import cz.fi.muni.pa165.hockeymanager.service.BeanMappingService;
 import cz.fi.muni.pa165.hockeymanager.service.MatchService;
-import utils.ScoreTupleImpl;
+import cz.fi.muni.pa165.hockeymanager.utils.ScoreTuple;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
@@ -48,15 +48,15 @@ public class MatchFacadeImpl implements MatchFacade {
     }
 
     @Override
-    public ScoreTupleImpl getScoreOfMatch(Long matchId) {
+    public ScoreTuple getScoreOfMatch(Long matchId) {
         Match match = matchService.findById(matchId);
-        return new ScoreTupleImpl(match.getHomeTeamScore(), match.getVisitingTeamScore());
+        return new ScoreTuple(match.getHomeTeamScore(), match.getVisitingTeamScore());
     }
 
     @Override
     public TeamDto getWinningTeam(Long matchId) {
         Match match = matchService.findById(matchId);
-        ScoreTupleImpl score = getScoreOfMatch(matchId);
+        ScoreTuple score = getScoreOfMatch(matchId);
         if (score.getHomeScore() == score.getVisitingScore()) {
             return null;
         }
