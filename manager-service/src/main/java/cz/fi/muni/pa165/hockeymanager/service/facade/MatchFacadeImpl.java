@@ -27,16 +27,15 @@ public class MatchFacadeImpl implements MatchFacade {
     private BeanMappingService beanMappingService;
 
     @Override
-    public Long create(MatchDto match) {
-        Match mappedMatch = beanMappingService.mapTo(match, Match.class);
+    public Long create(MatchDto matchDto) {
+        Match mappedMatch = beanMappingService.mapTo(matchDto, Match.class);
         matchService.create(mappedMatch);
-        match.setId(mappedMatch.getId());
-        return match.getId();
+        return mappedMatch.getId();
     }
 
     @Override
-    public void remove(MatchDto match) {
-        matchService.remove(beanMappingService.mapTo(match, Match.class));
+    public void remove(MatchDto matchDto) {
+        matchService.remove(beanMappingService.mapTo(matchDto, Match.class));
     }
 
     @Override
