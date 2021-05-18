@@ -5,8 +5,6 @@ import cz.fi.muni.pa165.hockeymanager.entity.User;
 import cz.fi.muni.pa165.hockeymanager.enums.Role;
 import cz.fi.muni.pa165.hockeymanager.exceptions.ManagerServiceException;
 import cz.fi.muni.pa165.hockeymanager.service.config.ServiceConfiguration;
-
-import org.hibernate.exception.ConstraintViolationException;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;

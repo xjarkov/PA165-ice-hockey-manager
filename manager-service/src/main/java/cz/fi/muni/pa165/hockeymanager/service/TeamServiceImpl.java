@@ -11,6 +11,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 
+/**
+ * @author Matus Jarkovic 456441
+ */
 @Service
 public class TeamServiceImpl implements TeamService {
     @Autowired
