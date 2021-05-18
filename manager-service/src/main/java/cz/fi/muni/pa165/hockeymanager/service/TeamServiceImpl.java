@@ -111,7 +111,7 @@ public class TeamServiceImpl implements TeamService {
         }
 
         team.addPlayer(hockeyPlayer);
-        hockeyPlayer.setTeam(team); // do i do this here??? do i do it liek this?
+        hockeyPlayer.setTeam(team);
     }
 
     @Override
@@ -125,7 +125,7 @@ public class TeamServiceImpl implements TeamService {
         }
 
         team.removePlayer(hockeyPlayer);
-        hockeyPlayer.setTeam(null); // do i do this here???
+        hockeyPlayer.setTeam(null);
     }
 
     @Override
