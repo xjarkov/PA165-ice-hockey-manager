@@ -8,11 +8,16 @@ import cz.fi.muni.pa165.hockeymanager.service.BeanMappingService;
 import cz.fi.muni.pa165.hockeymanager.service.HockeyPlayerService;
 
 import java.util.List;
+import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author Lukas Machalek
  */
+
+@Service
+@Transactional
 public class HockeyPlayerFacadeImpl implements HockeyPlayerFacade {
     @Autowired
     private BeanMappingService beanMappingService;

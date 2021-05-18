@@ -6,11 +6,15 @@ import cz.fi.muni.pa165.hockeymanager.entity.Match;
 import cz.fi.muni.pa165.hockeymanager.facade.MatchFacade;
 import cz.fi.muni.pa165.hockeymanager.service.BeanMappingService;
 import cz.fi.muni.pa165.hockeymanager.service.MatchService;
-import utils.ScoreTupleImpl;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
+import utils.ScoreTupleImpl;
+import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
+@Service
+@Transactional
 public class MatchFacadeImpl implements MatchFacade {
     @Autowired
     private MatchService matchService;
