@@ -6,6 +6,7 @@ import cz.fi.muni.pa165.hockeymanager.enums.Role;
 import cz.fi.muni.pa165.hockeymanager.exceptions.ManagerServiceException;
 import cz.fi.muni.pa165.hockeymanager.service.config.ServiceConfiguration;
 
+import org.hibernate.exception.ConstraintViolationException;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -15,6 +16,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -76,6 +78,14 @@ public class UserServiceTest extends AbstractTestNGSpringContextTests {
         assertThat(user).isEqualTo(user1);
     }
 
+    @Test()
+    public void findNotExistingUserByIdTest() {
+        when(userDao.findById(69L)).thenReturn(null);
+        User user = userService.findById(69L);
+        verify(userDao).findById(69L);
+        assertThat(user).isNull();
+    }
+
     @Test
     public void findAllUsersTest() {
         when(userDao.findAll()).thenReturn(userList);
@@ -83,6 +93,15 @@ public class UserServiceTest extends AbstractTestNGSpringContextTests {
         verify(userDao).findAll();
         assertThat(users).isEqualTo(userList);
         assertThat(users).hasSize(2);
+    }
+
+    @Test
+    public void findAllUsersEmptyTest() {
+        when(userDao.findAll()).thenReturn(List.of());
+        List<User> users = userService.findAll();
+        verify(userDao).findAll();
+        assertThat(users).isEqualTo(List.of());
+        assertThat(users).hasSize(0);
     }
 
     @Test(expectedExceptions = ManagerServiceException.class)
