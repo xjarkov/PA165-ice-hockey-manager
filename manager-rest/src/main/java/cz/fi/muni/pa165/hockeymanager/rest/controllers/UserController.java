@@ -4,7 +4,6 @@ package cz.fi.muni.pa165.hockeymanager.rest.controllers;
 import cz.fi.muni.pa165.hockeymanager.dto.UserDto;
 import cz.fi.muni.pa165.hockeymanager.facade.UserFacade;
 import cz.fi.muni.pa165.hockeymanager.rest.ApiUris;
-import org.dozer.inject.Inject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestBody;

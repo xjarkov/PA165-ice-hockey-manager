@@ -6,6 +6,7 @@ import cz.fi.muni.pa165.hockeymanager.entity.Match;
 import cz.fi.muni.pa165.hockeymanager.facade.MatchFacade;
 import cz.fi.muni.pa165.hockeymanager.service.BeanMappingService;
 import cz.fi.muni.pa165.hockeymanager.service.MatchService;
+import org.springframework.context.annotation.Bean;
 import utils.ScoreTupleImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;

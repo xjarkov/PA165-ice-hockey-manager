@@ -1,12 +1,11 @@
 package cz.fi.muni.pa165.hockeymanager.rest.controllers;
 
-
 import cz.fi.muni.pa165.hockeymanager.dto.MatchDto;
 import cz.fi.muni.pa165.hockeymanager.facade.MatchFacade;
 import cz.fi.muni.pa165.hockeymanager.rest.ApiUris;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
