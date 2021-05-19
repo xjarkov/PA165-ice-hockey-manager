@@ -6,12 +6,17 @@ import cz.fi.muni.pa165.hockeymanager.facade.TeamFacade;
 import cz.fi.muni.pa165.hockeymanager.service.BeanMappingService;
 import cz.fi.muni.pa165.hockeymanager.service.TeamService;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
+import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author Kristian Kosorin (456620)
  */
+
+@Service
+@Transactional
 public class TeamFacadeImpl implements TeamFacade {
     @Autowired
     private BeanMappingService beanMappingService;
