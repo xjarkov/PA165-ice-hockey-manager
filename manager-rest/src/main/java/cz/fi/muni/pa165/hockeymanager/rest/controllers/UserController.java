@@ -1,6 +1,5 @@
 package cz.fi.muni.pa165.hockeymanager.rest.controllers;
 
-
 import cz.fi.muni.pa165.hockeymanager.dto.UserDto;
 import cz.fi.muni.pa165.hockeymanager.facade.UserFacade;
 import cz.fi.muni.pa165.hockeymanager.rest.ApiUris;

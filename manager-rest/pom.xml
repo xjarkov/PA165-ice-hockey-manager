@@ -26,6 +26,7 @@
             <plugin>
                 <groupId>org.codehaus.cargo</groupId>
                 <artifactId>cargo-maven3-plugin</artifactId>
+                <version>1.9.1</version>
             </plugin>
         </plugins>
     </build>
