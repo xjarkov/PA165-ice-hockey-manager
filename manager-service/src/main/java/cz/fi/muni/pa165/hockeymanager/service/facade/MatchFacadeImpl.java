@@ -6,13 +6,16 @@ import cz.fi.muni.pa165.hockeymanager.entity.Match;
 import cz.fi.muni.pa165.hockeymanager.facade.MatchFacade;
 import cz.fi.muni.pa165.hockeymanager.service.BeanMappingService;
 import cz.fi.muni.pa165.hockeymanager.service.MatchService;
+import cz.fi.muni.pa165.hockeymanager.utils.ScoreTuple;
 
-import java.util.List;
-import utils.ScoreTupleImpl;
-import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import java.util.List;
 
+/**
+ * @author Matus Jarkovic 456441
+ */
 @Service
 @Transactional
 public class MatchFacadeImpl implements MatchFacade {
@@ -23,16 +26,15 @@ public class MatchFacadeImpl implements MatchFacade {
     private BeanMappingService beanMappingService;
 
     @Override
-    public Long create(MatchDto match) {
-        Match mappedMatch = beanMappingService.mapTo(match, Match.class);
+    public Long create(MatchDto matchDto) {
+        Match mappedMatch = beanMappingService.mapTo(matchDto, Match.class);
         matchService.create(mappedMatch);
-        match.setId(mappedMatch.getId());
-        return match.getId();
+        return mappedMatch.getId();
     }
 
     @Override
-    public void remove(MatchDto match) {
-        matchService.remove(beanMappingService.mapTo(match, Match.class));
+    public void remove(MatchDto matchDto) {
+        matchService.remove(beanMappingService.mapTo(matchDto, Match.class));
     }
 
     @Override
@@ -52,15 +54,15 @@ public class MatchFacadeImpl implements MatchFacade {
     }
 
     @Override
-    public ScoreTupleImpl getScoreOfMatch(Long matchId) {
+    public ScoreTuple getScoreOfMatch(Long matchId) {
         Match match = matchService.findById(matchId);
-        return new ScoreTupleImpl(match.getHomeTeamScore(), match.getVisitingTeamScore());
+        return new ScoreTuple(match.getHomeTeamScore(), match.getVisitingTeamScore());
     }
 
     @Override
     public TeamDto getWinningTeam(Long matchId) {
         Match match = matchService.findById(matchId);
-        ScoreTupleImpl score = getScoreOfMatch(matchId);
+        ScoreTuple score = getScoreOfMatch(matchId);
         if (score.getHomeScore() == score.getVisitingScore()) {
             return null;
         }
