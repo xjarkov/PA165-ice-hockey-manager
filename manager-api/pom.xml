@@ -7,6 +7,8 @@
     <groupId>cz.muni.fi.pa165</groupId>
     <artifactId>manager-api</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <name>API Layer</name>
+
     <dependencies>
         <dependency>
             <groupId>org.projectlombok</groupId>

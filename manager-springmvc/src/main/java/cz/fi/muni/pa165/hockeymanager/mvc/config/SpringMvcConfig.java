@@ -1,4 +1,4 @@
-package cz.muni.fi.pa165.mvc.config;
+package cz.fi.muni.pa165.hockeymanager.mvc.config;
 
 import cz.fi.muni.pa165.hockeymanager.sampledata.SampleDataConfiguration;
 import org.springframework.context.MessageSource;
@@ -20,7 +20,7 @@ import javax.validation.Validator;
 @EnableWebMvc
 @Configuration
 @Import({SampleDataConfiguration.class})
-@ComponentScan(basePackages = "cz.muni.fi.pa165.mvc.controllers")
+@ComponentScan(basePackages = "cz.fi.muni.pa165.hockeymanager.mvc.controllers")
 public class SpringMvcConfig implements WebMvcConfigurer {
 
     private static final String TEXTS = "Texts";

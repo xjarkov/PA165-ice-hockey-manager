@@ -11,7 +11,7 @@
 
     <artifactId>manager-sample-data</artifactId>
     <packaging>jar</packaging>
-    <name>sample-data</name>
+    <name>Sample Data</name>
 
     <dependencies>
         <dependency>

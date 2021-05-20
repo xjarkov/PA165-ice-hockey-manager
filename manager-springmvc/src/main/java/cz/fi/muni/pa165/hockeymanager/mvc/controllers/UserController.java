@@ -1,4 +1,4 @@
-package cz.muni.fi.pa165.mvc.controllers;
+package cz.fi.muni.pa165.hockeymanager.mvc.controllers;
 
 import cz.fi.muni.pa165.hockeymanager.dto.UserDto;
 import cz.fi.muni.pa165.hockeymanager.facade.UserFacade;
