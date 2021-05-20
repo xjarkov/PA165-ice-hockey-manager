@@ -10,6 +10,7 @@
         <module>manager-rest</module>
         <module>manager-sample-data</module>
         <module>manager-service</module>
+        <module>manager-springmvc</module>
     </modules>
 
     <groupId>cz.muni.fi.pa165</groupId>
