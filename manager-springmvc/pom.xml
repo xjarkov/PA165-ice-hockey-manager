@@ -10,6 +10,7 @@
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>manager-springmvc</artifactId>
+    <packaging>war</packaging>
 
     <dependencies>
         <dependency>
@@ -36,22 +37,7 @@
         </dependency>
         <dependency>
             <groupId>cz.muni.fi.pa165</groupId>
-            <artifactId>manager-persistence</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>cz.muni.fi.pa165</groupId>
-            <artifactId>manager-api</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>cz.muni.fi.pa165</groupId>
             <artifactId>manager-sample-data</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>cz.muni.fi.pa165</groupId>
-            <artifactId>manager-service</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
