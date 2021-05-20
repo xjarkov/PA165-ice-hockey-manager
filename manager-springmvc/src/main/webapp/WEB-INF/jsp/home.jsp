@@ -9,11 +9,9 @@
 <jsp:attribute name="body">
 
     <div class="jumbotron">
-        <h1>Welcome to Movie Recommender SpringMVC!</h1>
-        <p><a class="btn btn-lg btn-success" href="${pageContext.request.contextPath}/movie/list"
-              role="button">List All Movies</a></p>
-        <p><a class="btn btn-lg btn-success" href="${pageContext.request.contextPath}/genre/list"
-              role="button">List All Genres</a></p>
+        <h1>Welcome to SpringMVC !</h1>
+        <p class="lead">In this seminar, the mysteries of Spring MVC will be revealed to you. </p>
+        <p>Test</p>
     </div>
 
 </jsp:attribute>
