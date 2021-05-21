@@ -10,13 +10,16 @@ import cz.fi.muni.pa165.hockeymanager.service.HockeyPlayerService;
 import cz.fi.muni.pa165.hockeymanager.service.MatchService;
 import cz.fi.muni.pa165.hockeymanager.service.TeamService;
 import cz.fi.muni.pa165.hockeymanager.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+
+import java.time.Month;
+import java.time.LocalDateTime;
 import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
-import java.time.Month;
-
+/**
+ * @author Kristian Kosorin (456620)
+ */
 @Component
 @Transactional
 public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {

@@ -1,9 +1,8 @@
 package cz.fi.muni.pa165.hockeymanager.mvc.config;
 
+import javax.servlet.Filter;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
-
-import javax.servlet.Filter;
 
 public class StartInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
