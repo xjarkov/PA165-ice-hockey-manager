@@ -1,6 +1,6 @@
 package cz.fi.muni.pa165.hockeymanager.mvc.controllers;
 
-import cz.fi.muni.pa165.hockeymanager.dto.UserCreateDto;
+//import cz.fi.muni.pa165.hockeymanager.dto.UserCreateDto;
 import cz.fi.muni.pa165.hockeymanager.dto.UserDto;
 import cz.fi.muni.pa165.hockeymanager.facade.UserFacade;
 
@@ -17,19 +17,19 @@ public class UserController {
 
     @Autowired
     private UserFacade userFacade;
+//
+//    @GetMapping(value = "/list")
+//    public String list(Model model) {
+//        List<UserDto> allUsers = userFacade.findAllUsers();
+//        model.addAttribute("users", allUsers);
+//
+//        return "user/list";
+//    }
 
-    @GetMapping(value = "/list")
-    public String list(Model model) {
-        List<UserDto> allUsers = userFacade.findAllUsers();
-        model.addAttribute("users", allUsers);
-
-        return "user/list";
-    }
-
-    @GetMapping(value = "create")
-    public String getNew(Model model) {
-        model.addAttribute("user", new UserCreateDto());
-        return "user/new";
-    }
+//    @GetMapping(value = "create")
+//    public String getNew(Model model) {
+//        model.addAttribute("user", new UserCreateDto());
+//        return "user/new";
+//    }
 }
 

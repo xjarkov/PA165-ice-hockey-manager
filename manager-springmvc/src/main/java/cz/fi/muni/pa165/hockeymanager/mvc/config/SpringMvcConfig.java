@@ -2,6 +2,8 @@ package cz.fi.muni.pa165.hockeymanager.mvc.config;
 
 import cz.fi.muni.pa165.hockeymanager.sampledata.SampleDataConfiguration;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import javax.validation.Validator;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -23,6 +25,8 @@ import org.springframework.web.servlet.config.annotation.DefaultServletHandlerCo
 @ComponentScan(basePackages = "cz.fi.muni.pa165.hockeymanager.mvc.controllers")
 public class SpringMvcConfig implements WebMvcConfigurer {
 
+    private final static Logger log = LoggerFactory.getLogger(SpringMvcConfig.class);
+
     private static final String TEXTS = "Texts";
 
     /**
@@ -30,15 +34,16 @@ public class SpringMvcConfig implements WebMvcConfigurer {
      */
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
+        log.debug("mapping URL / to home view");
         registry.addViewController("/").setViewName("home");
     }
-
 
     /**
      * Enables default Tomcat servlet that serves static files.
      */
     @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
+        log.debug("enabling default servlet for static files");
         configurer.enable();
     }
 
@@ -47,6 +52,7 @@ public class SpringMvcConfig implements WebMvcConfigurer {
      */
     @Bean
     public ViewResolver viewResolver() {
+        log.debug("registering JSP in /WEB-INF/jsp/ as views");
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
         viewResolver.setPrefix("/WEB-INF/jsp/");
         viewResolver.setSuffix(".jsp");
@@ -58,6 +64,7 @@ public class SpringMvcConfig implements WebMvcConfigurer {
      */
     @Bean
     public MessageSource messageSource() {
+        log.debug("registering ResourceBundle 'Texts' for messages");
         ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
         messageSource.setBasename(TEXTS);
         return messageSource;
@@ -68,6 +75,7 @@ public class SpringMvcConfig implements WebMvcConfigurer {
      */
     @Bean
     public Validator validator() {
+        log.debug("registering JSR-303 validator");
         return new LocalValidatorFactoryBean();
     }
 }
