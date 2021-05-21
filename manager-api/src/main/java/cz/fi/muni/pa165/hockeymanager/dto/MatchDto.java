@@ -1,7 +1,6 @@
 package cz.fi.muni.pa165.hockeymanager.dto;
 
 import lombok.Data;
-
 import java.time.LocalDateTime;
 
 /**
