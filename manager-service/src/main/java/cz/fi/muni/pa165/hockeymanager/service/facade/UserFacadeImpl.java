@@ -43,6 +43,11 @@ public class UserFacadeImpl implements UserFacade {
     }
 
     @Override
+    public void update(UserDto user) {
+        userService.update(beanMappingService.mapTo(user, User.class));
+    }
+
+    @Override
     public UserDto findUserById(Long id) {
         User user = userService.findById(id);
         return (user == null) ? null : beanMappingService.mapTo(user, UserDto.class);

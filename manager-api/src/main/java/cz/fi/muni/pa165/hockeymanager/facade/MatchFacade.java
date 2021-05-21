@@ -25,6 +25,13 @@ public interface MatchFacade {
     void remove(MatchDto match);
 
     /**
+     * Updates a match
+     *
+     * @param match of the match to update
+     */
+    void update(MatchDto match);
+
+    /**
      * Finds match by id
      *
      * @param id of the match
