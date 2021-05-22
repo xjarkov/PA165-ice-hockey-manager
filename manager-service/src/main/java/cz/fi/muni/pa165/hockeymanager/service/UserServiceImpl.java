@@ -73,6 +73,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User findByEmail(String email) {
+        User user;
+        try {
+            user = userDao.findByEmail(email);
+        } catch (DataAccessException e) {
+            throw new ManagerServiceException("Could not find user with email: " + email + "exc: " + e);
+        }
+        return user;
+    }
+
+    @Override
     public boolean authenticate(User user, String password) {
         return encoder.matches(password, user.getPassword());
     }
