@@ -38,9 +38,22 @@ public interface UserFacade {
     UserDto findUserById(Long id);
 
     /**
+     * Finds user by Email
+     *
+     * @param email of the user
+     * @return User
+     */
+    UserDto findUserByEmail(String email);
+
+    /**
      * Finds all users
      *
      * @return all users
      */
     List<UserDto> findAllUsers();
+
+    /**
+     * Try to authenticate a user. Return true only if the hashed password matches the records.
+     */
+    boolean authenticate(UserDto user);
 }

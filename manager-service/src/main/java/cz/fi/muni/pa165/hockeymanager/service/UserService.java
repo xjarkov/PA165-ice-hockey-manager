@@ -44,4 +44,21 @@ public interface UserService {
      * @return User object.
      */
     User findById(Long id);
+
+    /**
+     * Finds user by its email.
+     *
+     * @param email of the user.
+     * @return User object.
+     */
+    User findByEmail(String email);
+
+    /**
+     * Tries to authenticate user
+     *
+     * @param user to authenticate
+     * @param password used fot authentication
+     * @return Authentication result
+     */
+    boolean authenticate(User user, String password);
 }
