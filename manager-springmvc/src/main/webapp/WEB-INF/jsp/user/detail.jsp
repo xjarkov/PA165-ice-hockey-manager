@@ -27,7 +27,7 @@
       </tr>
       <tr>
         <td>Team</td>
-        <td><c:out value="${user.team}"/></td>
+        <td><c:out value="${user.team.name}"/></td>
       </tr>
     </table>
 </jsp:attribute>
