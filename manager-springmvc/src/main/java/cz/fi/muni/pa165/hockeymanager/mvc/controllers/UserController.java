@@ -30,19 +30,12 @@ public class UserController {
         return "user/list";
     }
 
-<<<<<<< HEAD
-    @GetMapping(value = "create")
-    public String getNew(Model model) {
-        model.addAttribute("user", new UserCreateDto());
-        return "user/new";
-=======
     @GetMapping("/{id}")
     public String getUserById(@PathVariable Long id, Model model) {
         UserDto user = userFacade.findUserById(id);
         model.addAttribute("user", user);
 
         return "user/detail";
->>>>>>> b7ca74d96590c84af2edc0dcfed99c9d976ff302
     }
 }
 
