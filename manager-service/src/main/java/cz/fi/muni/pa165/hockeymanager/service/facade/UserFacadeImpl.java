@@ -8,6 +8,7 @@ import cz.fi.muni.pa165.hockeymanager.service.BeanMappingService;
 import cz.fi.muni.pa165.hockeymanager.service.UserService;
 
 import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -54,7 +55,18 @@ public class UserFacadeImpl implements UserFacade {
     }
 
     @Override
+    public UserDto findUserByEmail(String email) {
+        User user = userService.findByEmail(email);
+        return (user == null) ? null : beanMappingService.mapTo(user, UserDto.class);
+    }
+
+    @Override
     public List<UserDto> findAllUsers() {
         return beanMappingService.mapTo(userService.findAll(), UserDto.class);
+    }
+
+    @Override
+    public boolean authenticate(UserDto user) {
+        return userService.authenticate(userService.findById(user.getId()), user.getPassword());
     }
 }

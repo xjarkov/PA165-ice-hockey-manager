@@ -25,8 +25,10 @@ public class HockeyPlayerDto {
     private TeamDto team;
 
     public String getFullName() {
-        return this.firstName + this.lastName;
+        return this.firstName + " " + this.lastName;
     }
+
+    public HockeyPlayerDto() {}
 
     public HockeyPlayerDto(String firstName, String lastName, Integer offensiveStrength, Integer defensiveStrength) {
         this.firstName = firstName;
