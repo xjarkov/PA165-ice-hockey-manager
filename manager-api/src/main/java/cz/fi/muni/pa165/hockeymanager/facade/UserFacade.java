@@ -36,4 +36,9 @@ public interface UserFacade {
      * @return all users
      */
     List<UserDto> findAllUsers();
+
+    /**
+     * Try to authenticate a user. Return true only if the hashed password matches the records.
+     */
+    boolean authenticate(UserDto user);
 }
