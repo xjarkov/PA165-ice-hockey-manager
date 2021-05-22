@@ -24,6 +24,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User create(User user) {
         try {
+            user.setPassword(encoder.encode(user.getPassword()));
             userDao.create(user);
         } catch (DataAccessException e) {
             throw new ManagerServiceException("Could not create user " + user + " exc: " + e);

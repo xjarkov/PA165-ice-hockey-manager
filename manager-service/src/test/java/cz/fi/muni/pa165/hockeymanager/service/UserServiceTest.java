@@ -10,6 +10,8 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
+import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.annotations.AfterMethod;
@@ -33,8 +35,10 @@ public class UserServiceTest extends AbstractTestNGSpringContextTests {
     @InjectMocks
     private UserService userService;
 
-    final private User user1 = new User("user1", "user1@muni.cz", "user1pwd", Role.PLAYER);
-    final private User user2 = new User("user2", "user2@muni.cz", "user2pwd", Role.PLAYER);
+    private final PasswordEncoder encoder = new Argon2PasswordEncoder();
+
+    final private User user1 = new User("user1", "user1@muni.cz", encoder.encode("user1pwd"), Role.PLAYER);
+    final private User user2 = new User("user2", "user2@muni.cz", encoder.encode("user2pwd"), Role.PLAYER);
 
     final private List<User> userList = List.of(user1, user2);
 
@@ -108,6 +112,15 @@ public class UserServiceTest extends AbstractTestNGSpringContextTests {
         verify(userDao).findAll();
         assertThat(users).isEqualTo(List.of());
         assertThat(users).hasSize(0);
+    }
+
+    @Test
+    public void authenticateUser() {
+        boolean authResult = userService.authenticate(user1, "blabla");
+        assertThat(authResult).isFalse();
+
+        boolean authResult2 = userService.authenticate(user2, "user2pwd");
+        assertThat(authResult2).isTrue();
     }
 
     @Test(expectedExceptions = ManagerServiceException.class)
