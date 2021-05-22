@@ -13,6 +13,9 @@ import cz.fi.muni.pa165.hockeymanager.service.UserService;
 
 import java.time.Month;
 import java.time.LocalDateTime;
+
+import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,17 +35,17 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
     @Autowired
     private TeamService teamService;
 
+    private final PasswordEncoder encoder = new Argon2PasswordEncoder();
+
     @Override
     @SuppressWarnings("unused")
     public void loadSampleData() {
-
-
         Team cska = team("CSKA Moscow", Championship.KHL);
         Team ska = team("SKA Petersburg", Championship.KHL);
 
-        User pepa = user("Pepa Novák","pepa@novak.cz", "heslo123", Role.PLAYER, cska);
-        User honza = user("Honza Novák","honza@novak.cz", "heslo321", Role.PLAYER, ska);
-        User admin = user("Fero Novák","fero@novak.cz", "heslo654", Role.ADMIN, null);
+        User pepa = user("Pepa Novák", "pepa@novak.cz", encoder.encode("heslo123"), Role.PLAYER, cska);
+        User honza = user("Honza Novák", "honza@novak.cz", encoder.encode("heslo321"), Role.PLAYER, ska);
+        User admin = user("Fero Novák", "fero@novak.cz", encoder.encode("heslo654"), Role.ADMIN, null);
 
         Match m1 = match(cska, ska, LocalDateTime.of(2021, Month.JANUARY, 5, 19, 0, 0));
         Match m2 = match(cska, ska, LocalDateTime.of(2021, Month.JANUARY, 6, 19, 0, 0));
