@@ -13,9 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * @author Lukas Machalek
+ * @author Lukas Machalek (485196)
  */
-
 @Service
 @Transactional
 public class HockeyPlayerFacadeImpl implements HockeyPlayerFacade {

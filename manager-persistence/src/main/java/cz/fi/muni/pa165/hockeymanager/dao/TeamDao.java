@@ -3,6 +3,7 @@ package cz.fi.muni.pa165.hockeymanager.dao;
 import cz.fi.muni.pa165.hockeymanager.entity.Team;
 
 import java.util.List;
+
 /**
  * @author Kristian Kosorin (456620)
  */

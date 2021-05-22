@@ -23,6 +23,13 @@ public interface UserFacade {
     void remove(UserDto user);
 
     /**
+     * Updates an user
+     *
+     * @param user to be updated
+     */
+    void update(UserDto user);
+
+    /**
      * Finds user by ID
      *
      * @param id of the user

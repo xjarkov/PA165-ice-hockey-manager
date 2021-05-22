@@ -1,10 +1,10 @@
 package cz.fi.muni.pa165.hockeymanager.entity;
 
 import cz.fi.muni.pa165.hockeymanager.enums.Championship;
+
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Setter;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.*;

@@ -12,6 +12,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * @author Petr Šopf (506511)
+ */
 @Service
 @Transactional
 public class UserFacadeImpl implements UserFacade {
@@ -37,6 +40,11 @@ public class UserFacadeImpl implements UserFacade {
     @Override
     public void remove(UserDto user) {
         userService.remove(beanMappingService.mapTo(user, User.class));
+    }
+
+    @Override
+    public void update(UserDto user) {
+        userService.update(beanMappingService.mapTo(user, User.class));
     }
 
     @Override

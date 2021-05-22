@@ -1,10 +1,8 @@
 package cz.fi.muni.pa165.hockeymanager.entity;
 
 import cz.fi.muni.pa165.hockeymanager.enums.Role;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
+import lombok.Data;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Objects;
