@@ -6,26 +6,29 @@
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <head>
-    <meta charset="utf-8">
-    <title>Test User list</title>
+  <meta charset="utf-8">
+  <title>Test User Detail</title>
 </head>
 <my:pagetemplate>
 <jsp:attribute name="body">
-    <table class="table table-hover">
-        <thead>
-        <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Name</th>
-        </tr>
-        </thead>
-        <tbody>
-        <c:forEach items="${users}" var="user">
-            <tr>
-                <td><c:out value="${user.id}"/></td>
-                <td><c:out value="${user.name}"/></td>
-            </tr>
-        </c:forEach>
-        </tbody>
+    <h2>${user.name}</h2>
+    <table class="table">
+      <tr>
+        <td>Id</td>
+        <td>${user.id}</td>
+      </tr>
+      <tr>
+        <td>Nickname</td>
+        <td><c:out value="${user.name}"/></td>
+      </tr>
+      <tr>
+        <td>Email</td>
+        <td><c:out value="${user.email}"/></td>
+      </tr>
+      <tr>
+        <td>Team</td>
+        <td><c:out value="${user.team.name}"/></td>
+      </tr>
     </table>
 </jsp:attribute>
 </my:pagetemplate>
