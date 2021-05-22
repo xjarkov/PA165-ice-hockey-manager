@@ -49,12 +49,12 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         Match m3 = match(ska, cska, LocalDateTime.of(2021, Month.JANUARY, 15, 19, 0, 0));
         Match m4 = match(ska, cska, LocalDateTime.of(2021, Month.JANUARY, 16, 19, 0, 0));
 
-        HockeyPlayer p1 = hockeyPlayer("Alexander", "Oveckin", cska, 95, 93);
-        HockeyPlayer p2 = hockeyPlayer("Jevgeni", "Malkin", cska, 94, 90);
-        HockeyPlayer p3 = hockeyPlayer("Andrej", "Vasilevskij", cska, 50, 99);
-        HockeyPlayer p4 = hockeyPlayer("Fero", "Mrkvička", ska, 98, 99);
-        HockeyPlayer p5 = hockeyPlayer("Jozef", "Hruška", cska, 87, 78);
-        HockeyPlayer p6 = hockeyPlayer("Vladimír", "Putin", cska, 99, 99);
+        HockeyPlayer p1 = hockeyPlayer("Alexander", "Oveckin", null, 95, 93);
+        HockeyPlayer p2 = hockeyPlayer("Jevgeni", "Malkin", null, 94, 90);
+        HockeyPlayer p3 = hockeyPlayer("Andrej", "Vasilevskij", null, 50, 99);
+        HockeyPlayer p4 = hockeyPlayer("Fero", "Mrkvička", null, 98, 99);
+        HockeyPlayer p5 = hockeyPlayer("Jozef", "Hruška", null, 87, 78);
+        HockeyPlayer p6 = hockeyPlayer("Vladimír", "Putin", null, 99, 99);
     }
 
     private Team team(String name, Championship championship) {

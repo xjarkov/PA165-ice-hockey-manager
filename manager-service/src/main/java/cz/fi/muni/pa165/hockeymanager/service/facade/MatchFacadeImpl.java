@@ -38,6 +38,11 @@ public class MatchFacadeImpl implements MatchFacade {
     }
 
     @Override
+    public void update(MatchDto matchDto) {
+        matchService.update(beanMappingService.mapTo(matchDto, Match.class));
+    }
+
+    @Override
     public MatchDto findMatchById(Long id) {
         Match match = matchService.findById(id);
         return (match == null) ? null : beanMappingService.mapTo(match, MatchDto.class);

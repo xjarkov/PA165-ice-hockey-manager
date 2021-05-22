@@ -7,22 +7,20 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <head>
     <meta charset="utf-8">
-    <title>Test User list</title>
+    <title>List of available teams</title>
 </head>
 <my:pagetemplate>
 <jsp:attribute name="body">
     <table class="table table-hover">
         <thead>
         <tr>
-            <th scope="col">ID</th>
             <th scope="col">Name</th>
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${users}" var="user">
+        <c:forEach items="${teams}" var="team">
             <tr>
-                <td><c:out value="${user.id}"/></td>
-                <td><c:out value="${user.name}"/></td>
+                <td><c:out value="${team.name}"/></td>
             </tr>
         </c:forEach>
         </tbody>

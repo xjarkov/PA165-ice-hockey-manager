@@ -2,7 +2,6 @@ package cz.fi.muni.pa165.hockeymanager;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.web.servlet.HandlerInterceptor;
 
 public class AllowOriginInterceptor implements HandlerInterceptor {

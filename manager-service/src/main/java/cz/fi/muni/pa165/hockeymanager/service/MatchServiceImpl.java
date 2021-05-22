@@ -2,12 +2,11 @@ package cz.fi.muni.pa165.hockeymanager.service;
 
 import cz.fi.muni.pa165.hockeymanager.dao.MatchDao;
 import cz.fi.muni.pa165.hockeymanager.entity.Match;
+import cz.fi.muni.pa165.hockeymanager.exceptions.ManagerServiceException;
 
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-
-import cz.fi.muni.pa165.hockeymanager.exceptions.ManagerServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;

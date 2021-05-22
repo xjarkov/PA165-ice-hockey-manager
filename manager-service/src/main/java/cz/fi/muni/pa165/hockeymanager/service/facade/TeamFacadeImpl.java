@@ -14,7 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 /**
  * @author Kristian Kosorin (456620)
  */
-
 @Service
 @Transactional
 public class TeamFacadeImpl implements TeamFacade {
