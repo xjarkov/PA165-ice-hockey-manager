@@ -21,12 +21,12 @@ public class MatchDto {
 
     private LocalDateTime dateTime;
 
+    public MatchDto() {}
+
     public MatchDto(TeamDto homeTeam, TeamDto visitingTeam, LocalDateTime dateTime) {
         this.homeTeam = homeTeam;
         this.visitingTeam = visitingTeam;
         this.dateTime = dateTime;
     }
 
-    public MatchDto() {
-    }
 }

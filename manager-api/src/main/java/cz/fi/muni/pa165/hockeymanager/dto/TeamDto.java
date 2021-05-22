@@ -26,11 +26,10 @@ public class TeamDto {
 
     private Set<MatchDto> matches = new HashSet<>();
 
+    public TeamDto() {}
+
     public TeamDto(String name, Championship championship) {
         this.name = name;
         this.championship = championship;
-    }
-
-    public TeamDto() {
     }
 }
