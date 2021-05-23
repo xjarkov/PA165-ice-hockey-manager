@@ -9,6 +9,10 @@ Several human players (at least two) can manage their hockey teams out of a list
 ```
 curl -i -X GET http://localhost:8080/pa165/hockey_players
 ```
+### Get hockey player by id
+```
+curl -i -X GET http://localhost:8080/pa165/hockey_player/{id}
+```
 ### Get all teams
 ```
 curl -i -X GET http://localhost:8080/pa165/teams

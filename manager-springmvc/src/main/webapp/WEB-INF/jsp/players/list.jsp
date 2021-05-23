@@ -34,7 +34,7 @@
                             <my:a href="/team/${player.team.id}"><c:out value="${player.team.name}"/></my:a>
                         </c:when>
                         <c:otherwise>
-                            Free player
+                            <my:a href="/players/recruit/${player.id}" class="btn btn-success btn-sm">Assign to my team</my:a>
                         </c:otherwise>
                     </c:choose>
                 </td>

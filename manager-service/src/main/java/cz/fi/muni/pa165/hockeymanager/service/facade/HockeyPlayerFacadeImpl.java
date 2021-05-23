@@ -43,6 +43,11 @@ public class HockeyPlayerFacadeImpl implements HockeyPlayerFacade {
     }
 
     @Override
+    public HockeyPlayerDto findById(Long id) {
+        return beanMappingService.mapTo(hockeyPlayerService.findById(id), HockeyPlayerDto.class);
+    }
+
+    @Override
     public List<HockeyPlayerDto> findAll() {
         return beanMappingService.mapTo(hockeyPlayerService.findAll(), HockeyPlayerDto.class);
     }

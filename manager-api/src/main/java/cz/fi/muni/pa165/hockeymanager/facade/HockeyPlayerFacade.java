@@ -31,6 +31,14 @@ public interface HockeyPlayerFacade {
     void update(HockeyPlayerDto hockeyPlayerDto);
 
     /**
+     * Finds player by id
+     *
+     * @param id of the player
+     * @return player
+     */
+    HockeyPlayerDto findById(Long id);
+
+    /**
      * Get List of all HockeyPlayers saved in database.
      *
      * @return List of HockeyPlayer.
