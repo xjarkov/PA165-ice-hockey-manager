@@ -2,10 +2,12 @@ package cz.fi.muni.pa165.hockeymanager.service;
 
 import cz.fi.muni.pa165.hockeymanager.dto.MatchDto;
 import cz.fi.muni.pa165.hockeymanager.entity.Match;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,7 +28,7 @@ public class BeanMappingServiceImpl implements BeanMappingService {
 
     @Override
     public <T> T mapTo(Object u, Class<T> mapToClass) {
-        return dozer.map(u,mapToClass);
+        return dozer.map(u, mapToClass);
     }
 
     @Override
@@ -34,24 +36,21 @@ public class BeanMappingServiceImpl implements BeanMappingService {
         return dozer;
     }
 
-    public MatchDto mapMatchToMatchDto(Match match){
+    public MatchDto mapMatchToMatchDto(Match match) {
         MatchDto matchDto = dozer.map(match, MatchDto.class);
         LocalDateTime dt = match.getDateTime();
-        matchDto.setDateTimeDto(LocalDateTime.of(dt.getYear(), dt.getMonth(), dt.getDayOfMonth(),dt.getHour(), dt.getMinute(),dt.getSecond()));
+        matchDto.setDateTimeDto(LocalDateTime.of(dt.getYear(), dt.getMonth(), dt.getDayOfMonth(), dt.getHour(), dt.getMinute(), dt.getSecond()));
         return matchDto;
     }
 
-    public List<MatchDto> mapMatchesToMatchDtos(Collection<Match> matches){
+    public List<MatchDto> mapMatchesToMatchDtos(Collection<Match> matches) {
         List<MatchDto> matchDtos = new ArrayList<>();
-        for(var match: matches){
+        for (var match : matches) {
             MatchDto matchDto = dozer.map(match, MatchDto.class);
             LocalDateTime dt = match.getDateTime();
-            matchDto.setDateTimeDto(LocalDateTime.of(dt.getYear(), dt.getMonth(), dt.getDayOfMonth(),dt.getHour(), dt.getMinute(),dt.getSecond()));
+            matchDto.setDateTimeDto(LocalDateTime.of(dt.getYear(), dt.getMonth(), dt.getDayOfMonth(), dt.getHour(), dt.getMinute(), dt.getSecond()));
             matchDtos.add(matchDto);
         }
         return matchDtos;
     }
-
-
-
 }

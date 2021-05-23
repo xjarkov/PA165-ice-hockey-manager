@@ -87,7 +87,7 @@ public class MatchFacadeTest extends AbstractTransactionalTestNGSpringContextTes
     @Test
     public void findByIdTest() {
         when(matchService.findById(match1.getId())).thenReturn(match1);
-        when(beanMappingService.mapTo(match1, MatchDto.class)).thenReturn(matchDto1);
+        when(beanMappingService.mapMatchToMatchDto(match1)).thenReturn(matchDto1);
         assertThat(matchFacade.findMatchById(match1.getId())).isEqualTo(matchDto1);
     }
 
@@ -101,7 +101,7 @@ public class MatchFacadeTest extends AbstractTransactionalTestNGSpringContextTes
     @Test
     public void findNearestTest() {
         when(matchService.findNearest()).thenReturn(match1);
-        when(beanMappingService.mapTo(match1, MatchDto.class)).thenReturn(matchDto1);
+        when(beanMappingService.mapMatchToMatchDto(match1)).thenReturn(matchDto1);
         assertThat(matchFacade.findNearestMatch()).isEqualTo(matchDto1);
     }
 }
