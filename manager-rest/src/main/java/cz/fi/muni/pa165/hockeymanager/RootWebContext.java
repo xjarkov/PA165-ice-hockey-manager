@@ -1,6 +1,7 @@
 package cz.fi.muni.pa165.hockeymanager;
 
-import cz.fi.muni.pa165.hockeymanager.rest.controllers.HockeyPlayerController;
+import cz.fi.muni.pa165.hockeymanager.dto.UserDto;
+import cz.fi.muni.pa165.hockeymanager.rest.mixin.UserDtoMixin;
 import cz.fi.muni.pa165.hockeymanager.service.config.ServiceConfiguration;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -14,6 +15,7 @@ import org.springframework.web.servlet.config.annotation.DefaultServletHandlerCo
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Locale;
@@ -21,7 +23,7 @@ import java.util.Locale;
 @EnableWebMvc
 @Configuration
 @Import({ServiceConfiguration.class})
-@ComponentScan(basePackageClasses = HockeyPlayerController.class)
+@ComponentScan(basePackages = {"cz.fi.muni.pa165.hockeymanager.rest.controllers"})
 public class RootWebContext implements WebMvcConfigurer {
 
     @Override
@@ -42,8 +44,9 @@ public class RootWebContext implements WebMvcConfigurer {
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
         objectMapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.ENGLISH));
-
         objectMapper.disable(MapperFeature.DEFAULT_VIEW_INCLUSION);
+
+        objectMapper.addMixIn(UserDto.class, UserDtoMixin.class);
 
         jsonConverter.setObjectMapper(objectMapper);
         return jsonConverter;
