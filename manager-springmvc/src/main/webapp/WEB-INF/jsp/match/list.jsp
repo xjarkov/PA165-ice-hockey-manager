@@ -18,8 +18,8 @@
         <tr>
             <th scope="col">Home team</th>
             <th scope="col">Visiting team</th>
-            <th scope="col">Score</th>
             <th scope="col">Date</th>
+            <th scope="col">Score</th>
             <th scope="col"></th>
         </tr>
         </thead>
