@@ -15,9 +15,9 @@ public class MatchDto {
 
     private TeamDto visitingTeam;
 
-    private int homeScore;
+    private int homeTeamScore;
 
-    private int visitingScore;
+    private int visitingTeamScore;
 
     private LocalDateTime dateTimeDto;
 

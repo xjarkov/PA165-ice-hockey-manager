@@ -18,13 +18,17 @@
         <tr>
             <th scope="col">Home team</th>
             <th scope="col">Visiting team</th>
+            <th scope="col">Score</th>
+            <th scope="col"></th>
         </tr>
         </thead>
         <tbody>
         <c:forEach items="${matches}" var="match">
             <tr>
-                <td>${match.homeTeam.name}</td>
-                <td>${match.visitingTeam.name}</td>
+                <td><my:a href="/team/${match.homeTeam.id}"><c:out value="${match.homeTeam.name}"/></my:a></td>
+                <td><my:a href="/team/${match.visitingTeam.id}"><c:out value="${match.visitingTeam.name}"/></my:a></td>
+                <td>${match.homeTeamScore}</td>
+                <td>${match.visitingTeamScore}</td>
             </tr>
         </c:forEach>
         </tbody>
