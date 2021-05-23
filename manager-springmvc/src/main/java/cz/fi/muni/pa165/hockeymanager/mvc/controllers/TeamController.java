@@ -64,7 +64,7 @@ public class TeamController {
             return "redirect:/user/list";
         }
 
-        authUser.setId(team.getId());
+        authUser.setTeam(team);
         team.setManager(authUser);
 
         teamFacade.update(team);
