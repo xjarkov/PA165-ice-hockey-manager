@@ -13,14 +13,13 @@
 
 <my:pagetemplate>
 <jsp:attribute name="body">
-    <table class="table table-hover">
+    <table class="table table-hover table-striped table-bordered">
         <thead>
         <tr>
             <th scope="col">Home team</th>
             <th scope="col">Visiting team</th>
             <th scope="col">Date</th>
-            <th scope="col">Score</th>
-            <th scope="col"></th>
+            <th scope="col" colspan="2">Score</th>
         </tr>
         </thead>
         <tbody>

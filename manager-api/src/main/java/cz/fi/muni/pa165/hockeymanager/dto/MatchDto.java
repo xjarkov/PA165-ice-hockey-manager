@@ -1,6 +1,7 @@
 package cz.fi.muni.pa165.hockeymanager.dto;
 
 import lombok.Data;
+
 import java.time.LocalDateTime;
 
 /**
@@ -21,7 +22,8 @@ public class MatchDto {
 
     private LocalDateTime dateTimeDto;
 
-    public MatchDto() {}
+    public MatchDto() {
+    }
 
     public MatchDto(TeamDto homeTeam, TeamDto visitingTeam, LocalDateTime dateTime) {
         this.homeTeam = homeTeam;
@@ -29,7 +31,7 @@ public class MatchDto {
         this.dateTimeDto = dateTime;
     }
 
-    public String dateFormated(){
-        return dateTimeDto.getDayOfMonth() + "." + dateTimeDto.getMonth().getValue() + "." + dateTimeDto.getYear();
+    public String dateFormated() {
+        return dateTimeDto.getDayOfMonth() + "." + dateTimeDto.getMonth().getValue() + "." + dateTimeDto.getYear() + " " + dateTimeDto.getHour() + ":" + dateTimeDto.getMinute();
     }
 }

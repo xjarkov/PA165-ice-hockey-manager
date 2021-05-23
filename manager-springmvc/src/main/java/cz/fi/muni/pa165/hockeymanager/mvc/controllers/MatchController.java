@@ -25,7 +25,7 @@ public class MatchController {
         List<MatchDto> matches = matchFacade.findAllMatches();
         Collections.sort(matches, new Comparator<MatchDto>() {
             public int compare(MatchDto o1, MatchDto o2) {
-                return o1.getDateTimeDto().compareTo(o2.getDateTimeDto());
+                return o2.getDateTimeDto().compareTo(o1.getDateTimeDto());
             }
         });
         model.addAttribute("matches", matches);
