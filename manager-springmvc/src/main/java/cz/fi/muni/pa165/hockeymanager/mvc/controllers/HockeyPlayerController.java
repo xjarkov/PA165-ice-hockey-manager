@@ -41,6 +41,6 @@ public class HockeyPlayerController {
             hockeyPlayerFacade.update(player);
         }
 
-        return "redirect:players/list";
+        return "redirect:/players/list";
     }
 }
