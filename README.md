@@ -25,6 +25,10 @@ curl -i -X GET http://localhost:8080/pa165/users
 ```
 curl -i -X GET http://localhost:8080/pa165/user/{id}
 ```
+### Remove user by id
+```
+curl -i -X DELETE http://localhost:8080/pa165/user/{id}
+```
 ### Get all matches
 ```
 curl -i -X GET http://localhost:8080/pa165/matches
