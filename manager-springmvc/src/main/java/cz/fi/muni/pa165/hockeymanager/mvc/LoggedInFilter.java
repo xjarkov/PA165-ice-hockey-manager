@@ -11,6 +11,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpSession;
 import javax.servlet.annotation.WebFilter;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,6 +20,8 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebFilter(urlPatterns = {"/", "/user/*", "/players/*", "/team/*", "/match/*"})
 public class LoggedInFilter implements Filter {
+    private final static Logger logger = LoggerFactory.getLogger(LoggedInFilter.class);
+
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
@@ -29,7 +33,11 @@ public class LoggedInFilter implements Filter {
             String redirectURL = request.getContextPath() + "/auth/login";
             response.setStatus(HttpStatus.TEMPORARY_REDIRECT.value());
             response.setHeader("Location", redirectURL);
-        } else if (authUser.getTeam() == null) {
+
+            logger.info("Redirecting to login from {}", request.getRequestURI());
+        } else if (authUser.getTeam() == null && !request.getRequestURI().equals("/pa165/user/select")) {
+            logger.info("Redirecting to team select from {}", request.getRequestURI());
+
             String redirectURL = request.getContextPath() + "/user/select";
             response.setStatus(HttpStatus.TEMPORARY_REDIRECT.value());
             response.setHeader("Location", redirectURL);
