@@ -1,6 +1,7 @@
 package cz.fi.muni.pa165.hockeymanager.rest.controllers;
 
 import cz.fi.muni.pa165.hockeymanager.dto.HockeyPlayerDto;
+import cz.fi.muni.pa165.hockeymanager.dto.MatchDto;
 import cz.fi.muni.pa165.hockeymanager.dto.UserDto;
 import cz.fi.muni.pa165.hockeymanager.facade.HockeyPlayerFacade;
 import org.slf4j.Logger;
@@ -22,5 +23,11 @@ public class HockeyPlayerController {
     public final List<HockeyPlayerDto> getAll() {
         logger.info("REST HockeyPlayers findAll()");
         return hockeyPlayerFacade.findAll();
+    }
+
+    @GetMapping(value = "/hockey_player/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public final HockeyPlayerDto getPlayer(@PathVariable("id") Long id) {
+        logger.info("REST HockeyPlayer findById({})", id);
+        return hockeyPlayerFacade.findById(id);
     }
 }
