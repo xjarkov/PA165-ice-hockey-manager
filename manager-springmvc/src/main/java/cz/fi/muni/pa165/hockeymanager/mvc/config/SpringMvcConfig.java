@@ -4,7 +4,9 @@ import cz.fi.muni.pa165.hockeymanager.sampledata.SampleDataConfiguration;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import javax.validation.Validator;
+
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.servlet.ViewResolver;

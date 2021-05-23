@@ -3,6 +3,8 @@ package cz.fi.muni.pa165.hockeymanager.dto;
 import cz.fi.muni.pa165.hockeymanager.enums.Role;
 import lombok.Data;
 
+import java.util.Objects;
+
 /**
  * @author Lukas Machalek (485196)
  */
@@ -22,5 +24,18 @@ public class UserDto {
         this.email = email;
         this.password = password;
         this.role = role;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserDto userDto = (UserDto) o;
+        return email.equals(userDto.email);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(email);
     }
 }

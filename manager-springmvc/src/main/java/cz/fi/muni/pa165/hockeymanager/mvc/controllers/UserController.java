@@ -5,6 +5,8 @@ import cz.fi.muni.pa165.hockeymanager.dto.UserDto;
 import cz.fi.muni.pa165.hockeymanager.facade.TeamFacade;
 import cz.fi.muni.pa165.hockeymanager.facade.UserFacade;
 
+import javax.servlet.http.HttpSession;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,9 +17,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import javax.servlet.http.HttpSession;
-
 
 /**
  * @author Kristian Kosorin (456620)

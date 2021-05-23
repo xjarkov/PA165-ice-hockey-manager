@@ -6,8 +6,10 @@ import cz.fi.muni.pa165.hockeymanager.facade.TeamFacade;
 import cz.fi.muni.pa165.hockeymanager.facade.UserFacade;
 
 import java.util.List;
-import org.springframework.ui.Model;
+
 import javax.servlet.http.HttpSession;
+
+import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -53,14 +55,12 @@ public class TeamController {
         if (team.getManager() != null) {
             redirectAttributes.addFlashAttribute("team_has_manager", "This team already has a manager");
 
-            //TODO change redirect to error page
             return "redirect:/user/select";
         }
 
         if (authUser.getTeam() != null) {
             redirectAttributes.addFlashAttribute("user_has_team", "This user already has a team");
 
-            //TODO change redirect to error page
             return "redirect:/user/list";
         }
 

@@ -2,14 +2,16 @@ package cz.fi.muni.pa165.hockeymanager.mvc.controllers;
 
 import cz.fi.muni.pa165.hockeymanager.dto.MatchDto;
 import cz.fi.muni.pa165.hockeymanager.facade.MatchFacade;
-import java.util.Collections;
-import java.util.Comparator;
+
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import java.util.Comparator;
+import java.util.Collections;
+
 import org.springframework.ui.Model;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * @author Lukas Machalek (485196)
