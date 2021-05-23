@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,5 +30,17 @@ public class UserController {
     public final UserDto getUser(@PathVariable("id") Long id) {
         logger.info("REST User findUserById({})", id);
         return userFacade.findUserById(id);
+    }
+
+    @DeleteMapping(value = "/user/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public final boolean removeUser(@PathVariable("id") Long id) {
+        logger.info("REST User removeUser({})", id);
+        UserDto user = userFacade.findUserById(id);
+        if (user != null) {
+            userFacade.remove(user);
+            return true;
+        }
+
+        return false;
     }
 }

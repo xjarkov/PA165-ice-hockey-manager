@@ -1,6 +1,7 @@
 package cz.fi.muni.pa165.hockeymanager.rest.controllers;
 
 import cz.fi.muni.pa165.hockeymanager.dto.HockeyPlayerDto;
+import cz.fi.muni.pa165.hockeymanager.dto.UserDto;
 import cz.fi.muni.pa165.hockeymanager.facade.HockeyPlayerFacade;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
