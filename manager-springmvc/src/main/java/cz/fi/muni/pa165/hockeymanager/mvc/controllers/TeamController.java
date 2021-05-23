@@ -70,8 +70,6 @@ public class TeamController {
         teamFacade.update(team);
         userFacade.update(authUser);
 
-        model.addAttribute("team", team);
-
-        return "team/details";
+        return "redirect:/team/" + team.getId();
     }
 }
