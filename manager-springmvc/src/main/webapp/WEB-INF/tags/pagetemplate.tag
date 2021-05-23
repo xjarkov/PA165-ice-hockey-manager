@@ -18,8 +18,9 @@
 </head>
 <body>
 <!-- navigation bar -->
-<nav class="navbar navbar-inverse navbar-static-top">
+<nav class="navbar navbar-dark bg-dark">
     <div class="container">
+
     </div>
 </nav>
 

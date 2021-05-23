@@ -16,13 +16,15 @@
         <tr>
             <th scope="col">ID</th>
             <th scope="col">Name</th>
+            <th scope="col">Team</th>
         </tr>
         </thead>
         <tbody>
         <c:forEach items="${users}" var="user">
             <tr>
                 <td><c:out value="${user.id}"/></td>
-                <td><c:out value="${user.name}"/></td>
+                <td><my:a href="/user/${user.id}"><c:out value="${user.name}"/></my:a></td>
+                <td><my:a href="/team/${user.team.id}"><c:out value="${user.team.name}"/></my:a></td>
             </tr>
         </c:forEach>
         </tbody>
