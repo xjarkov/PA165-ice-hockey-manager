@@ -15,7 +15,7 @@
             <div class="alert alert-danger" role="alert"><c:out value="${user_has_team}"/></div>
     </c:if>
 
-    <table class="table table-hover">
+    <table class="table table-hover table-striped table-bordered">
         <thead>
         <tr>
             <th scope="col">ID</th>

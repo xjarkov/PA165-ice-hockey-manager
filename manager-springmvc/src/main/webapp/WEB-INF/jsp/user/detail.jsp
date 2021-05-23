@@ -12,7 +12,7 @@
 <my:pagetemplate>
 <jsp:attribute name="body">
     <h2>${user.name}</h2>
-    <table class="table">
+    <table class="table table-hover table-bordered">
       <tr>
         <td>Id</td>
         <td>${user.id}</td>

@@ -14,7 +14,7 @@ import org.springframework.http.HttpStatus;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebFilter(urlPatterns = {"/", "/user/*"})
+@WebFilter(urlPatterns = {"/", "/user/*", "/players/*", "/team/*", "/match/*"})
 public class LoggedInFilter implements Filter {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {

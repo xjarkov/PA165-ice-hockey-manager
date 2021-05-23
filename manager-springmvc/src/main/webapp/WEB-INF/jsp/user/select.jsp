@@ -14,7 +14,7 @@
     <c:if test="${not empty team_has_manager}">
         <div class="alert alert-danger" role="alert"><c:out value="${team_has_manager}"/></div>
     </c:if>
-    <table class="table table-hover">
+    <table class="table table-hover table-bordered">
         <thead>
         <tr>
             <th scope="col">Name</th>
@@ -28,7 +28,7 @@
                 <td><my:a href="/team/${team.id}"><c:out value="${team.name}"/></my:a></td>
                 <td><c:out value="${team.championship}"/></td>
                 <td align="right">
-                    <my:a href="/team/${team.id}/select" class="btn btn-primary">Choose</my:a>
+                    <my:a href="/team/${team.id}/select" class="btn btn-primary btn-sm">Choose</my:a>
                 </td>
             </tr>
         </c:forEach>

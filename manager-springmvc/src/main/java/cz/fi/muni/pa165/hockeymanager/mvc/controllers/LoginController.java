@@ -61,4 +61,14 @@ public class LoginController {
         }
         return "redirect:/";
     }
+
+    @GetMapping(value = "/logout")
+    public String logout(HttpSession session) {
+        if (session.getAttribute("authenticatedUser") == null) {
+            return "redirect:/";
+        }
+
+        session.removeAttribute("authenticatedUser");
+        return "redirect:/auth/login";
+    }
 }
