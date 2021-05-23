@@ -55,11 +55,11 @@ curl -i -X GET http://localhost:8080/pa165/rest/match/{id}/winner
 ```
 
 ### Users
-Mail: admin@muni.cz 
-Password: admin123
-Mail: user@muni.cz 
-Password: user123
-Mail: adminTeam@muni.cz 
-Password: adminTeam123
-Mail: userTeam@muni.cz 
-Password: userTeam123
+Mail: admin@muni.cz  
+Password: admin123  
+Mail: user@muni.cz  
+Password: user123  
+Mail: adminTeam@muni.cz  
+Password: adminTeam123  
+Mail: userTeam@muni.cz  
+Password: userTeam123  
