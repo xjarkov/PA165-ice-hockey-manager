@@ -25,6 +25,10 @@
             <td>Championship</td>
             <td><c:out value="${team.championship}"/></td>
         </tr>
+        <tr>
+            <td>Manager</td>
+            <td><c:out value="${team.manager.name}"/></td>
+        </tr>
     </table>
 </jsp:attribute>
 </my:pagetemplate>
