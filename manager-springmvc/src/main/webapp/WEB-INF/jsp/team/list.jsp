@@ -24,7 +24,7 @@
             <tr>
                 <td><my:a href="/team/${team.id}"><c:out value="${team.name}"/></my:a></td>
                 <td><c:out value="${team.championship}"/></td>
-                <td>
+                <td align="right">
                     <my:a href="/" class="btn btn-primary">Choose</my:a>
                 </td>
             </tr>

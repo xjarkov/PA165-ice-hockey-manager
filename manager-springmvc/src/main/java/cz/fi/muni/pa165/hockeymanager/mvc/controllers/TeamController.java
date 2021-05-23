@@ -33,6 +33,6 @@ public class TeamController {
         TeamDto team = teamFacade.findTeamById(id);
         model.addAttribute("team", team);
 
-        return "team/detail";
+        return "team/details";
     }
 }
