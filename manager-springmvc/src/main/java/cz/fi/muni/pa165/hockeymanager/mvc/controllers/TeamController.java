@@ -54,7 +54,7 @@ public class TeamController {
             redirectAttributes.addFlashAttribute("team_has_manager", "This team already has a manager");
 
             //TODO change redirect to error page
-            return "redirect:/user/list";
+            return "redirect:/user/select";
         }
 
         if (authUser.getTeam() != null) {

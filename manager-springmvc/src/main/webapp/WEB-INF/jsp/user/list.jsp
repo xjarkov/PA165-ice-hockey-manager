@@ -11,6 +11,10 @@
 </head>
 <my:pagetemplate>
 <jsp:attribute name="body">
+    <c:if test="${not empty user_has_team}">
+            <div class="alert alert-danger" role="alert"><c:out value="${user_has_team}"/></div>
+    </c:if>
+
     <table class="table table-hover">
         <thead>
         <tr>
