@@ -94,7 +94,7 @@ public class MatchFacadeTest extends AbstractTransactionalTestNGSpringContextTes
     @Test
     public void findAllTest() {
         when(matchService.findAll()).thenReturn(matchList);
-        when(beanMappingService.mapTo(matchList, MatchDto.class)).thenReturn(matchDtoList);
+        when(beanMappingService.mapMatchesToMatchDtos(matchList)).thenReturn(matchDtoList);
         assertThat(matchFacade.findAllMatches()).isEqualTo(matchDtoList);
     }
 

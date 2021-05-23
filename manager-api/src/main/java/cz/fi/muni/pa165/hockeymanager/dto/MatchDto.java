@@ -19,14 +19,14 @@ public class MatchDto {
 
     private int visitingScore;
 
-    private LocalDateTime dateTime;
+    private LocalDateTime dateTimeDto;
 
     public MatchDto() {}
 
     public MatchDto(TeamDto homeTeam, TeamDto visitingTeam, LocalDateTime dateTime) {
         this.homeTeam = homeTeam;
         this.visitingTeam = visitingTeam;
-        this.dateTime = dateTime;
+        this.dateTimeDto = dateTime;
     }
 
 }
