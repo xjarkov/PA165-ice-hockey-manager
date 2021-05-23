@@ -1,6 +1,6 @@
 package cz.fi.muni.pa165.hockeymanager;
 
-import cz.fi.muni.pa165.hockeymanager.rest.controllers.HelloController;
+import cz.fi.muni.pa165.hockeymanager.rest.controllers.HockeyPlayerController;
 import cz.fi.muni.pa165.hockeymanager.service.config.ServiceConfiguration;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -21,7 +21,7 @@ import java.util.Locale;
 @EnableWebMvc
 @Configuration
 @Import({ServiceConfiguration.class})
-@ComponentScan(basePackageClasses = HelloController.class)
+@ComponentScan(basePackageClasses = HockeyPlayerController.class)
 public class RootWebContext implements WebMvcConfigurer {
 
     @Override

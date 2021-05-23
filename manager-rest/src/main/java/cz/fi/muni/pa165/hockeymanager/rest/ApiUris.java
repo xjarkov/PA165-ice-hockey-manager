@@ -10,5 +10,5 @@ public abstract class ApiUris {
     public static final String ROOT_URI_MATCH        = "/match";
     public static final String ROOT_URI_USER         = "/user";
     public static final String ROOT_URI_TEAM         = "/team";
-    public static final String ROOT_URI_HOCKEYPLAYER = "/hockey_player";
+    public static final String ROOT_URI_HOCKEY_PLAYER = "/hockey_player";
 }
