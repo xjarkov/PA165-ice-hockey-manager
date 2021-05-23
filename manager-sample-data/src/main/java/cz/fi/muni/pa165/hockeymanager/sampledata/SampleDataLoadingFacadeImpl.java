@@ -43,8 +43,10 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         Team cska = team("CSKA Moscow", Championship.KHL);
         Team ska = team("SKA Petersburg", Championship.KHL);
 
-        User adminTest = user("admin", "admin@muni.cz", "admin123", Role.ADMIN, null);
-        User userTest = user("user", "user@muni.cz", "user123", Role.PLAYER, null);
+        User adminWithoutTeam = user("admin", "admin@muni.cz", "admin123", Role.ADMIN, null);
+        User userWithoutTeam = user("user", "user@muni.cz", "user123", Role.PLAYER, null);
+        User adminWithTeam = user("adminTeam", "adminTeam@muni.cz", "adminTeam123", Role.ADMIN, cska);
+        User userWithTeam = user("userTeam", "userTeam@muni.cz", "userTeam123", Role.PLAYER, ska);
         // Do not encode here... it is done in user service
         User pepa = user("Pepa Novák", "pepa@novak.cz", encoder.encode("heslo123"), Role.PLAYER, cska);
         User honza = user("Honza Novák", "honza@novak.cz", encoder.encode("heslo321"), Role.PLAYER, ska);

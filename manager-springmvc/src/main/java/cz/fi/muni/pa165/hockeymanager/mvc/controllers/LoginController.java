@@ -56,6 +56,9 @@ public class LoginController {
         }
 
         session.setAttribute("authenticatedUser", userDTO);
+        if (user.getTeam() == null) {
+            return "redirect:/team/list";
+        }
         return "redirect:/";
     }
 }
