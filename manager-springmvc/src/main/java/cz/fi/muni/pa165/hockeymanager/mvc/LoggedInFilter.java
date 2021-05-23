@@ -10,7 +10,9 @@ import javax.servlet.ServletResponse;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpSession;
 import javax.servlet.annotation.WebFilter;
+
 import org.springframework.http.HttpStatus;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -21,10 +23,14 @@ public class LoggedInFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         HttpSession session = request.getSession();
-        UserDto authUser = (UserDto)session.getAttribute("authenticatedUser");
+        UserDto authUser = (UserDto) session.getAttribute("authenticatedUser");
 
         if (authUser == null) {
             String redirectURL = request.getContextPath() + "/auth/login";
+            response.setStatus(HttpStatus.TEMPORARY_REDIRECT.value());
+            response.setHeader("Location", redirectURL);
+        } else if (authUser.getTeam() == null) {
+            String redirectURL = request.getContextPath() + "/user/select";
             response.setStatus(HttpStatus.TEMPORARY_REDIRECT.value());
             response.setHeader("Location", redirectURL);
         }

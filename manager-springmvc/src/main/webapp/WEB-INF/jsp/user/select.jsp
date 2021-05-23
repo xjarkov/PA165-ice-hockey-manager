@@ -11,6 +11,9 @@
 </head>
 <my:pagetemplate>
 <jsp:attribute name="body">
+    <div class="alert alert-warning" role="alert">
+        Please select your team to continue.
+    </div>
     <c:if test="${not empty team_has_manager}">
         <div class="alert alert-danger" role="alert"><c:out value="${team_has_manager}"/></div>
     </c:if>
