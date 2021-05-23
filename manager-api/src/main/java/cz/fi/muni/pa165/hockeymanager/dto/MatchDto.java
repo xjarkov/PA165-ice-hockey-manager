@@ -15,18 +15,21 @@ public class MatchDto {
 
     private TeamDto visitingTeam;
 
-    private int homeScore;
+    private int homeTeamScore;
 
-    private int visitingScore;
+    private int visitingTeamScore;
 
-    private LocalDateTime dateTime;
+    private LocalDateTime dateTimeDto;
 
     public MatchDto() {}
 
     public MatchDto(TeamDto homeTeam, TeamDto visitingTeam, LocalDateTime dateTime) {
         this.homeTeam = homeTeam;
         this.visitingTeam = visitingTeam;
-        this.dateTime = dateTime;
+        this.dateTimeDto = dateTime;
     }
 
+    public String dateFormated(){
+        return dateTimeDto.getDayOfMonth() + "." + dateTimeDto.getMonth().getValue() + "." + dateTimeDto.getYear();
+    }
 }
