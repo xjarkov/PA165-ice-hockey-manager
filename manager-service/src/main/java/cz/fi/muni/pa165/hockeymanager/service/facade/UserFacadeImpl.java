@@ -67,6 +67,6 @@ public class UserFacadeImpl implements UserFacade {
 
     @Override
     public boolean authenticate(UserDto user) {
-        return userService.authenticate(userService.findById(user.getId()), user.getPassword());
+        return userService.authenticate(userService.findByEmail(user.getEmail()), user.getPassword());
     }
 }

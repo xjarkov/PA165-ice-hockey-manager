@@ -2,6 +2,7 @@ package cz.fi.muni.pa165.hockeymanager.mvc.controllers;
 
 import cz.fi.muni.pa165.hockeymanager.dto.UserDto;
 import cz.fi.muni.pa165.hockeymanager.facade.UserFacade;
+import org.springframework.aop.scope.ScopedProxyUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;

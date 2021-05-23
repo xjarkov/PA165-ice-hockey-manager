@@ -36,7 +36,10 @@ public class User {
     @OneToOne(fetch= FetchType.LAZY)
     private Team team;
 
-    public User() {
+    public User() {}
+
+    public User(String name, String email, String password, Role role) {
+        this(name, email, password, role, null);
     }
 
     public User(String name, String email, String password, Role role, Team team) {
@@ -45,10 +48,6 @@ public class User {
         this.password = password;
         this.role = role;
         this.team = team;
-    }
-
-    public User(String name, String email, String password, Role role) {
-        this(name, email, password, role, null);
     }
 
     @Override
