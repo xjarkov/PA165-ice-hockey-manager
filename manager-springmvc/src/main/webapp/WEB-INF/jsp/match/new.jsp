@@ -12,31 +12,31 @@
 
 <my:pagetemplate>
 <jsp:attribute name="body">
-    <form id="matchCreate" action="${pageContext.request.contextPath}/match/create" method="post">
-        <label for="ht">Home team:</label>
-        <select id="ht" name="homeTeam">
+    <form:form id="matchCreate" action="${pageContext.request.contextPath}/match/create" modelAttribute="matchCreate" method="post">
+        <form:label path="homeTeam">Home team:</form:label>
+        <form:select path="homeTeam">
             <c:forEach items="${teams}" var="team">
-                <option>${team.name}</option>
+                <form:option value="${team.name}" label="${team.name}"/>
             </c:forEach>
-        </select><br>
+        </form:select><br>
 
-        <label for="vt">Visiting team:</label>
-        <select id="vt" name="visitingTeam">
+        <form:label path="visitingTeam">Visiting team:</form:label>
+        <form:select path="visitingTeam">
             <c:forEach items="${teams}" var="team">
-                <option>${team.name}</option>
+                <form:option value="${team.name}" label="${team.name}"/>
             </c:forEach>
-        </select><br>
+        </form:select><br>
 
-        <label for="hts">Home team score:</label>
-        <input type="number" min="0" id="hts" name="homeTeamScore"><br>
+        <form:label path="homeTeamScore">Home team score:</form:label>
+        <form:input type="number" min="0" path="homeTeamScore"/><br>
 
-        <label for="vts">Visiting team score:</label>
-        <input type="number" min="0" id="vts" name="visitingTeamScore"><br>
+        <form:label path="visitingTeamScore">Visiting team score:</form:label>
+        <form:input type="number" min="0" path="visitingTeamScore"/><br>
 
-        <label for="dt">Date and time:</label>
-        <input type="datetime-local" id="dt" name="dateTimeDto"><br>
+        <form:label path="dateTimeDto">Date and time:</form:label>
+        <form:input type="datetime-local" path="dateTimeDto"/><br>
 
-        <button type="submit">Create</button>
-    </form>
+        <button class="btn btn-primary" type="submit">Create</button>
+    </form:form>
 </jsp:attribute>
 </my:pagetemplate>

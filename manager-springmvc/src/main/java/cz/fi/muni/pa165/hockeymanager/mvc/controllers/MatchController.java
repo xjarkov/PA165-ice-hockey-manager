@@ -9,13 +9,19 @@ import cz.fi.muni.pa165.hockeymanager.facade.TeamFacade;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+
+import cz.fi.muni.pa165.hockeymanager.mvc.LoggedInFilter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 /**
  * @author Lukas Machalek (485196)
@@ -28,6 +34,8 @@ public class MatchController {
 
     @Autowired
     private TeamFacade teamFacade;
+
+    private final static Logger logger = LoggerFactory.getLogger(LoggedInFilter.class);
 
     @GetMapping("/list")
     public String list(Model model) {
@@ -46,13 +54,26 @@ public class MatchController {
         List<TeamDto> teams = teamFacade.findAllTeams();
         model.addAttribute("teams", teams);
         model.addAttribute("matchCreate", new MatchDto());
+
         return "match/new";
     }
 
-    @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String create(@ModelAttribute("matchCreate")MatchDto formBean, Model model) {
-        //create product
-        Long id = matchFacade.create(formBean);
+    @PostMapping(value = "/create")
+    public String create(@Valid @ModelAttribute("matchDto") MatchDto matchDto,
+                         Model model,
+                         BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            for (ObjectError ge : bindingResult.getGlobalErrors()) {
+                System.err.println("ObjectError: " + ge);
+            }
+            for (FieldError fe : bindingResult.getFieldErrors()) {
+                System.err.println(fe.getField() + "_error");
+            }
+            return "match/list";
+
+        }
+
+        matchFacade.create(matchDto);
         return "match/list";
     }
 }
