@@ -48,6 +48,9 @@
             </ul>
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <li class="nav-item">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/team/my_team">My team</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="${pageContext.request.contextPath}/auth/logout">Log out</a>
                 </li>
             </ul>

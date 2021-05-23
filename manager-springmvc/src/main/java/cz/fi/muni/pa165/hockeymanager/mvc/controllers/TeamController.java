@@ -1,11 +1,15 @@
 package cz.fi.muni.pa165.hockeymanager.mvc.controllers;
 
+import cz.fi.muni.pa165.hockeymanager.dto.HockeyPlayerDto;
 import cz.fi.muni.pa165.hockeymanager.dto.TeamDto;
 import cz.fi.muni.pa165.hockeymanager.dto.UserDto;
+import cz.fi.muni.pa165.hockeymanager.facade.HockeyPlayerFacade;
 import cz.fi.muni.pa165.hockeymanager.facade.TeamFacade;
 import cz.fi.muni.pa165.hockeymanager.facade.UserFacade;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpSession;
 
@@ -28,6 +32,9 @@ public class TeamController {
 
     @Autowired
     private UserFacade userFacade;
+
+    @Autowired
+    private HockeyPlayerFacade hockeyPlayerFacade;
 
     @GetMapping("/list")
     public String list(Model model) {
@@ -71,5 +78,29 @@ public class TeamController {
         userFacade.update(authUser);
 
         return "redirect:/team/" + team.getId();
+    }
+
+    @GetMapping("/my_team")
+    public String myTeam(Model model, HttpSession httpSession) {
+        UserDto authUser = (UserDto)httpSession.getAttribute("authenticatedUser");
+        model.addAttribute("players", authUser.getTeam().getHockeyPlayers());
+        return "team/myTeam";
+    }
+
+    @GetMapping("/remove/{id}")
+    public String removePlayer(HttpSession session, @PathVariable Long id) {
+        HockeyPlayerDto player = hockeyPlayerFacade.findById(id);
+        UserDto authUser = (UserDto) session.getAttribute("authenticatedUser");
+
+        if (player != null && player.getTeam() != null && authUser != null && authUser.getTeam() != null) {
+            TeamDto team = authUser.getTeam();
+            team.getHockeyPlayers().remove(player);
+            player.setTeam(null);
+
+            teamFacade.update(team);
+            hockeyPlayerFacade.update(player);
+        }
+
+        return "redirect:/team/my_team";
     }
 }
