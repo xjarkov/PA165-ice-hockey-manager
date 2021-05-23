@@ -24,7 +24,7 @@ public class MatchDaoImpl implements MatchDao {
 
     @Override
     public void remove(Match match) {
-        em.remove(match);
+        em.remove(em.contains(match) ? match : em.merge(match));
     }
 
     @Override

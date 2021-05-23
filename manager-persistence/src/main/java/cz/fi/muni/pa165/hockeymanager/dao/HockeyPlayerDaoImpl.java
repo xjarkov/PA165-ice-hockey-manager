@@ -22,7 +22,7 @@ public class HockeyPlayerDaoImpl implements HockeyPlayerDao {
 
     @Override
     public void remove(HockeyPlayer hockeyPlayer) {
-        em.remove(hockeyPlayer);
+        em.remove(em.contains(hockeyPlayer) ? hockeyPlayer : em.merge(hockeyPlayer));
     }
 
     @Override
