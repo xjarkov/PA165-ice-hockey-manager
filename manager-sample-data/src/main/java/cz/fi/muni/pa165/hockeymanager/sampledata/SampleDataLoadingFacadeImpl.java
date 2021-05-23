@@ -47,7 +47,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         User honza = user("Honza Novák", "honza@novak.cz", encoder.encode("heslo321"), Role.PLAYER, ska);
         User admin = user("Fero Novák", "fero@novak.cz", encoder.encode("heslo654"), Role.ADMIN, null);
 
-        Match m1 = match(cska, ska, LocalDateTime.of(2021, Month.JANUARY, 5, 19, 0, 0),1,2);
+        Match m1 = match(cska, ska, LocalDateTime.of(2021, Month.FEBRUARY, 5, 19, 0, 0),1,2);
         Match m2 = match(cska, ska, LocalDateTime.of(2021, Month.JANUARY, 6, 19, 0, 0),0,4);
         Match m3 = match(ska, cska, LocalDateTime.of(2021, Month.JANUARY, 15, 19, 0, 0),5,2);
         Match m4 = match(ska, cska, LocalDateTime.of(2021, Month.JANUARY, 16, 19, 0, 0),3,3);

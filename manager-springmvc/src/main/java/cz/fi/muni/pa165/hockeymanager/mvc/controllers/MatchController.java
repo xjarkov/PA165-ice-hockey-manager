@@ -5,6 +5,8 @@ import cz.fi.muni.pa165.hockeymanager.dto.TeamDto;
 import cz.fi.muni.pa165.hockeymanager.entity.Match;
 import cz.fi.muni.pa165.hockeymanager.facade.MatchFacade;
 import cz.fi.muni.pa165.hockeymanager.facade.TeamFacade;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,15 +24,12 @@ public class MatchController {
     @GetMapping("/list")
     public String list(Model model) {
         List<MatchDto> matches = matchFacade.findAllMatches();
+        Collections.sort(matches, new Comparator<MatchDto>() {
+            public int compare(MatchDto o1, MatchDto o2) {
+                return o1.getDateTimeDto().compareTo(o2.getDateTimeDto());
+            }
+        });
         model.addAttribute("matches", matches);
         return "match/list";
-    }
-
-    @GetMapping("/{id}")
-    public String getUserById(@PathVariable Long id, Model model) {
-        MatchDto match= matchFacade.findMatchById(id);
-        model.addAttribute("match", match);
-
-        return "match/detail";
     }
 }

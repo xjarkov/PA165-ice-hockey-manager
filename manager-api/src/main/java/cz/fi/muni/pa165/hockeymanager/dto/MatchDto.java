@@ -29,4 +29,7 @@ public class MatchDto {
         this.dateTimeDto = dateTime;
     }
 
+    public String dateFormated(){
+        return dateTimeDto.getDayOfMonth() + "." + dateTimeDto.getMonth().getValue() + "." + dateTimeDto.getYear();
+    }
 }
