@@ -7,49 +7,59 @@ Several human players (at least two) can manage their hockey teams out of a list
 ## REST API endpoints
 ### Get all hockey players
 ```
-curl -i -X GET http://localhost:8080/pa165/hockey_players
+curl -i -X GET http://localhost:8080/pa165/rest/hockey_players
 ```
 ### Get hockey player by id
 ```
-curl -i -X GET http://localhost:8080/pa165/hockey_player/{id}
+curl -i -X GET http://localhost:8080/pa165/rest/hockey_player/{id}
 ```
 ### Get all teams
 ```
-curl -i -X GET http://localhost:8080/pa165/teams
+curl -i -X GET http://localhost:8080/pa165/rest/teams
 ```
 ### Get team by id
 ```
-curl -i -X GET http://localhost:8080/pa165/team/{id}
+curl -i -X GET http://localhost:8080/pa165/rest/team/{id}
 ```
 ### Get all users
 ```
-curl -i -X GET http://localhost:8080/pa165/users
+curl -i -X GET http://localhost:8080/pa165/rest/users
 ```
 ### Get user by id
 ```
-curl -i -X GET http://localhost:8080/pa165/user/{id}
+curl -i -X GET http://localhost:8080/pa165/rest/user/{id}
 ```
 ### Remove user by id
 ```
-curl -i -X DELETE http://localhost:8080/pa165/user/{id}
+curl -i -X DELETE http://localhost:8080/pa165/rest/user/{id}
 ```
 ### Get all matches
 ```
-curl -i -X GET http://localhost:8080/pa165/matches
+curl -i -X GET http://localhost:8080/pa165/rest/matches
 ```
 ### Get match by id
 ```
-curl -i -X GET http://localhost:8080/pa165/match/{id}
+curl -i -X GET http://localhost:8080/pa165/rest/match/{id}
 ```
 ### Get nearest match
 ```
-curl -i -X GET http://localhost:8080/pa165/match/nearest
+curl -i -X GET http://localhost:8080/pa165/rest/match/nearest
 ```
 ### Get score of match
 ```
-curl -i -X GET http://localhost:8080/pa165/match/{id}/score
+curl -i -X GET http://localhost:8080/pa165/rest/match/{id}/score
 ```
 ### Get winner of match
 ```
-curl -i -X GET http://localhost:8080/pa165/match/{id}/winner
+curl -i -X GET http://localhost:8080/pa165/rest/match/{id}/winner
 ```
+
+### Users
+Mail: admin@muni.cz  
+Password: admin123  
+Mail: user@muni.cz  
+Password: user123  
+Mail: adminTeam@muni.cz  
+Password: adminTeam123  
+Mail: userTeam@muni.cz  
+Password: userTeam123  
