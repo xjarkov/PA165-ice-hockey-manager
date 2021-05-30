@@ -31,6 +31,14 @@ public class MatchDto {
         this.dateTimeDto = dateTime;
     }
 
+    public MatchDto(TeamDto homeTeam, TeamDto visitingTeam, int homeTeamScore, int visitingTeamScore, LocalDateTime dateTime) {
+        this.homeTeam = homeTeam;
+        this.visitingTeam = visitingTeam;
+        this.homeTeamScore = homeTeamScore;
+        this.visitingTeamScore = visitingTeamScore;
+        this.dateTimeDto = dateTime;
+    }
+
     public String dateFormated() {
         return dateTimeDto.getDayOfMonth() + "." + dateTimeDto.getMonth().getValue() + "." + dateTimeDto.getYear() + " " + dateTimeDto.getHour() + ":" + dateTimeDto.getMinute();
     }
