@@ -45,4 +45,8 @@ public interface HockeyPlayerFacade {
      */
     List<HockeyPlayerDto> findAll();
 
+    /**
+     * @return List of players without a team
+     */
+    List<HockeyPlayerDto> findPlayersWithoutTeam();
 }

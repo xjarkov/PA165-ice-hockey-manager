@@ -38,4 +38,9 @@ public interface HockeyPlayerDao {
      * @return Player by its id.
      */
     HockeyPlayer findById(Long id);
+
+    /**
+     * @return List of players without team
+     */
+    List<HockeyPlayer> findPlayersWithoutTeam();
 }

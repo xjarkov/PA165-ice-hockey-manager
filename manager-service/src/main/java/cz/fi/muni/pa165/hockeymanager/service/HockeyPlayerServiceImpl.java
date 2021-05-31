@@ -82,4 +82,15 @@ public class HockeyPlayerServiceImpl implements HockeyPlayerService {
         }
         return matches;
     }
+
+    @Override
+    public List<HockeyPlayer> findPlayersWithoutTeam() {
+        List<HockeyPlayer> playerList;
+        try {
+            playerList = hockeyPlayerDao.findPlayersWithoutTeam();
+        } catch (DataAccessException e) {
+            throw new ManagerServiceException("Could not find players without team exc: " + e);
+        }
+        return playerList;
+    }
 }

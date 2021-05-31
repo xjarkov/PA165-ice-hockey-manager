@@ -37,4 +37,9 @@ public class HockeyPlayerDaoImpl implements HockeyPlayerDao {
     public List<HockeyPlayer> findAll() {
         return em.createQuery("select p from HockeyPlayer p", HockeyPlayer.class).getResultList();
     }
+
+    @Override
+    public List<HockeyPlayer> findPlayersWithoutTeam() {
+        return em.createQuery("select p from HockeyPlayer p where p.team = null").getResultList();
+    }
 }
