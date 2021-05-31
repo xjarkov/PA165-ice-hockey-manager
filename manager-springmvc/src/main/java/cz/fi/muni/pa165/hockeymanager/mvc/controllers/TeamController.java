@@ -84,6 +84,7 @@ public class TeamController {
     public String myTeam(Model model, HttpSession httpSession) {
         UserDto authUser = (UserDto)httpSession.getAttribute("authenticatedUser");
         model.addAttribute("players", authUser.getTeam().getHockeyPlayers());
+        model.addAttribute("freeAgents", hockeyPlayerFacade.findPlayersWithoutTeam());
         return "team/teamManagement";
     }
 

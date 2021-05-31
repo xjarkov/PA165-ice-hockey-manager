@@ -46,11 +46,11 @@
                     </tr>
                     </thead>
                     <tbody>
-                        <c:forEach items="${players}" var="player">
+                        <c:forEach items="${freeAgents}" var="freeAgent">
                             <tr>
-                                <td>${player.firstName}&nbsp;${player.lastName}</td>
+                                <td>${freeAgent.firstName}&nbsp;${freeAgent.lastName}</td>
                                 <td align="right">
-                                    <my:a href="/players/recruit/${player.id}" class="btn btn-success btn-sm">
+                                    <my:a href="/players/recruit/${freeAgent.id}" class="btn btn-success btn-sm">
                                         Assign to my team
                                     </my:a>
                                 </td>
