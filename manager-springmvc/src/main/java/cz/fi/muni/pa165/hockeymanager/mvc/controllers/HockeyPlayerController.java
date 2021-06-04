@@ -62,4 +62,32 @@ public class HockeyPlayerController {
 
         return "redirect:/team/my_team";
     }
+
+    @GetMapping("/remove/{id}")
+    public String removePlayer(@PathVariable Long id) {
+        HockeyPlayerDto player = hockeyPlayerFacade.findById(id);
+        hockeyPlayerFacade.remove(player);
+
+        return "redirect:/players/list";
+    }
+
+    @GetMapping("/create")
+    public String createPlayer() {
+        return "redirect:/players/new";
+    }
+
+    @GetMapping("/add")
+    public String addPlayer() {
+        // TODO: add new player to database
+        return "redirect:/players/list";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String editPlayer() {
+        // TODO: edit player already in database
+        // should be redirected to separate page where
+        // user can edit values and then save it
+        // after that redirected to /players/list
+        return "redirect:/players/list";
+    }
 }
