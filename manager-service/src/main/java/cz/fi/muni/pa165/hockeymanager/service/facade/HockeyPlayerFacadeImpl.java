@@ -1,5 +1,6 @@
 package cz.fi.muni.pa165.hockeymanager.service.facade;
 
+import cz.fi.muni.pa165.hockeymanager.dao.HockeyPlayerDao;
 import cz.fi.muni.pa165.hockeymanager.dto.HockeyPlayerDto;
 import cz.fi.muni.pa165.hockeymanager.entity.HockeyPlayer;
 import cz.fi.muni.pa165.hockeymanager.entity.Team;
@@ -50,5 +51,10 @@ public class HockeyPlayerFacadeImpl implements HockeyPlayerFacade {
     @Override
     public List<HockeyPlayerDto> findAll() {
         return beanMappingService.mapTo(hockeyPlayerService.findAll(), HockeyPlayerDto.class);
+    }
+
+    @Override
+    public List<HockeyPlayerDto> findPlayersWithoutTeam() {
+        return beanMappingService.mapTo(hockeyPlayerService.findPlayersWithoutTeam(), HockeyPlayerDto.class);
     }
 }

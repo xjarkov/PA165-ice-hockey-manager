@@ -84,7 +84,8 @@ public class TeamController {
     public String myTeam(Model model, HttpSession httpSession) {
         UserDto authUser = (UserDto)httpSession.getAttribute("authenticatedUser");
         model.addAttribute("players", authUser.getTeam().getHockeyPlayers());
-        return "team/myTeam";
+        model.addAttribute("freeAgents", hockeyPlayerFacade.findPlayersWithoutTeam());
+        return "team/teamManagement";
     }
 
     @GetMapping("/remove/{id}")

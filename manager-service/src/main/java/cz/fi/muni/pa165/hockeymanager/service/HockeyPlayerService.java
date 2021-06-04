@@ -51,4 +51,9 @@ public interface HockeyPlayerService {
      * @return list of all player's team matches.
      */
     List<Match> findPlayerTeamMatches(HockeyPlayer player);
+
+    /**
+     * @return List of players without a team
+     */
+    List<HockeyPlayer> findPlayersWithoutTeam();
 }
