@@ -1,5 +1,6 @@
 package cz.fi.muni.pa165.hockeymanager.facade;
 
+import cz.fi.muni.pa165.hockeymanager.dto.MatchCreateDto;
 import cz.fi.muni.pa165.hockeymanager.dto.MatchDto;
 import cz.fi.muni.pa165.hockeymanager.dto.TeamDto;
 import cz.fi.muni.pa165.hockeymanager.entity.Match;
@@ -13,6 +14,8 @@ import cz.fi.muni.pa165.hockeymanager.service.facade.MatchFacadeImpl;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.Spy;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTransactionalTestNGSpringContextTests;
 import org.testng.annotations.BeforeMethod;
@@ -32,49 +35,54 @@ public class MatchFacadeTest extends AbstractTransactionalTestNGSpringContextTes
     @Mock
     private MatchService matchService;
 
-    @Mock
+    @Spy
+    @Autowired
     private BeanMappingService beanMappingService;
 
     @InjectMocks
     private MatchFacadeImpl matchFacade = new MatchFacadeImpl();
 
-    final private Match match1 = new Match(
-            new Team("Sochi", Championship.KHL),
-            new Team("CSKA Moskva", Championship.KHL),
-            LocalDateTime.of(2021, Month.AUGUST, 24, 18, 0)
-    );
+    private Match match1;
+    private Match match2;
 
-    final private Match match2 = new Match(
-            new Team("Sochi", Championship.KHL),
-            new Team("CSKA Moskva", Championship.KHL),
-            LocalDateTime.of(2021, Month.AUGUST, 26, 18, 0)
-    );
+    private MatchCreateDto matchCreateDto1;
 
-    final private MatchDto matchDto1 = new MatchDto(
-            new TeamDto("Sochi", Championship.KHL),
-            new TeamDto("CSKA Moskva", Championship.KHL),
-            LocalDateTime.of(2021, Month.AUGUST, 24, 18, 0)
-    );
+    private MatchDto matchDto1;
+    private MatchDto matchDto2;
 
-    final private MatchDto matchDto2 = new MatchDto(
-            new TeamDto("Sochi", Championship.KHL),
-            new TeamDto("CSKA Moskva", Championship.KHL),
-            LocalDateTime.of(2021, Month.AUGUST, 26, 18, 0)
-    );
-
-    final private List<Match> matchList = List.of(match1, match2);
-    final private List<MatchDto> matchDtoList = List.of(matchDto1, matchDto2);
+    private List<Match> matchList;
+    private List<MatchDto> matchDtoList;
 
     @BeforeMethod
     public void setup() {
         MockitoAnnotations.openMocks(this);
+
+        match1 = new Match(
+                new Team("Sochi", Championship.KHL),
+                new Team("CSKA Moskva", Championship.KHL),
+                LocalDateTime.of(2021, Month.AUGUST, 24, 18, 0)
+        );
+
+        match2 = new Match(
+                new Team("Sochi", Championship.KHL),
+                new Team("CSKA Moskva", Championship.KHL),
+                LocalDateTime.of(2021, Month.AUGUST, 26, 18, 0)
+        );
+
+        matchCreateDto1 = beanMappingService.mapTo(match1, MatchCreateDto.class);
+
+        matchDto1 = beanMappingService.mapTo(match1, MatchDto.class);
+        matchDto2 = beanMappingService.mapTo(match2, MatchDto.class);
+
+        matchList = List.of(match1, match2);
+        matchDtoList = List.of(matchDto1, matchDto2);
     }
 
     @Test
     public void createMatchTest() {
         when(beanMappingService.mapTo(matchDto1, Match.class)).thenReturn(match1);
         when(matchService.create(match1)).thenReturn(match1);
-        assertThat(matchFacade.create(matchDto1)).isEqualTo(match1.getId());
+        assertThat(matchFacade.create(matchCreateDto1)).isEqualTo(match1.getId());
     }
 
     @Test
