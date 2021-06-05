@@ -27,18 +27,17 @@ public class MatchCreateDto {
     @Min(value = 0, message = "Score cannot be negative")
     private Integer visitingTeamScore;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
-    private LocalDateTime dateTime;
+    private Long dateTime;
 
     public MatchCreateDto() {}
 
-    public MatchCreateDto(TeamDto homeTeam, TeamDto visitingTeam, LocalDateTime dateTime) {
+    public MatchCreateDto(TeamDto homeTeam, TeamDto visitingTeam, Long dateTime) {
         this.homeTeam = homeTeam;
         this.visitingTeam = visitingTeam;
         this.dateTime = dateTime;
     }
 
-    public MatchCreateDto(TeamDto homeTeam, TeamDto visitingTeam, int homeTeamScore, int visitingTeamScore, LocalDateTime dateTime) {
+    public MatchCreateDto(TeamDto homeTeam, TeamDto visitingTeam, int homeTeamScore, int visitingTeamScore, Long dateTime) {
         this.homeTeam = homeTeam;
         this.visitingTeam = visitingTeam;
         this.homeTeamScore = homeTeamScore;
