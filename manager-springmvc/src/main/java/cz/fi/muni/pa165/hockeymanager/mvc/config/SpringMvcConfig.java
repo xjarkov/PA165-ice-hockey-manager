@@ -1,5 +1,7 @@
 package cz.fi.muni.pa165.hockeymanager.mvc.config;
 
+import cz.fi.muni.pa165.hockeymanager.mvc.formatters.IdToTeamConverter;
+import cz.fi.muni.pa165.hockeymanager.mvc.formatters.LocalDateTimeFormatter;
 import cz.fi.muni.pa165.hockeymanager.sampledata.SampleDataConfiguration;
 
 import org.slf4j.Logger;
@@ -9,6 +11,7 @@ import javax.validation.Validator;
 
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.ComponentScan;
@@ -79,6 +82,12 @@ public class SpringMvcConfig implements WebMvcConfigurer {
     public Validator validator() {
         log.debug("registering JSR-303 validator");
         return new LocalValidatorFactoryBean();
+    }
+
+    @Override
+    public void addFormatters(FormatterRegistry registry) {
+        registry.addConverter(new IdToTeamConverter());
+        registry.addFormatter(new LocalDateTimeFormatter("yyyy-MM-dd'T'HH:mm"));
     }
 }
 
