@@ -7,12 +7,8 @@ import cz.fi.muni.pa165.hockeymanager.facade.HockeyPlayerFacade;
 import cz.fi.muni.pa165.hockeymanager.facade.TeamFacade;
 import cz.fi.muni.pa165.hockeymanager.facade.UserFacade;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-
 import javax.servlet.http.HttpSession;
-
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
