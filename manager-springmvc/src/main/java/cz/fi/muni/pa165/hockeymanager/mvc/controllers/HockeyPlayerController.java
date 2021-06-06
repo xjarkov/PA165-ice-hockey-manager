@@ -1,8 +1,10 @@
 package cz.fi.muni.pa165.hockeymanager.mvc.controllers;
 
+import cz.fi.muni.pa165.hockeymanager.dto.HockeyPlayerCreateDto;
 import cz.fi.muni.pa165.hockeymanager.dto.HockeyPlayerDto;
 import cz.fi.muni.pa165.hockeymanager.dto.TeamDto;
 import cz.fi.muni.pa165.hockeymanager.dto.UserDto;
+import cz.fi.muni.pa165.hockeymanager.entity.User;
 import cz.fi.muni.pa165.hockeymanager.facade.HockeyPlayerFacade;
 import cz.fi.muni.pa165.hockeymanager.facade.TeamFacade;
 
@@ -72,8 +74,12 @@ public class HockeyPlayerController {
     }
 
     @GetMapping("/create")
-    public String createPlayer() {
-        return "redirect:/players/new";
+    public String createPlayer(Model model, HttpSession httpSession) {
+        HockeyPlayerCreateDto hockeyPlayerCreateDto = new HockeyPlayerCreateDto();
+        UserDto userDto = (UserDto) httpSession.getAttribute("authenticatedUser");
+        model.addAttribute("hockeyPlayerCreateDto", hockeyPlayerCreateDto);
+        model.addAttribute("authenticatedUser", userDto);
+        return "players/new";
     }
 
     @GetMapping("/add")
