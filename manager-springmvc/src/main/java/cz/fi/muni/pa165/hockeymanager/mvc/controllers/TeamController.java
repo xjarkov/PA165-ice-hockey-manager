@@ -1,10 +1,12 @@
 package cz.fi.muni.pa165.hockeymanager.mvc.controllers;
 
 import cz.fi.muni.pa165.hockeymanager.dto.HockeyPlayerDto;
+import cz.fi.muni.pa165.hockeymanager.dto.MatchDto;
 import cz.fi.muni.pa165.hockeymanager.dto.TeamDto;
 import cz.fi.muni.pa165.hockeymanager.dto.UserDto;
 import cz.fi.muni.pa165.hockeymanager.enums.Championship;
 import cz.fi.muni.pa165.hockeymanager.facade.HockeyPlayerFacade;
+import cz.fi.muni.pa165.hockeymanager.facade.MatchFacade;
 import cz.fi.muni.pa165.hockeymanager.facade.TeamFacade;
 import cz.fi.muni.pa165.hockeymanager.facade.UserFacade;
 
@@ -42,6 +44,9 @@ public class TeamController {
 
     @Autowired
     private HockeyPlayerFacade hockeyPlayerFacade;
+
+    @Autowired
+    private MatchFacade matchFacade;
 
     @GetMapping("/list")
     public String list(Model model) {
@@ -110,6 +115,56 @@ public class TeamController {
         }
 
         return "redirect:/team/my_team";
+    }
+
+    @GetMapping("/{id}/delete")
+    public String deleteTeam(Model model, @PathVariable Long id) {
+        TeamDto team = teamFacade.findTeamById(id);
+
+        if (team != null) {
+            //FREE PLAYERS
+            if(team.getHockeyPlayers().size() > 0){
+                for(var player : team.getHockeyPlayers()){
+                    player.setTeam(null);
+                    hockeyPlayerFacade.update(player);
+                }
+            }
+            //FREE MANAGER
+            if(team.getManager() != null){
+                UserDto manager = team.getManager();
+                manager.setTeam(null);
+                userFacade.update(manager);
+            }
+
+            //FREE MATCHES
+            for(var match : matchFacade.findAllMatches()){
+                if(match.getHomeTeam().getId().equals(team.getId()) || match.getVisitingTeam().getId().equals(team.getId())){
+                    TeamDto visitingTeam = match.getVisitingTeam();
+                    TeamDto homeTeam = match.getHomeTeam();
+
+                    Set<MatchDto> visitingMatches = visitingTeam.getMatches();
+                    Set<MatchDto> homeMatches = homeTeam.getMatches();
+
+                    visitingMatches.remove(match);
+                    homeMatches.remove(match);
+
+                    visitingTeam.setMatches(visitingMatches);
+                    homeTeam.setMatches(homeMatches);
+
+                    match.setHomeTeam(null);
+                    match.setVisitingTeam(null);
+
+                    matchFacade.update(match);
+
+                    matchFacade.remove(match);
+                    teamFacade.update(visitingTeam);
+                    teamFacade.update(homeTeam);
+                }
+            }
+            teamFacade.remove(teamFacade.findTeamById(id));
+        }
+
+        return list(model);
     }
 
     @GetMapping(value = "/new")

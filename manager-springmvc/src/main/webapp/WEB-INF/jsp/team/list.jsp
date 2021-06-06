@@ -17,6 +17,7 @@
     <table class="table table-hover table-striped table-bordered">
         <thead>
         <tr>
+            <th scope="col">Delete</th>
             <th scope="col">Name</th>
             <th scope="col">Championship</th>
             <th scope="col">Manager</th>
@@ -25,6 +26,11 @@
         <tbody>
         <c:forEach items="${teams}" var="team">
             <tr>
+                <td>
+                    <my:a href="/team/${team.id}/delete" class="btn btn-danger btn-sm ms-auto">
+                                    Delete team
+                                </my:a>
+                </td>
                 <td><my:a href="/team/${team.id}"><c:out value="${team.name}"/></my:a></td>
                 <td><c:out value="${team.championship}"/></td>
                 <td>
