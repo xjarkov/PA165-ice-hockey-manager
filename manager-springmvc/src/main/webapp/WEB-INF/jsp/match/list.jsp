@@ -13,6 +13,7 @@
 
 <my:pagetemplate>
 <jsp:attribute name="body">
+    <pre>${matches}</pre>
     <table class="table table-hover table-striped table-bordered">
         <thead>
         <tr>
@@ -27,7 +28,7 @@
             <tr>
                 <td><my:a href="/team/${match.homeTeam.id}"><c:out value="${match.homeTeam.name}"/></my:a></td>
                 <td><my:a href="/team/${match.visitingTeam.id}"><c:out value="${match.visitingTeam.name}"/></my:a></td>
-                <td>${match.dateFormated()}</td>
+                <td>${match.dateFormatted()}</td>
                 <td>${match.homeTeamScore}</td>
                 <td>${match.visitingTeamScore}</td>
             </tr>

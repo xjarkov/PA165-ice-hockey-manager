@@ -47,7 +47,7 @@ public class MatchCreateDto {
     }
 
     public String dateFormated() {
-        DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm").withZone(ZoneId.systemDefault());
+        DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm").withZone(ZoneId.systemDefault());
         Instant dateTimeInst = Instant.ofEpochSecond(dateTime);
         return DATE_TIME_FORMATTER.format(dateTimeInst);
     }

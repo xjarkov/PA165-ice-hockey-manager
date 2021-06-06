@@ -20,6 +20,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 
@@ -29,6 +30,7 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("/match")
 public class MatchController {
+
     @Autowired
     private MatchFacade matchFacade;
 
@@ -39,7 +41,7 @@ public class MatchController {
 
     @GetMapping("/list")
     public String getList(Model model) {
-        logger.info("get list called");
+        logger.info("Match list - GET");
 
         List<MatchDto> matches = matchFacade.findAllMatches();
         Collections.sort(matches, new Comparator<MatchDto>() {
@@ -51,23 +53,29 @@ public class MatchController {
         return "match/list";
     }
 
-    @GetMapping(value = "/new")
-    public String getNew(Model model) {
-        logger.info("get new called");
+    @GetMapping(value = "/create")
+    public String getNew(Model model, RedirectAttributes redirectAttributes) {
+        logger.info("Match new - GET");
 
         List<TeamDto> teams = teamFacade.findAllTeams();
+
+        if (teams == null || teams.isEmpty()) {
+            redirectAttributes.addFlashAttribute("generic_error", "Cannot create match, there are no teams present");
+            logger.info("Match new - GET - Cannot create match, there are no teams present");
+            return "redirect:/";
+        }
+
         model.addAttribute("teams", teams);
         model.addAttribute("matchCreate", new MatchCreateDto());
 
         return "match/new";
     }
 
-    @PostMapping(value = "/new")
+    @PostMapping(value = "/create")
     public String postNew(@Valid @ModelAttribute("matchCreate") MatchCreateDto matchDto,
                           Model model,
                           BindingResult bindingResult) {
-        logger.info("post new called");
-        logger.info("create(formBean={})", matchDto);
+        logger.info("Match new - POST");
 
         if (bindingResult.hasErrors()) {
             for (ObjectError ge : bindingResult.getGlobalErrors()) {
@@ -75,12 +83,16 @@ public class MatchController {
             }
             for (FieldError fe : bindingResult.getFieldErrors()) {
                 System.err.println(fe.getField() + "_error");
+                logger.info("Match create - POST - {}", fe.getField());
             }
             return "match/list";
 
         }
 
+        logger.info("{}", matchDto);
+
         matchFacade.create(matchDto);
+        logger.info("Match create - POST - New match created successfully");
         return "match/list";
     }
 

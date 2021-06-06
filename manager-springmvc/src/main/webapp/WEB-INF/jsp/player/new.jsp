@@ -11,8 +11,8 @@
 </head>
 <my:pagetemplate>
 <jsp:attribute name="body">
-        <form:form method="post" action="${pageContext.request.contextPath}/players/save/${hockeyPlayerDto.id}"
-                   modelAttribute="hockeyPlayerDto" cssClass="form-horizontal">
+        <form:form method="POST" action="${pageContext.request.contextPath}/players/create"
+                   modelAttribute="hockeyPlayerCreateDto" cssClass="form-horizontal">
         <div class="form-group ${firstName_error?'has-error':''}">
             <form:label path="firstName" cssClass="col-sm-2 control-label">First Name</form:label>
             <div class="col-sm-10">
@@ -42,7 +42,7 @@
             </div>
         </div>
         <div class="mt-3 mb-3">
-            <button class="btn btn-primary" type="submit">Save</button>
+            <button class="btn btn-primary" type="submit">Create player</button>
         </div>
     </form:form>
 

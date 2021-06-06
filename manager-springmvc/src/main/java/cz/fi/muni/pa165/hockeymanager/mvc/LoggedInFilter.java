@@ -19,7 +19,7 @@ import org.springframework.http.HttpStatus;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebFilter(urlPatterns = {"/", "/user/*", "/players/*", "/team/*", "/match/*"})
+@WebFilter(urlPatterns = {"/", "/user/*", "/player/*", "/team/*", "/match/*", "/team/my_team"})
 public class LoggedInFilter implements Filter {
     private final static Logger logger = LoggerFactory.getLogger(LoggedInFilter.class);
 

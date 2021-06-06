@@ -13,6 +13,9 @@
 <my:pagetemplate>
 <jsp:attribute name="body">
 <main>
+    <c:if test="${not empty generic_error}">
+        <div class="alert alert-danger" role="alert"><c:out value="${generic_error}"/></div>
+    </c:if>
     <h1>Welcome to Ice Hockey Manager</h1>
     <p class="fs-5 col-md-8">Ice Hockey Manager allows you to manage your own ice hockey team. You will became coach of any of the european ice hockey teams and manage them!</p>
 
