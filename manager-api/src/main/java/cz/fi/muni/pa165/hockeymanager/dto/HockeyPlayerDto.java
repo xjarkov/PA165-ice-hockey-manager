@@ -23,7 +23,7 @@ public class HockeyPlayerDto {
     @NotNull
     private Integer defensiveStrength;
 
-    private TeamDto team;
+    private TeamDto team = null;
 
     public String getFullName() {
         return this.firstName + " " + this.lastName;

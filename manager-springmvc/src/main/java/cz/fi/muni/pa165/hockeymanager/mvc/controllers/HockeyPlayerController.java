@@ -85,7 +85,7 @@ public class HockeyPlayerController {
     }
 
     @PostMapping("/add")
-    public String addPlayer(@Valid @ModelAttribute("hockeyPlayerCreateDto") HockeyPlayerDto hockeyPlayerDto,
+    public String addPlayer(@Valid @ModelAttribute("hockeyPlayerCreateDto") HockeyPlayerCreateDto hockeyPlayerDto,
                             Model model,
                             BindingResult bindingResult,
                             RedirectAttributes redirectAttributes,

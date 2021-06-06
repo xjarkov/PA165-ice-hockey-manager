@@ -19,7 +19,17 @@ public class HockeyPlayerCreateDto {
     @NotNull
     private Integer defensiveStrength;
 
-    private TeamDto team;
+    private TeamDto team = null;
+
+    public HockeyPlayerCreateDto() {
+    }
+
+    public HockeyPlayerCreateDto(String firstName, String lastName, Integer offensiveStrength, Integer defensiveStrength) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.offensiveStrength = offensiveStrength;
+        this.defensiveStrength = defensiveStrength;
+    }
 
     public String getFullName() {
         return this.firstName + " " + this.lastName;

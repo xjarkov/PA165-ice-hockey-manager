@@ -1,6 +1,7 @@
 package cz.fi.muni.pa165.hockeymanager.service.facade;
 
 import cz.fi.muni.pa165.hockeymanager.dao.HockeyPlayerDao;
+import cz.fi.muni.pa165.hockeymanager.dto.HockeyPlayerCreateDto;
 import cz.fi.muni.pa165.hockeymanager.dto.HockeyPlayerDto;
 import cz.fi.muni.pa165.hockeymanager.entity.HockeyPlayer;
 import cz.fi.muni.pa165.hockeymanager.entity.Team;
@@ -26,11 +27,10 @@ public class HockeyPlayerFacadeImpl implements HockeyPlayerFacade {
     private HockeyPlayerService hockeyPlayerService;
 
     @Override
-    public Long create(HockeyPlayerDto hockeyPlayerDto) {
-        HockeyPlayer mappedHockeyPlayer = beanMappingService.mapTo(hockeyPlayerDto, HockeyPlayer.class);
-        mappedHockeyPlayer.setTeam(beanMappingService.mapTo(hockeyPlayerDto.getTeam(), Team.class));
-        HockeyPlayer createdPlayer = hockeyPlayerService.create(mappedHockeyPlayer);
-        return createdPlayer.getId();
+    public Long create(HockeyPlayerCreateDto hockeyPlayerCreateDto) {
+        HockeyPlayer hockeyPlayer = beanMappingService.mapTo(hockeyPlayerCreateDto, HockeyPlayer.class);
+        hockeyPlayer = hockeyPlayerService.create(hockeyPlayer);
+        return hockeyPlayer.getId();
     }
 
     @Override
