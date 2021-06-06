@@ -14,10 +14,6 @@
     <h2>${team.name}</h2>
     <table class="table table-hover table-bordered">
         <tr>
-            <td>Id</td>
-            <td>${team.id}</td>
-        </tr>
-        <tr>
             <td>Name</td>
             <td><c:out value="${team.name}"/></td>
         </tr>
@@ -28,6 +24,29 @@
         <tr>
             <td>Manager</td>
             <td><c:out value="${team.manager.name}"/></td>
+        </tr>
+        <tr>
+            <td>Players</td>
+            <td>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <td scope="col">Name</td>
+                            <td scope="col">Off</td>
+                            <td scope="col">Deff</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <c:forEach items="${team.hockeyPlayers}" var="player">
+                            <tr>
+                                <td>${player.fullName}</td>
+                                <td>${player.offensiveStrength}</td>
+                                <td>${player.defensiveStrength}</td>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                </table>
+            </td>
         </tr>
     </table>
 </jsp:attribute>
