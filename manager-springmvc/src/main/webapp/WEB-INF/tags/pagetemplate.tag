@@ -43,7 +43,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link ${pagina.contains('/players') ? 'active' : ''}"
-                       href="${pageContext.request.contextPath}/players/list">Players</a>
+                       href="${pageContext.request.contextPath}/players/list">Free Agents</a>
                 </li>
             </ul>
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">

@@ -26,6 +26,10 @@ public class UserDto {
         this.role = role;
     }
 
+    public boolean isAdmin() {
+        return role.equals(Role.ADMIN);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

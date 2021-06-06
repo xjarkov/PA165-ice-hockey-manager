@@ -1,5 +1,6 @@
 package cz.fi.muni.pa165.hockeymanager.facade;
 
+import cz.fi.muni.pa165.hockeymanager.dto.HockeyPlayerCreateDto;
 import cz.fi.muni.pa165.hockeymanager.dto.HockeyPlayerDto;
 
 import java.util.List;
@@ -11,10 +12,10 @@ public interface HockeyPlayerFacade {
     /**
      * Create HockeyPlayer in database.
      *
-     * @param hockeyPlayerDto HockeyPlayer to be saved in database.
+     * @param hockeyPlayerCreateDto HockeyPlayer to be saved in database.
      * @return Id of the newly saved player.
      */
-    Long create(HockeyPlayerDto hockeyPlayerDto);
+    Long create(HockeyPlayerCreateDto hockeyPlayerCreateDto);
 
     /**
      * Delete HockeyPlayer from database by it's id.

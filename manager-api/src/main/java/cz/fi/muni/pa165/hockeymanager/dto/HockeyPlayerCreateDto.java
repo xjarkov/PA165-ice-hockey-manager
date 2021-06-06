@@ -8,13 +8,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Objects;
 
-/**
- * @author Matus Jarkovic 456441
- */
 @Data
-public class HockeyPlayerDto {
-    private Long id;
-
+public class HockeyPlayerCreateDto {
     @NotNull
     @Size(min = 2, max = 20)
     private String firstName;
@@ -35,29 +30,30 @@ public class HockeyPlayerDto {
 
     private TeamDto team = null;
 
-    public String getFullName() {
-        return this.firstName + " " + this.lastName;
+    public HockeyPlayerCreateDto() {
     }
 
-    public HockeyPlayerDto() {}
-
-    public HockeyPlayerDto(String firstName, String lastName, Integer offensiveStrength, Integer defensiveStrength) {
+    public HockeyPlayerCreateDto(String firstName, String lastName, Integer offensiveStrength, Integer defensiveStrength) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.offensiveStrength = offensiveStrength;
         this.defensiveStrength = defensiveStrength;
     }
 
+    public String getFullName() {
+        return this.firstName + " " + this.lastName;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        HockeyPlayerDto that = (HockeyPlayerDto) o;
-        return firstName.equals(that.firstName) && lastName.equals(that.lastName) && offensiveStrength.equals(that.offensiveStrength) && defensiveStrength.equals(that.defensiveStrength) && Objects.equals(team, that.team);
+        HockeyPlayerCreateDto that = (HockeyPlayerCreateDto) o;
+        return firstName.equals(that.firstName) && lastName.equals(that.lastName) && offensiveStrength.equals(that.offensiveStrength) && defensiveStrength.equals(that.defensiveStrength);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(firstName, lastName, offensiveStrength, defensiveStrength, team);
+        return Objects.hash(firstName, lastName, offensiveStrength, defensiveStrength);
     }
 }
