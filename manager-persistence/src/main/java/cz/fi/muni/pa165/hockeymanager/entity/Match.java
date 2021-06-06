@@ -28,7 +28,6 @@ public class Match {
     @Getter
     private Team homeTeam;
 
-
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @Getter
     private Team visitingTeam;
@@ -36,12 +35,12 @@ public class Match {
     @NotNull
     @Getter
     @Setter
-    private int homeTeamScore;
+    private Integer homeTeamScore;
 
     @NotNull
     @Getter
     @Setter
-    private int visitingTeamScore;
+    private Integer visitingTeamScore;
 
     @NotNull
     @Getter
@@ -83,6 +82,4 @@ public class Match {
                 ", date=" + dateTime +
                 '}';
     }
-
-
 }

@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.validation.Validator;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.format.FormatterRegistry;
@@ -33,6 +34,9 @@ public class SpringMvcConfig implements WebMvcConfigurer {
     private final static Logger log = LoggerFactory.getLogger(SpringMvcConfig.class);
 
     private static final String TEXTS = "Texts";
+
+    @Autowired
+    private IdToTeamConverter idToTeamConverter;
 
     /**
      * Maps the main page to a specific view.
@@ -86,7 +90,7 @@ public class SpringMvcConfig implements WebMvcConfigurer {
 
     @Override
     public void addFormatters(FormatterRegistry registry) {
-        registry.addConverter(new IdToTeamConverter());
+        registry.addConverter(idToTeamConverter);
         registry.addFormatter(new LocalDateTimeFormatter("yyyy-MM-dd'T'HH:mm"));
     }
 }
