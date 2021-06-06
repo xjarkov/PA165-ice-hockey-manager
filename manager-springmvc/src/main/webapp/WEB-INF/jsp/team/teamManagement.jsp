@@ -60,7 +60,7 @@
                                 <td>${freeAgent.offensiveStrength}</td>
                                 <td>${freeAgent.defensiveStrength}</td>
                                 <td align="right">
-                                    <my:a href="/players/recruit/${freeAgent.id}" class="btn btn-success btn-sm">
+                                    <my:a href="/player/recruit/${freeAgent.id}" class="btn btn-success btn-sm">
                                         Assign to my team
                                     </my:a>
                                 </td>

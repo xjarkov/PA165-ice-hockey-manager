@@ -35,6 +35,9 @@
         </c:forEach>
         </tbody>
     </table>
+    <c:if test="${authenticatedUser.admin}">
+        <my:a href="/match/admin/create/" class="btn btn-success btn-sm mb-3">Add match</my:a>
+    </c:if>
 </jsp:attribute>
 </my:pagetemplate>
 

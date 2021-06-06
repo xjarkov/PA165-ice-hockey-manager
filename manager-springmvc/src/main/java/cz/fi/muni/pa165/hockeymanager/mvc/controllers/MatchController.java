@@ -3,6 +3,7 @@ package cz.fi.muni.pa165.hockeymanager.mvc.controllers;
 import cz.fi.muni.pa165.hockeymanager.dto.MatchCreateDto;
 import cz.fi.muni.pa165.hockeymanager.dto.MatchDto;
 import cz.fi.muni.pa165.hockeymanager.dto.TeamDto;
+import cz.fi.muni.pa165.hockeymanager.dto.UserDto;
 import cz.fi.muni.pa165.hockeymanager.facade.MatchFacade;
 import cz.fi.muni.pa165.hockeymanager.facade.TeamFacade;
 
@@ -22,6 +23,7 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 /**
@@ -40,8 +42,16 @@ public class MatchController {
     private final static Logger logger = LoggerFactory.getLogger(MatchController.class);
 
     @GetMapping("/list")
-    public String getList(Model model) {
+    public String getList(Model model, HttpSession httpSession) {
         logger.info("Match list - GET");
+
+        UserDto authUser = (UserDto) httpSession.getAttribute("authenticatedUser");
+
+        if (authUser == null) {
+            return "redirect:/auth/login";
+        }
+
+        model.addAttribute("authenticatedUser", authUser);
 
         List<MatchDto> matches = matchFacade.findAllMatches();
         Collections.sort(matches, new Comparator<MatchDto>() {
@@ -53,7 +63,7 @@ public class MatchController {
         return "match/list";
     }
 
-    @GetMapping(value = "/create")
+    @GetMapping(value = "admin/create")
     public String getNew(Model model, RedirectAttributes redirectAttributes) {
         logger.info("Match new - GET");
 
@@ -71,7 +81,7 @@ public class MatchController {
         return "match/new";
     }
 
-    @PostMapping(value = "/create")
+    @PostMapping(value = "admin/create")
     public String postNew(@Valid @ModelAttribute("matchCreate") MatchCreateDto matchDto,
                           Model model,
                           BindingResult bindingResult) {

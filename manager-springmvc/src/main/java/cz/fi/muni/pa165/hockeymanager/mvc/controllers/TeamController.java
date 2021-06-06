@@ -126,7 +126,7 @@ public class TeamController {
 
     @GetMapping("/remove/{id}")
     public String removePlayer(HttpSession session, @PathVariable Long id, RedirectAttributes redirectAttributes) {
-        logger.info("Team id:{} remove player - GET", id);
+        logger.info("Team remove player id:{} - GET", id);
 
         UserDto authUser = (UserDto) session.getAttribute("authenticatedUser");
 
@@ -149,7 +149,7 @@ public class TeamController {
 
             teamFacade.update(team);
             hockeyPlayerFacade.update(player);
-            logger.info("Team id:{} remove player - GET - Successfully removed player", id);
+            logger.info("Team remove player id:{} - GET - Successfully removed player", id);
         }
 
         return "redirect:/team/my_team";

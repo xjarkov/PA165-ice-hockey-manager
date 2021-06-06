@@ -12,7 +12,7 @@
 
 <my:pagetemplate>
 <jsp:attribute name="body">
-    <form:form id="matchCreate" action="${pageContext.request.contextPath}/match/new" modelAttribute="matchCreate" method="POST">
+    <form:form id="matchCreate" action="${pageContext.request.contextPath}/match/admin/create" modelAttribute="matchCreate" method="POST">
         <div class="form-group">
             <form:label path="homeTeam">Home team:</form:label>
             <form:select path="homeTeam">

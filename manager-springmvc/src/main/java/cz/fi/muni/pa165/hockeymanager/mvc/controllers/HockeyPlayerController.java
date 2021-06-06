@@ -98,7 +98,7 @@ public class HockeyPlayerController {
         return "redirect:/team/my_team";
     }
 
-    @GetMapping("/remove/{id}")
+    @GetMapping("admin/remove/{id}")
     public String removePlayer(@PathVariable Long id, RedirectAttributes redirectAttributes) {
         logger.info("Hockey player remove id:{} - GET", id);
 
@@ -115,7 +115,7 @@ public class HockeyPlayerController {
         return "redirect:/player/list";
     }
 
-    @GetMapping("/create")
+    @GetMapping("admin/create")
     public String createPlayer(Model model, HttpSession httpSession) {
         logger.info("Hockey player create - GET");
 
@@ -132,7 +132,7 @@ public class HockeyPlayerController {
         return "player/new";
     }
 
-    @PostMapping("/create")
+    @PostMapping("admin/create")
     public String addPlayer(@Valid @ModelAttribute("hockeyPlayerCreateDto") HockeyPlayerCreateDto hockeyPlayerDto,
                             Model model,
                             BindingResult bindingResult,
@@ -164,7 +164,7 @@ public class HockeyPlayerController {
         return "redirect:/player/list";
     }
 
-    @GetMapping("/edit/{id}")
+    @GetMapping("admin/edit/{id}")
     public String editPlayerForm(@PathVariable("id") Long id, Model model, HttpSession httpSession, RedirectAttributes redirectAttributes) {
         logger.info("Hockey player edit - GET");
 
@@ -188,7 +188,7 @@ public class HockeyPlayerController {
         return "player/edit";
     }
 
-    @PostMapping("/edit/{id}")
+    @PostMapping("admin/edit/{id}")
     public String updateEditedPlayer(@PathVariable("id") Long id,
                                      @Valid @ModelAttribute("hockeyPlayerDto") HockeyPlayerDto hockeyPlayerDto,
                                      Model model,

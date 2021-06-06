@@ -11,7 +11,7 @@
 </head>
 <my:pagetemplate>
 <jsp:attribute name="body">
-        <form:form method="POST" action="${pageContext.request.contextPath}/players/create"
+        <form:form method="POST" action="${pageContext.request.contextPath}/player/admin/create"
                    modelAttribute="hockeyPlayerCreateDto" cssClass="form-horizontal">
         <div class="form-group ${firstName_error?'has-error':''}">
             <form:label path="firstName" cssClass="col-sm-2 control-label">First Name</form:label>
