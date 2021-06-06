@@ -18,6 +18,7 @@ import org.testng.annotations.Test;
 
 import java.time.LocalDateTime;
 import java.time.Month;
+import java.time.ZoneId;
 import java.util.List;
 
 import static java.util.Arrays.asList;
@@ -39,12 +40,12 @@ public class MatchServiceTest extends AbstractTestNGSpringContextTests {
     private Match match1 = new Match(
             new Team("Sochi", Championship.KHL),
             new Team("CSKA Moskva", Championship.KHL),
-            LocalDateTime.of(2021, Month.AUGUST, 24, 18, 0)
+            LocalDateTime.of(2021, Month.AUGUST, 24, 18, 0).atZone(ZoneId.systemDefault()).toEpochSecond()
     );
     private Match match2 = new Match(
             new Team("Sochi", Championship.KHL),
             new Team("CSKA Moskva", Championship.KHL),
-            LocalDateTime.of(2021, Month.AUGUST, 26, 18, 0)
+            LocalDateTime.of(2021, Month.AUGUST, 26, 18, 0).atZone(ZoneId.systemDefault()).toEpochSecond()
     );
 
     @BeforeMethod

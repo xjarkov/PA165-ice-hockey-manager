@@ -2,7 +2,9 @@ package cz.fi.muni.pa165.hockeymanager.dto;
 
 import lombok.Data;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 /**
@@ -40,7 +42,9 @@ public class MatchDto {
     }
 
     public String dateFormated() {
-        return dateTime.getDayOfMonth() + "." + dateTime.getMonth().getValue() + "." + dateTime.getYear() + " " + dateTime.getHour() + ":" + dateTime.getMinute();
+        DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm").withZone(ZoneId.systemDefault());
+        Instant dateTimeInst = Instant.ofEpochSecond(dateTime);
+        return DATE_TIME_FORMATTER.format(dateTimeInst);
     }
 
     @Override

@@ -13,10 +13,6 @@
 <my:pagetemplate>
 <jsp:attribute name="body">
     <form:form id="matchCreate" action="${pageContext.request.contextPath}/match/new" modelAttribute="matchCreate" method="POST">
-<%--            <c:forEach items="${teams}" var="team">--%>
-<%--                ${team.name}--%>
-<%--            </c:forEach>--%>
-
         <div class="form-group">
             <form:label path="homeTeam">Home team:</form:label>
             <form:select path="homeTeam">
@@ -50,9 +46,9 @@
         </div>
 
         <div class="form-group">
-            <form:label path="dateTimeDto">Date and time:</form:label>
-            <form:input type="datetime-local" path="dateTimeDto"/>
-            <form:errors path="dateTimeDto" cssClass="help-block"/>
+            <form:label path="dateTime">Date and time:</form:label>
+            <form:input type="datetime-local" path="dateTime"/>
+            <form:errors path="dateTime" cssClass="help-block"/>
         </div>
 
         <button class="btn btn-primary" type="submit">Create</button>

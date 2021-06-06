@@ -2,10 +2,11 @@ package cz.fi.muni.pa165.hockeymanager.dto;
 
 import lombok.Data;
 import lombok.NonNull;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.Min;
-import java.time.LocalDateTime;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 /**
@@ -37,7 +38,7 @@ public class MatchCreateDto {
         this.dateTime = dateTime;
     }
 
-    public MatchCreateDto(TeamDto homeTeam, TeamDto visitingTeam, int homeTeamScore, int visitingTeamScore, Long dateTime) {
+    public MatchCreateDto(TeamDto homeTeam, TeamDto visitingTeam, Integer homeTeamScore, Integer visitingTeamScore, Long dateTime) {
         this.homeTeam = homeTeam;
         this.visitingTeam = visitingTeam;
         this.homeTeamScore = homeTeamScore;
@@ -46,7 +47,9 @@ public class MatchCreateDto {
     }
 
     public String dateFormated() {
-        return dateTime.getDayOfMonth() + "." + dateTime.getMonth().getValue() + "." + dateTime.getYear() + " " + dateTime.getHour() + ":" + dateTime.getMinute();
+        DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm").withZone(ZoneId.systemDefault());
+        Instant dateTimeInst = Instant.ofEpochSecond(dateTime);
+        return DATE_TIME_FORMATTER.format(dateTimeInst);
     }
 
     @Override
@@ -65,11 +68,11 @@ public class MatchCreateDto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         MatchCreateDto matchDto = (MatchCreateDto) o;
-        return homeTeamScore.equals(matchDto.homeTeamScore) && visitingTeamScore.equals(matchDto.visitingTeamScore) && homeTeam.equals(matchDto.homeTeam) && visitingTeam.equals(matchDto.visitingTeam) && dateTimeDto.equals(matchDto.dateTimeDto);
+        return homeTeamScore.equals(matchDto.homeTeamScore) && visitingTeamScore.equals(matchDto.visitingTeamScore) && homeTeam.equals(matchDto.homeTeam) && visitingTeam.equals(matchDto.visitingTeam) && dateTime.equals(matchDto.dateTime);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(homeTeam, visitingTeam, homeTeamScore, visitingTeamScore, dateTimeDto);
+        return Objects.hash(homeTeam, visitingTeam, homeTeamScore, visitingTeamScore, dateTime);
     }
 }
