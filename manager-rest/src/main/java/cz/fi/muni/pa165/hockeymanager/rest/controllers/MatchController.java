@@ -1,5 +1,6 @@
 package cz.fi.muni.pa165.hockeymanager.rest.controllers;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import cz.fi.muni.pa165.hockeymanager.dto.MatchDto;
 import cz.fi.muni.pa165.hockeymanager.dto.TeamDto;
 import cz.fi.muni.pa165.hockeymanager.facade.MatchFacade;
@@ -12,7 +13,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class MatchController {
@@ -46,8 +49,15 @@ public class MatchController {
     }
 
     @GetMapping(value = "/match/{id}/winner", produces = MediaType.APPLICATION_JSON_VALUE)
-    public final TeamDto getMatchWinner(@PathVariable("id") Long id) {
+    public final Map<String, Object> getMatchWinner(@PathVariable("id") Long id) throws JsonProcessingException {
         logger.info("REST Match getMatchWinner({})", id);
-        return matchFacade.getWinningTeam(id);
+
+        TeamDto teamWinner = matchFacade.getWinningTeam(id);
+        Map<String, Object> winningTeam = new LinkedHashMap<>();
+
+        winningTeam.put("id", teamWinner.getId());
+        winningTeam.put("name", teamWinner.getName());
+
+        return winningTeam;
     }
 }
