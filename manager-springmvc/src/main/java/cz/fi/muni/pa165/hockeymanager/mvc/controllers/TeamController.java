@@ -49,7 +49,9 @@ public class TeamController {
     private MatchFacade matchFacade;
 
     @GetMapping("/list")
-    public String list(Model model) {
+    public String list(Model model, HttpSession httpSession) {
+        UserDto authUser = (UserDto) httpSession.getAttribute("authenticatedUser");
+        model.addAttribute("authenticatedUser", authUser);
         List<TeamDto> teams = teamFacade.findAllTeams();
         model.addAttribute("teams", teams);
         return "team/list";
@@ -160,7 +162,7 @@ public class TeamController {
             teamFacade.remove(teamFacade.findTeamById(id));
         }
 
-        return list(model);
+        return "redirect:/team/list";
     }
 
     @GetMapping(value = "/new")
@@ -181,13 +183,43 @@ public class TeamController {
             for (FieldError fe : bindingResult.getFieldErrors()) {
                 System.err.println(fe.getField() + "_error");
             }
-            return list(model);
-
+            return "/team/new";
         }
 
         teamFacade.create(teamDto);
-        return list(model);
+        return "redirect:/team/list";
     }
 
+    @GetMapping("/edit/{id}")
+    public String editPlayerForm(@PathVariable("id") Long id, Model model, HttpSession httpSession) {
+        TeamDto teamDto = teamFacade.findTeamById(id);
+        model.addAttribute("teamDto", teamDto);
+        UserDto userDto = (UserDto) httpSession.getAttribute("authenticatedUser");
+        model.addAttribute("authenticatedUser", userDto);
+        return "team/edit";
+    }
 
+    @PostMapping("/save/{id}")
+    public String updateEditedPlayer(@PathVariable("id") Long id,
+                                     @Valid @ModelAttribute("teamDto") TeamDto teamDto,
+                                     Model model,
+                                     BindingResult bindingResult,
+                                     RedirectAttributes redirectAttributes,
+                                     HttpSession httpSession) {
+        UserDto userDto = (UserDto) httpSession.getAttribute("authenticatedUser");
+        if (bindingResult.hasErrors()) {
+            for (ObjectError ge : bindingResult.getGlobalErrors()) {
+                System.err.println("ObjectError: " + ge);
+            }
+            for (FieldError fe : bindingResult.getFieldErrors()) {
+                model.addAttribute(fe.getField() + "_error", true);
+            }
+            model.addAttribute("authenticatedUser", userDto);
+            return "team/edit";
+        }
+        teamDto.setId(id);
+        teamFacade.update(teamDto);
+        redirectAttributes.addFlashAttribute("alert_success", "review was updated");
+        return "redirect:/team/list";
+    }
 }
