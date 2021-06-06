@@ -4,7 +4,6 @@ import cz.fi.muni.pa165.hockeymanager.dto.HockeyPlayerCreateDto;
 import cz.fi.muni.pa165.hockeymanager.dto.HockeyPlayerDto;
 import cz.fi.muni.pa165.hockeymanager.dto.TeamDto;
 import cz.fi.muni.pa165.hockeymanager.dto.UserDto;
-import cz.fi.muni.pa165.hockeymanager.entity.User;
 import cz.fi.muni.pa165.hockeymanager.facade.HockeyPlayerFacade;
 import cz.fi.muni.pa165.hockeymanager.facade.TeamFacade;
 
@@ -13,13 +12,16 @@ import java.util.List;
 import java.util.HashSet;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  * @author Petr Šopf (506511)
@@ -82,9 +84,25 @@ public class HockeyPlayerController {
         return "players/new";
     }
 
-    @GetMapping("/add")
-    public String addPlayer() {
-        // TODO: add new player to database
+    @PostMapping("/add")
+    public String addPlayer(@Valid @ModelAttribute("hockeyPlayerCreateDto") HockeyPlayerDto hockeyPlayerDto,
+                            Model model,
+                            BindingResult bindingResult,
+                            RedirectAttributes redirectAttributes,
+                            HttpSession httpSession) {
+        UserDto userDto = (UserDto) httpSession.getAttribute("authenticatedUser");
+        if (bindingResult.hasErrors()) {
+            for (ObjectError ge : bindingResult.getGlobalErrors()) {
+                System.err.println("ObjectError: " + ge);
+            }
+            for (FieldError fe : bindingResult.getFieldErrors()) {
+                model.addAttribute(fe.getField() + "_error", true);
+            }
+            model.addAttribute("authenticatedUser", userDto);
+            return "players/new";
+        }
+        hockeyPlayerFacade.create(hockeyPlayerDto);
+        redirectAttributes.addFlashAttribute("alert_success", "Player was created");
         return "redirect:/players/list";
     }
 
