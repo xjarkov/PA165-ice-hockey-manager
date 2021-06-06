@@ -23,6 +23,7 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.util.UriComponentsBuilder;
 
 /**
  * @author Petr Šopf (506511)
@@ -116,12 +117,28 @@ public class HockeyPlayerController {
         return "players/edit";
     }
 
-    //    @GetMapping("/edit")
-//    public String createPlayer(Model model, HttpSession httpSession) {
-//        HockeyPlayerCreateDto hockeyPlayerCreateDto = new HockeyPlayerCreateDto();
-//        UserDto userDto = (UserDto) httpSession.getAttribute("authenticatedUser");
-//        model.addAttribute("hockeyPlayerCreateDto", hockeyPlayerCreateDto);
-//        model.addAttribute("authenticatedUser", userDto);
-//        return "players/new";
-//    }
+    @PostMapping("/edit")
+    public String updateEditedPlayer(@Valid @ModelAttribute("hockeyPlayerDto") HockeyPlayerDto hockeyPlayerDto,
+                                     Model model,
+                                     BindingResult bindingResult,
+                                     UriComponentsBuilder uriBuilder,
+                                     RedirectAttributes redirectAttributes,
+                                     HttpSession httpSession) {
+        UserDto userDto = (UserDto) httpSession.getAttribute("authenticatedUser");
+        if (bindingResult.hasErrors()) {
+            for (ObjectError ge : bindingResult.getGlobalErrors()) {
+                System.err.println("ObjectError: " + ge);
+            }
+            for (FieldError fe : bindingResult.getFieldErrors()) {
+                model.addAttribute(fe.getField() + "_error", true);
+            }
+            model.addAttribute("authenticatedUser", userDto);
+            return "players/edit";
+        }
+        hockeyPlayerDto.setId(1L);
+        hockeyPlayerFacade.update(hockeyPlayerDto);
+        redirectAttributes.addFlashAttribute("alert_success", "review was updated");
+        Long id = hockeyPlayerDto.getId();
+        return "redirect:" + uriBuilder.path("/players/list").buildAndExpand(id).encode().toUriString();
+    }
 }
