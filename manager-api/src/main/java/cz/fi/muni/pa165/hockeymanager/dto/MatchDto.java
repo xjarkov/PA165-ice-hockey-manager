@@ -21,14 +21,14 @@ public class MatchDto {
 
     private Integer visitingTeamScore;
 
-    private LocalDateTime dateTimeDto;
+    private LocalDateTime dateTime;
 
     public MatchDto() {}
 
     public MatchDto(TeamDto homeTeam, TeamDto visitingTeam, LocalDateTime dateTime) {
         this.homeTeam = homeTeam;
         this.visitingTeam = visitingTeam;
-        this.dateTimeDto = dateTime;
+        this.dateTime = dateTime;
     }
 
     public MatchDto(TeamDto homeTeam, TeamDto visitingTeam, Integer homeTeamScore, Integer visitingTeamScore, LocalDateTime dateTime) {
@@ -36,11 +36,23 @@ public class MatchDto {
         this.visitingTeam = visitingTeam;
         this.homeTeamScore = homeTeamScore;
         this.visitingTeamScore = visitingTeamScore;
-        this.dateTimeDto = dateTime;
+        this.dateTime = dateTime;
     }
 
     public String dateFormated() {
-        return dateTimeDto.getDayOfMonth() + "." + dateTimeDto.getMonth().getValue() + "." + dateTimeDto.getYear() + " " + dateTimeDto.getHour() + ":" + dateTimeDto.getMinute();
+        return dateTime.getDayOfMonth() + "." + dateTime.getMonth().getValue() + "." + dateTime.getYear() + " " + dateTime.getHour() + ":" + dateTime.getMinute();
+    }
+
+    @Override
+    public String toString() {
+        return "MatchDto{" +
+                "id=" + id +
+                ", homeTeam=" + homeTeam +
+                ", visitingTeam=" + visitingTeam +
+                ", homeTeamScore=" + homeTeamScore +
+                ", visitingTeamScore=" + visitingTeamScore +
+                ", dateTime=" + dateTime +
+                '}';
     }
 
     @Override
@@ -48,11 +60,11 @@ public class MatchDto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         MatchDto matchDto = (MatchDto) o;
-        return homeTeamScore.equals(matchDto.homeTeamScore) && visitingTeamScore.equals(matchDto.visitingTeamScore) && homeTeam.equals(matchDto.homeTeam) && visitingTeam.equals(matchDto.visitingTeam) && dateTimeDto.equals(matchDto.dateTimeDto);
+        return homeTeamScore.equals(matchDto.homeTeamScore) && visitingTeamScore.equals(matchDto.visitingTeamScore) && homeTeam.equals(matchDto.homeTeam) && visitingTeam.equals(matchDto.visitingTeam) && dateTime.equals(matchDto.dateTime);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(homeTeam, visitingTeam, homeTeamScore, visitingTeamScore, dateTimeDto);
+        return Objects.hash(homeTeam, visitingTeam, homeTeamScore, visitingTeamScore, dateTime);
     }
 }

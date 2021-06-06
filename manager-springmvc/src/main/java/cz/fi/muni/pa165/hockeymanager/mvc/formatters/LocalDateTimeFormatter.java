@@ -1,6 +1,5 @@
 package cz.fi.muni.pa165.hockeymanager.mvc.formatters;
 
-import cz.fi.muni.pa165.hockeymanager.mvc.LoggedInFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.format.Formatter;
@@ -21,7 +20,7 @@ public class LocalDateTimeFormatter implements Formatter<LocalDateTime> {
 
     @Override
     public LocalDateTime parse(String text, Locale locale) {
-        logger.info("Time: " + LocalDateTime.parse(text, formatter).toString());
+        //logger.info("Time: " + LocalDateTime.parse(text, formatter).toString());
         return LocalDateTime.parse(text, formatter);
     }
 

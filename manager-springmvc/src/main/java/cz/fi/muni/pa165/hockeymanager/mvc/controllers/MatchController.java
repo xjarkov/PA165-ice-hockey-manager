@@ -47,7 +47,7 @@ public class MatchController {
         List<MatchDto> matches = matchFacade.findAllMatches();
         Collections.sort(matches, new Comparator<MatchDto>() {
             public int compare(MatchDto o1, MatchDto o2) {
-                return o2.getDateTimeDto().compareTo(o1.getDateTimeDto());
+                return o2.getDateTime().compareTo(o1.getDateTime());
             }
         });
         model.addAttribute("matches", matches);
@@ -67,9 +67,6 @@ public class MatchController {
 
     @PostMapping(value = "/new")
     public String postNew(@Valid @ModelAttribute("matchCreate") MatchCreateDto matchDto,
-                          @RequestParam("dateTimeDto") LocalDateTime dateAndTime,
-                          @RequestParam("homeTeam") TeamDto homeTeam,
-                          @RequestParam("visitingTeam") TeamDto visitingTeam,
                           Model model,
                           BindingResult bindingResult) {
         logger.info("post new called");

@@ -39,6 +39,18 @@ public class HockeyPlayerDto {
     }
 
     @Override
+    public String toString() {
+        return "HockeyPlayerDto{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", offensiveStrength=" + offensiveStrength +
+                ", defensiveStrength=" + defensiveStrength +
+                ", team=" + team +
+                '}';
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
