@@ -41,7 +41,7 @@
                 <form:errors path="defensiveStrength" cssClass="help-block"/>
             </div>
         </div>
-        <div class="mt-3">
+        <div class="mt-3 mb-3">
             <button class="btn btn-primary" type="submit">Create player</button>
         </div>
     </form:form>

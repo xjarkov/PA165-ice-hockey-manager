@@ -37,7 +37,7 @@
         </c:forEach>
         </tbody>
     </table>
-    <my:a href="/players/create/" class="btn btn-success btn-sm">Add player</my:a>
+    <my:a href="/players/create/" class="btn btn-success btn-sm mb-3">Add player</my:a>
 </jsp:attribute>
 </my:pagetemplate>
 
