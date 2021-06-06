@@ -4,7 +4,6 @@ import cz.fi.muni.pa165.hockeymanager.dto.HockeyPlayerCreateDto;
 import cz.fi.muni.pa165.hockeymanager.dto.HockeyPlayerDto;
 import cz.fi.muni.pa165.hockeymanager.dto.TeamDto;
 import cz.fi.muni.pa165.hockeymanager.dto.UserDto;
-import cz.fi.muni.pa165.hockeymanager.entity.User;
 import cz.fi.muni.pa165.hockeymanager.facade.HockeyPlayerFacade;
 import cz.fi.muni.pa165.hockeymanager.facade.TeamFacade;
 
@@ -23,7 +22,6 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.util.UriComponentsBuilder;
 
 /**
  * @author Petr Šopf (506511)
@@ -120,11 +118,11 @@ public class HockeyPlayerController {
         return "players/edit";
     }
 
-    @PostMapping("/edit")
-    public String updateEditedPlayer(@Valid @ModelAttribute("hockeyPlayerDto") HockeyPlayerDto hockeyPlayerDto,
+    @PostMapping("/save/{id}")
+    public String updateEditedPlayer(@PathVariable("id") Long id,
+                                     @Valid @ModelAttribute("hockeyPlayerDto") HockeyPlayerDto hockeyPlayerDto,
                                      Model model,
                                      BindingResult bindingResult,
-                                     UriComponentsBuilder uriBuilder,
                                      RedirectAttributes redirectAttributes,
                                      HttpSession httpSession) {
         UserDto userDto = (UserDto) httpSession.getAttribute("authenticatedUser");
@@ -138,9 +136,9 @@ public class HockeyPlayerController {
             model.addAttribute("authenticatedUser", userDto);
             return "players/edit";
         }
+        hockeyPlayerDto.setId(id);
         hockeyPlayerFacade.update(hockeyPlayerDto);
         redirectAttributes.addFlashAttribute("alert_success", "review was updated");
-        Long id = hockeyPlayerDto.getId();
-        return "redirect:" + uriBuilder.path("/players/list").buildAndExpand(id).encode().toUriString();
+        return "redirect:/players/list";
     }
 }
