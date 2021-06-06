@@ -16,10 +16,13 @@
     <div class="container">
         <div class="row">
             <div class="col">
+                <h2>My team</h2>
                 <table class="table table-hover table-bordered">
                     <thead>
                     <tr>
-                        <th scope="col">My team</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Offense</th>
+                        <th scope="col">Defense</th>
                         <th></th>
                     </tr>
                     </thead>
@@ -27,6 +30,8 @@
                     <c:forEach items="${players}" var="player">
                         <tr>
                             <td>${player.firstName}&nbsp;${player.lastName}</td>
+                            <td>${player.offensiveStrength}</td>
+                            <td>${player.defensiveStrength}</td>
                             <td align="right">
                                 <my:a href="/team/remove/${player.id}" class="btn btn-danger btn-sm ms-auto">
                                     Remove from my team
@@ -38,10 +43,13 @@
                 </table>
             </div>
             <div class="col">
+                <h2>Free agents</h2>
                 <table class="table table-hover table-bordered">
                     <thead>
                     <tr>
-                        <th scope="col">Free agents</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Offense</th>
+                        <th scope="col">Defense</th>
                         <th></th>
                     </tr>
                     </thead>
@@ -49,6 +57,8 @@
                         <c:forEach items="${freeAgents}" var="freeAgent">
                             <tr>
                                 <td>${freeAgent.firstName}&nbsp;${freeAgent.lastName}</td>
+                                <td>${freeAgent.offensiveStrength}</td>
+                                <td>${freeAgent.defensiveStrength}</td>
                                 <td align="right">
                                     <my:a href="/players/recruit/${freeAgent.id}" class="btn btn-success btn-sm">
                                         Assign to my team
