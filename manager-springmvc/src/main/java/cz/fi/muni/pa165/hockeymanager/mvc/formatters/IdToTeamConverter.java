@@ -2,7 +2,6 @@ package cz.fi.muni.pa165.hockeymanager.mvc.formatters;
 
 import cz.fi.muni.pa165.hockeymanager.dto.TeamDto;
 import cz.fi.muni.pa165.hockeymanager.facade.TeamFacade;
-import cz.fi.muni.pa165.hockeymanager.mvc.LoggedInFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
