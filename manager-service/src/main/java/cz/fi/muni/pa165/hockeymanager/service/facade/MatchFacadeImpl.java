@@ -1,5 +1,6 @@
 package cz.fi.muni.pa165.hockeymanager.service.facade;
 
+import cz.fi.muni.pa165.hockeymanager.dto.MatchCreateDto;
 import cz.fi.muni.pa165.hockeymanager.dto.MatchDto;
 import cz.fi.muni.pa165.hockeymanager.dto.TeamDto;
 import cz.fi.muni.pa165.hockeymanager.entity.Match;
@@ -26,7 +27,7 @@ public class MatchFacadeImpl implements MatchFacade {
     private BeanMappingService beanMappingService;
 
     @Override
-    public Long create(MatchDto matchDto) {
+    public Long create(MatchCreateDto matchDto) {
         Match mappedMatch = beanMappingService.mapTo(matchDto, Match.class);
         matchService.create(mappedMatch);
         return mappedMatch.getId();
@@ -45,17 +46,17 @@ public class MatchFacadeImpl implements MatchFacade {
     @Override
     public MatchDto findMatchById(Long id) {
         Match match = matchService.findById(id);
-        return (match == null) ? null : beanMappingService.mapMatchToMatchDto(match);
+        return (match == null) ? null : beanMappingService.mapTo(match, MatchDto.class);
     }
 
     @Override
     public List<MatchDto> findAllMatches() {
-        return beanMappingService.mapMatchesToMatchDtos(matchService.findAll());
+        return beanMappingService.mapTo(matchService.findAll(), MatchDto.class);
     }
 
     @Override
     public MatchDto findNearestMatch() {
-        return beanMappingService.mapMatchToMatchDto(matchService.findNearest());
+        return beanMappingService.mapTo(matchService.findNearest(), MatchDto.class);
     }
 
     @Override

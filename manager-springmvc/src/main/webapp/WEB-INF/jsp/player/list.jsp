@@ -32,9 +32,9 @@
                 <td>${player.defensiveStrength}</td>
                 <c:if test="${authenticatedUser.admin}">
                     <td align="right">
-                        <my:a href="/players/edit/${player.id}" class="btn btn-primary btn-sm">Edit</my:a>
+                        <my:a href="/player/admin/edit/${player.id}" class="btn btn-primary btn-sm">Edit</my:a>
                         <span></span>
-                        <my:a href="/players/remove/${player.id}" class="btn btn-danger btn-sm">Remove</my:a>
+                        <my:a href="/player/admin/remove/${player.id}" class="btn btn-danger btn-sm">Remove</my:a>
                     </td>
                 </c:if>
             </tr>
@@ -42,7 +42,7 @@
         </tbody>
     </table>
     <c:if test="${authenticatedUser.admin}">
-        <my:a href="/players/create/" class="btn btn-success btn-sm mb-3">Add player</my:a>
+        <my:a href="/player/admin/create/" class="btn btn-success btn-sm mb-3">Add player</my:a>
     </c:if>
 </jsp:attribute>
 </my:pagetemplate>

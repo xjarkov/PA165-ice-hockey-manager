@@ -74,7 +74,7 @@ public class MatchController {
         Map<String, Object> matchData = new LinkedHashMap<>();
 
         matchData.put("id", match.getId());
-        matchData.put("datetime", match.getDateTimeDto());
+        matchData.put("datetime", match.getDateTime());
         matchData.put("visitingTeamScore", match.getVisitingTeamScore());
         matchData.put("visitingHomeScore", match.getHomeTeamScore());
         matchData.put("homeTeamId", match.getHomeTeam().getId());

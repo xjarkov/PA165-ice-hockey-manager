@@ -1,5 +1,6 @@
 package cz.fi.muni.pa165.hockeymanager.facade;
 
+import cz.fi.muni.pa165.hockeymanager.dto.MatchCreateDto;
 import cz.fi.muni.pa165.hockeymanager.dto.MatchDto;
 import cz.fi.muni.pa165.hockeymanager.dto.TeamDto;
 import cz.fi.muni.pa165.hockeymanager.utils.ScoreTuple;
@@ -15,7 +16,7 @@ public interface MatchFacade {
      *
      * @param match to create
      */
-    Long create(MatchDto match);
+    Long create(MatchCreateDto match);
 
     /**
      * Removes a match

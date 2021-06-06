@@ -14,6 +14,9 @@ import java.util.HashSet;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -27,30 +30,53 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  * @author Petr Šopf (506511)
  */
 @Controller
-@RequestMapping("/players")
+@RequestMapping("/player")
 public class HockeyPlayerController {
+
     @Autowired
     private HockeyPlayerFacade hockeyPlayerFacade;
 
     @Autowired
     private TeamFacade teamFacade;
 
+    private final static Logger logger = LoggerFactory.getLogger(HockeyPlayerController.class);
+
     @GetMapping("/list")
     public String list(Model model, HttpSession httpSession) {
-        UserDto userDto = (UserDto) httpSession.getAttribute("authenticatedUser");
-        model.addAttribute("authenticatedUser", userDto);
+        logger.info("Hockey player list - GET");
+
+        UserDto authUser = (UserDto) httpSession.getAttribute("authenticatedUser");
+
+        if (authUser == null) {
+            return "redirect:/auth/login";
+        }
+
+        model.addAttribute("authenticatedUser", authUser);
 
         List<HockeyPlayerDto> players = hockeyPlayerFacade.findAll();
         model.addAttribute("players", players);
-        return "players/list";
+        return "player/list";
     }
 
     @GetMapping("/recruit/{id}")
-    public String recruit(HttpSession session, @PathVariable Long id) {
-        HockeyPlayerDto player = hockeyPlayerFacade.findById(id);
+    public String recruit(HttpSession session, @PathVariable Long id, RedirectAttributes redirectAttributes) {
+        logger.info("Hockey player recruit id:{} - GET", id);
+
         UserDto authUser = (UserDto) session.getAttribute("authenticatedUser");
 
-        if (player != null && player.getTeam() == null && authUser != null && authUser.getTeam() != null) {
+        if (authUser == null) {
+            return "redirect:/auth/login";
+        }
+
+        HockeyPlayerDto player = hockeyPlayerFacade.findById(id);
+
+        if (player == null) {
+            redirectAttributes.addFlashAttribute("generic_error", "Player with this ID does not exists");
+            logger.info("Hockey player recruit id:{} - GET - Player with this ID does not exists", id);
+            return "redirect:/";
+        }
+
+        if (player.getTeam() == null && authUser.getTeam() != null) {
             TeamDto team = authUser.getTeam();
             player.setTeam(team);
 
@@ -65,80 +91,140 @@ public class HockeyPlayerController {
 
             teamFacade.update(team);
             hockeyPlayerFacade.update(player);
+
+            logger.info("Hockey player recruit id:{} - GET - Player assigned to you team", id);
         }
 
         return "redirect:/team/my_team";
     }
 
-    @GetMapping("/remove/{id}")
-    public String removePlayer(@PathVariable Long id) {
+    @GetMapping("admin/remove/{id}")
+    public String removePlayer(@PathVariable Long id, RedirectAttributes redirectAttributes) {
+        logger.info("Hockey player remove id:{} - GET", id);
+
         HockeyPlayerDto player = hockeyPlayerFacade.findById(id);
+
+        if (player == null) {
+            redirectAttributes.addFlashAttribute("generic_error", "Player with this ID does not exists");
+            logger.info("Hockey player remove id:{} - GET - Player with this ID does not exists", id);
+            return "redirect:/";
+        }
+
         hockeyPlayerFacade.remove(player);
 
-        return "redirect:/players/list";
+        return "redirect:/player/list";
     }
 
-    @GetMapping("/create")
+    @GetMapping("admin/create")
     public String createPlayer(Model model, HttpSession httpSession) {
+        logger.info("Hockey player create - GET");
+
+        UserDto authUser = (UserDto) httpSession.getAttribute("authenticatedUser");
+
+        if (authUser == null) {
+            return "redirect:/auth/login";
+        }
+
         HockeyPlayerCreateDto hockeyPlayerCreateDto = new HockeyPlayerCreateDto();
-        UserDto userDto = (UserDto) httpSession.getAttribute("authenticatedUser");
+
         model.addAttribute("hockeyPlayerCreateDto", hockeyPlayerCreateDto);
-        model.addAttribute("authenticatedUser", userDto);
-        return "players/new";
+        model.addAttribute("authenticatedUser", authUser);
+        return "player/new";
     }
 
-    @PostMapping("/add")
+    @PostMapping("admin/create")
     public String addPlayer(@Valid @ModelAttribute("hockeyPlayerCreateDto") HockeyPlayerCreateDto hockeyPlayerDto,
                             Model model,
                             BindingResult bindingResult,
                             RedirectAttributes redirectAttributes,
                             HttpSession httpSession) {
-        UserDto userDto = (UserDto) httpSession.getAttribute("authenticatedUser");
+        logger.info("Hockey player create - POST");
+
+        UserDto authUser = (UserDto) httpSession.getAttribute("authenticatedUser");
+
+        if (authUser == null) {
+            return "redirect:/auth/login";
+        }
+
         if (bindingResult.hasErrors()) {
             for (ObjectError ge : bindingResult.getGlobalErrors()) {
                 System.err.println("ObjectError: " + ge);
             }
             for (FieldError fe : bindingResult.getFieldErrors()) {
                 model.addAttribute(fe.getField() + "_error", true);
+                logger.info("Hockey player create - POST - {}", fe.getField());
             }
-            model.addAttribute("authenticatedUser", userDto);
-            return "players/new";
+            model.addAttribute("authenticatedUser", authUser);
+            return "player/new";
         }
         hockeyPlayerFacade.create(hockeyPlayerDto);
+
         redirectAttributes.addFlashAttribute("alert_success", "Player was created");
-        return "redirect:/players/list";
+        logger.info("Hockey player create - POST - New player created successfully");
+        return "redirect:/player/list";
     }
 
-    @GetMapping("/edit/{id}")
-    public String editPlayerForm(@PathVariable("id") Long id, Model model, HttpSession httpSession) {
-        HockeyPlayerDto hockeyPlayerDto = hockeyPlayerFacade.findById(id);
-        model.addAttribute("hockeyPlayerDto", hockeyPlayerDto);
-        UserDto userDto = (UserDto) httpSession.getAttribute("authenticatedUser");
-        model.addAttribute("authenticatedUser", userDto);
-        return "players/edit";
+    @GetMapping("admin/edit/{id}")
+    public String editPlayerForm(@PathVariable("id") Long id, Model model, HttpSession httpSession, RedirectAttributes redirectAttributes) {
+        logger.info("Hockey player edit - GET");
+
+        UserDto authUser = (UserDto) httpSession.getAttribute("authenticatedUser");
+
+        if (authUser == null) {
+            return "redirect:/auth/login";
+        }
+
+        model.addAttribute("authenticatedUser", authUser);
+
+        HockeyPlayerDto player = hockeyPlayerFacade.findById(id);
+
+        if (player == null) {
+            redirectAttributes.addFlashAttribute("generic_error", "Player with this ID does not exists");
+            logger.info("Hockey player edit id:{} - GET - Player with this ID does not exists", id);
+            return "redirect:/";
+        }
+
+        model.addAttribute("hockeyPlayerDto", player);
+        return "player/edit";
     }
 
-    @PostMapping("/save/{id}")
+    @PostMapping("admin/edit/{id}")
     public String updateEditedPlayer(@PathVariable("id") Long id,
                                      @Valid @ModelAttribute("hockeyPlayerDto") HockeyPlayerDto hockeyPlayerDto,
                                      Model model,
                                      BindingResult bindingResult,
                                      RedirectAttributes redirectAttributes,
                                      HttpSession httpSession) {
-        UserDto userDto = (UserDto) httpSession.getAttribute("authenticatedUser");
+        logger.info("Hockey player edit - POST");
+
+        UserDto authUser = (UserDto) httpSession.getAttribute("authenticatedUser");
+
+        if (authUser == null) {
+            return "redirect:/auth/login";
+        }
+
         if (bindingResult.hasErrors()) {
             for (ObjectError ge : bindingResult.getGlobalErrors()) {
                 System.err.println("ObjectError: " + ge);
             }
             for (FieldError fe : bindingResult.getFieldErrors()) {
                 model.addAttribute(fe.getField() + "_error", true);
+                logger.info("Hockey player edit - POST - {}", fe.getField());
             }
-            model.addAttribute("authenticatedUser", userDto);
-            return "players/edit";
+            model.addAttribute("authenticatedUser", authUser);
+            return "player/edit";
         }
         hockeyPlayerDto.setId(id);
         hockeyPlayerFacade.update(hockeyPlayerDto);
-        redirectAttributes.addFlashAttribute("alert_success", "review was updated");
-        return "redirect:/players/list";
+
+        redirectAttributes.addFlashAttribute("alert_success", "Player was updated");
+        logger.info("Hockey player edit - GET - Player edited successfully");
+        return "redirect:/player/list";
+    }
+
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public void handle(Exception e) {
+        logger.warn("Returning HTTP 400 Bad Request", e);
     }
 }
