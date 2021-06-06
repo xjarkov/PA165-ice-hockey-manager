@@ -21,17 +21,17 @@ public class MatchDto {
 
     private Integer visitingTeamScore;
 
-    private LocalDateTime dateTime;
+    private Long dateTime;
 
     public MatchDto() {}
 
-    public MatchDto(TeamDto homeTeam, TeamDto visitingTeam, LocalDateTime dateTime) {
+    public MatchDto(TeamDto homeTeam, TeamDto visitingTeam, Long dateTime) {
         this.homeTeam = homeTeam;
         this.visitingTeam = visitingTeam;
         this.dateTime = dateTime;
     }
 
-    public MatchDto(TeamDto homeTeam, TeamDto visitingTeam, Integer homeTeamScore, Integer visitingTeamScore, LocalDateTime dateTime) {
+    public MatchDto(TeamDto homeTeam, TeamDto visitingTeam, Integer homeTeamScore, Integer visitingTeamScore, Long dateTime) {
         this.homeTeam = homeTeam;
         this.visitingTeam = visitingTeam;
         this.homeTeamScore = homeTeamScore;
@@ -65,6 +65,6 @@ public class MatchDto {
 
     @Override
     public int hashCode() {
-        return Objects.hash(homeTeam, visitingTeam, homeTeamScore, visitingTeamScore, dateTime);
+        return Objects.hash(homeTeam, visitingTeam, homeTeamScore, visitingTeamScore, dateTimeDto);
     }
 }
