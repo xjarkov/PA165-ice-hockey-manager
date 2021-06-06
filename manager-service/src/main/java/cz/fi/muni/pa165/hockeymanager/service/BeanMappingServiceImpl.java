@@ -53,4 +53,11 @@ public class BeanMappingServiceImpl implements BeanMappingService {
         }
         return matchDtos;
     }
+
+    public Match mapMatchDtoToMatch(MatchDto matchDto){
+        Match match = dozer.map(matchDto, Match.class);
+        LocalDateTime dt = matchDto.getDateTimeDto();
+        match.setDateTime(LocalDateTime.of(dt.getYear(), dt.getMonth(), dt.getDayOfMonth(), dt.getHour(), dt.getMinute(), dt.getSecond()));
+        return match;
+    }
 }

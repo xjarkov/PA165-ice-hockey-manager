@@ -151,14 +151,10 @@ public class TeamController {
                     visitingTeam.setMatches(visitingMatches);
                     homeTeam.setMatches(homeMatches);
 
-                    match.setHomeTeam(null);
-                    match.setVisitingTeam(null);
-
-                    matchFacade.update(match);
-
-                    matchFacade.remove(match);
                     teamFacade.update(visitingTeam);
                     teamFacade.update(homeTeam);
+
+                    matchFacade.remove(match);
                 }
             }
             teamFacade.remove(teamFacade.findTeamById(id));

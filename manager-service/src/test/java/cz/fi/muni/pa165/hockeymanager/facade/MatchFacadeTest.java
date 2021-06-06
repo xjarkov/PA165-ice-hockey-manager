@@ -79,7 +79,7 @@ public class MatchFacadeTest extends AbstractTransactionalTestNGSpringContextTes
 
     @Test
     public void removeMatchTest() {
-        when(beanMappingService.mapTo(matchDto1, Match.class)).thenReturn(match1);
+        when(beanMappingService.mapMatchDtoToMatch(matchDto1)).thenReturn(match1);
         matchFacade.remove(matchDto1);
         verify(matchService).remove(match1);
     }

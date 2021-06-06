@@ -12,4 +12,5 @@ public interface BeanMappingService {
     Mapper getMapper();
     List<MatchDto> mapMatchesToMatchDtos(Collection<Match> matches);
     MatchDto mapMatchToMatchDto(Match match);
+    Match mapMatchDtoToMatch(MatchDto matchDto);
 }
