@@ -15,7 +15,7 @@
 <jsp:attribute name="body">
     <form:form id="teamCreate" action="${pageContext.request.contextPath}/team/create" modelAttribute="teamCreate" method="post">
         <form:label path="name">Name:</form:label>
-        <form:input type="text" path="name"/><br>
+        <form:input type="text" path="name" required="required"/><br>
 
         <form:label path="championship">Championship</form:label>
         <form:select path="championship">
