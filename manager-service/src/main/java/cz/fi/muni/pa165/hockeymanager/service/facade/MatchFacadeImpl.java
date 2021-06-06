@@ -35,12 +35,12 @@ public class MatchFacadeImpl implements MatchFacade {
 
     @Override
     public void remove(MatchDto matchDto) {
-        matchService.remove(beanMappingService.mapMatchDtoToMatch(matchDto));
+        matchService.remove(beanMappingService.mapTo(matchDto, Match.class));
     }
 
     @Override
     public void update(MatchDto matchDto) {
-        matchService.update(beanMappingService.mapMatchDtoToMatch(matchDto));
+        matchService.update(beanMappingService.mapTo(matchDto, Match.class));
     }
 
     @Override
