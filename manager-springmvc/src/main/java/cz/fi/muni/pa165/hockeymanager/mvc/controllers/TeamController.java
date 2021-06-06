@@ -3,6 +3,7 @@ package cz.fi.muni.pa165.hockeymanager.mvc.controllers;
 import cz.fi.muni.pa165.hockeymanager.dto.HockeyPlayerDto;
 import cz.fi.muni.pa165.hockeymanager.dto.TeamDto;
 import cz.fi.muni.pa165.hockeymanager.dto.UserDto;
+import cz.fi.muni.pa165.hockeymanager.enums.Championship;
 import cz.fi.muni.pa165.hockeymanager.facade.HockeyPlayerFacade;
 import cz.fi.muni.pa165.hockeymanager.facade.TeamFacade;
 import cz.fi.muni.pa165.hockeymanager.facade.UserFacade;
@@ -13,10 +14,16 @@ import java.util.Set;
 
 import javax.servlet.http.HttpSession;
 
+import javax.validation.Valid;
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -104,4 +111,32 @@ public class TeamController {
 
         return "redirect:/team/my_team";
     }
+
+    @GetMapping(value = "/new")
+    public String newTeam(Model model) {
+        model.addAttribute("teamCreate", new TeamDto());
+        model.addAttribute("championships", Championship.values());
+        return "team/new";
+    }
+
+    @PostMapping(value = "/create")
+    public String create(@Valid @ModelAttribute("teamCreate") TeamDto teamDto,
+                         Model model,
+                         BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            for (ObjectError ge : bindingResult.getGlobalErrors()) {
+                System.err.println("ObjectError: " + ge);
+            }
+            for (FieldError fe : bindingResult.getFieldErrors()) {
+                System.err.println(fe.getField() + "_error");
+            }
+            return list(model);
+
+        }
+
+        teamFacade.create(teamDto);
+        return list(model);
+    }
+
+
 }

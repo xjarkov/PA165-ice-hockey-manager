@@ -11,6 +11,9 @@
 </head>
 <my:pagetemplate>
 <jsp:attribute name="body">
+    <a href="${pageContext.request.contextPath}/team/new">
+        <button>New</button>
+    </a>
     <table class="table table-hover table-striped table-bordered">
         <thead>
         <tr>
