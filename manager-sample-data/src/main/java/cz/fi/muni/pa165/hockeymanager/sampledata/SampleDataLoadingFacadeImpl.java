@@ -13,6 +13,7 @@ import cz.fi.muni.pa165.hockeymanager.service.UserService;
 
 import java.time.Month;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -51,10 +52,10 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         User adminWithTeam = user("adminTeam", "adminTeam@muni.cz", "adminTeam123", Role.ADMIN, cska);
         User userWithTeam = user("userTeam", "userTeam@muni.cz", "userTeam123", Role.PLAYER, ska);
 
-        Match m1 = match(cska, ska, LocalDateTime.of(2021, Month.FEBRUARY, 5, 19, 0, 0),1,2);
-        Match m2 = match(cska, ska, LocalDateTime.of(2021, Month.JANUARY, 6, 19, 0, 0),0,4);
-        Match m3 = match(ska, cska, LocalDateTime.of(2021, Month.JANUARY, 15, 19, 0, 0),5,2);
-        Match m4 = match(ska, cska, LocalDateTime.of(2021, Month.JANUARY, 16, 19, 0, 0),3,3);
+        Match m1 = match(cska, ska, LocalDateTime.of(2021, Month.FEBRUARY, 5, 19, 0, 0).atZone(ZoneId.systemDefault()).toEpochSecond(),1,2);
+        Match m2 = match(cska, ska, LocalDateTime.of(2021, Month.JANUARY, 6, 19, 0, 0).atZone(ZoneId.systemDefault()).toEpochSecond(),0,4);
+        Match m3 = match(ska, cska, LocalDateTime.of(2021, Month.JANUARY, 15, 19, 0, 0).atZone(ZoneId.systemDefault()).toEpochSecond(),5,2);
+        Match m4 = match(ska, cska, LocalDateTime.of(2021, Month.JANUARY, 16, 19, 0, 0).atZone(ZoneId.systemDefault()).toEpochSecond(),3,3);
 
         HockeyPlayer p1 = hockeyPlayer("Alexander", "Oveckin", null, 95, 93);
         HockeyPlayer p2 = hockeyPlayer("Jevgeni", "Malkin", null, 94, 90);
@@ -88,7 +89,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         return u;
     }
 
-    private Match match(Team homeTeam, Team visitingTeam, LocalDateTime dateTime, int homeScore, int visitingScore) {
+    private Match match(Team homeTeam, Team visitingTeam, Long dateTime, int homeScore, int visitingScore) {
         Match m = new Match(homeTeam, visitingTeam, dateTime);
         m.setHomeTeamScore(homeScore);
         m.setVisitingTeamScore(visitingScore);

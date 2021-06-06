@@ -37,39 +37,39 @@ public class BeanMappingServiceImpl implements BeanMappingService {
         return dozer;
     }
 
-    public MatchDto mapMatchToMatchDto(Match match) {
-        MatchDto matchDto = dozer.map(match, MatchDto.class);
-        LocalDateTime dt = match.getDateTime();
-        matchDto.setDateTime(LocalDateTime.of(dt.getYear(), dt.getMonth(), dt.getDayOfMonth(), dt.getHour(), dt.getMinute(), dt.getSecond()));
-        return matchDto;
-    }
-
-    public List<MatchDto> mapMatchesToMatchDtos(Collection<Match> matches) {
-        List<MatchDto> matchDtos = new ArrayList<>();
-        for (var match : matches) {
-            MatchDto matchDto = dozer.map(match, MatchDto.class);
-            LocalDateTime dt = match.getDateTime();
-            matchDto.setDateTime(LocalDateTime.of(dt.getYear(), dt.getMonth(), dt.getDayOfMonth(), dt.getHour(), dt.getMinute(), dt.getSecond()));
-            matchDtos.add(matchDto);
-        }
-        return matchDtos;
-    }
-
-    public MatchCreateDto mapMatchToMatchCreateDto(Match match) {
-        MatchCreateDto matchCreateDto = dozer.map(match, MatchCreateDto.class);
-        LocalDateTime dt = match.getDateTime();
-        matchCreateDto.setDateTime(LocalDateTime.of(dt.getYear(), dt.getMonth(), dt.getDayOfMonth(), dt.getHour(), dt.getMinute(), dt.getSecond()));
-        return matchCreateDto;
-    }
-
-    public List<MatchCreateDto> mapMatchesToMatchCreateDtos(Collection<Match> matches) {
-        List<MatchCreateDto> matchCreateDtos = new ArrayList<>();
-        for (var match : matches) {
-            MatchCreateDto matchCreateDto = dozer.map(match, MatchCreateDto.class);
-            LocalDateTime dt = match.getDateTime();
-            matchCreateDto.setDateTime(LocalDateTime.of(dt.getYear(), dt.getMonth(), dt.getDayOfMonth(), dt.getHour(), dt.getMinute(), dt.getSecond()));
-            matchCreateDtos.add(matchCreateDto);
-        }
-        return matchCreateDtos;
-    }
+//    public MatchDto mapMatchToMatchDto(Match match) {
+//        MatchDto matchDto = dozer.map(match, MatchDto.class);
+//        LocalDateTime dt = match.getDateTime();
+//        matchDto.setDateTimeDto(LocalDateTime.of(dt.getYear(), dt.getMonth(), dt.getDayOfMonth(), dt.getHour(), dt.getMinute(), dt.getSecond()));
+//        return matchDto;
+//    }
+//
+//    public List<MatchDto> mapMatchesToMatchDtos(Collection<Match> matches) {
+//        List<MatchDto> matchDtos = new ArrayList<>();
+//        for (var match : matches) {
+//            MatchDto matchDto = dozer.map(match, MatchDto.class);
+//            LocalDateTime dt = match.getDateTime();
+//            matchDto.setDateTimeDto(LocalDateTime.of(dt.getYear(), dt.getMonth(), dt.getDayOfMonth(), dt.getHour(), dt.getMinute(), dt.getSecond()));
+//            matchDtos.add(matchDto);
+//        }
+//        return matchDtos;
+//    }
+//
+//    public MatchCreateDto mapMatchToMatchCreateDto(Match match) {
+//        MatchCreateDto matchCreateDto = dozer.map(match, MatchCreateDto.class);
+//        LocalDateTime dt = match.getDateTime();
+//        matchCreateDto.setDateTime(LocalDateTime.of(dt.getYear(), dt.getMonth(), dt.getDayOfMonth(), dt.getHour(), dt.getMinute(), dt.getSecond()));
+//        return matchCreateDto;
+//    }
+//
+//    public List<MatchCreateDto> mapMatchesToMatchCreateDtos(Collection<Match> matches) {
+//        List<MatchCreateDto> matchCreateDtos = new ArrayList<>();
+//        for (var match : matches) {
+//            MatchCreateDto matchCreateDto = dozer.map(match, MatchCreateDto.class);
+//            LocalDateTime dt = match.getDateTime();
+//            matchCreateDto.setDateTime(LocalDateTime.of(dt.getYear(), dt.getMonth(), dt.getDayOfMonth(), dt.getHour(), dt.getMinute(), dt.getSecond()));
+//            matchCreateDtos.add(matchCreateDto);
+//        }
+//        return matchCreateDtos;
+//    }
 }

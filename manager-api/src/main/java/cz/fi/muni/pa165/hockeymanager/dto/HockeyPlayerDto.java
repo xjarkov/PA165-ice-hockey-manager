@@ -56,7 +56,6 @@ public class HockeyPlayerDto {
                 ", lastName='" + lastName + '\'' +
                 ", offensiveStrength=" + offensiveStrength +
                 ", defensiveStrength=" + defensiveStrength +
-                ", team=" + team +
                 '}';
     }
 

@@ -5,10 +5,6 @@ import java.util.Objects;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -45,11 +41,11 @@ public class Match {
     @NotNull
     @Getter
     @Setter
-    private LocalDateTime dateTime;
+    private Long dateTime;
 
     public Match(){}
 
-    public Match(Team homeTeam, Team visitingTeam, LocalDateTime dateTime) {
+    public Match(Team homeTeam, Team visitingTeam, Long dateTime) {
         this.homeTeam = homeTeam;
         this.visitingTeam = visitingTeam;
         this.dateTime = dateTime;
@@ -79,7 +75,7 @@ public class Match {
                 ", visitingTeam=" + visitingTeam +
                 ", homeTeamScore=" + homeTeamScore +
                 ", visitingTeamScore=" + visitingTeamScore +
-                ", date=" + dateTime +
+                ", dateTime=" + dateTime +
                 '}';
     }
 }

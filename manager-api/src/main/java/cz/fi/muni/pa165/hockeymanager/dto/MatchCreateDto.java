@@ -2,10 +2,11 @@ package cz.fi.muni.pa165.hockeymanager.dto;
 
 import lombok.Data;
 import lombok.NonNull;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.Min;
-import java.time.LocalDateTime;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 /**
@@ -27,18 +28,17 @@ public class MatchCreateDto {
     @Min(value = 0, message = "Score cannot be negative")
     private Integer visitingTeamScore;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
-    private LocalDateTime dateTime;
+    private Long dateTime;
 
     public MatchCreateDto() {}
 
-    public MatchCreateDto(TeamDto homeTeam, TeamDto visitingTeam, LocalDateTime dateTime) {
+    public MatchCreateDto(TeamDto homeTeam, TeamDto visitingTeam, Long dateTime) {
         this.homeTeam = homeTeam;
         this.visitingTeam = visitingTeam;
         this.dateTime = dateTime;
     }
 
-    public MatchCreateDto(TeamDto homeTeam, TeamDto visitingTeam, int homeTeamScore, int visitingTeamScore, LocalDateTime dateTime) {
+    public MatchCreateDto(TeamDto homeTeam, TeamDto visitingTeam, Integer homeTeamScore, Integer visitingTeamScore, Long dateTime) {
         this.homeTeam = homeTeam;
         this.visitingTeam = visitingTeam;
         this.homeTeamScore = homeTeamScore;
@@ -47,7 +47,9 @@ public class MatchCreateDto {
     }
 
     public String dateFormated() {
-        return dateTime.getDayOfMonth() + "." + dateTime.getMonth().getValue() + "." + dateTime.getYear() + " " + dateTime.getHour() + ":" + dateTime.getMinute();
+        DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm").withZone(ZoneId.systemDefault());
+        Instant dateTimeInst = Instant.ofEpochSecond(dateTime);
+        return DATE_TIME_FORMATTER.format(dateTimeInst);
     }
 
     @Override

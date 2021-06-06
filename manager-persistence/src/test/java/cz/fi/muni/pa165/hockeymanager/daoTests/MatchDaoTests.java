@@ -17,6 +17,7 @@ import org.springframework.test.context.ContextConfiguration;
 import javax.validation.ConstraintViolationException;
 import java.time.LocalDateTime;
 import java.time.Month;
+import java.time.ZoneId;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -48,11 +49,11 @@ public class MatchDaoTests extends AbstractTestNGSpringContextTests {
         petersburgTeam = new Team("SKA Petersburg", Championship.KHL);
         sochiTeam = new Team("Sochi", Championship.KHL);
 
-        match = new Match(omskTeam, moskvaTeam, LocalDateTime.of(2021, Month.AUGUST, 24, 18, 0));
-        match2 = new Match(omskTeam, petersburgTeam, LocalDateTime.of(2021, Month.AUGUST, 26, 18, 0));
-        match3 = new Match(moskvaTeam, petersburgTeam, LocalDateTime.of(2021, Month.AUGUST, 27, 18, 0));
-        match4 = new Match(petersburgTeam, omskTeam, LocalDateTime.of(2021, Month.AUGUST, 21, 19, 0));
-        match5 = new Match(moskvaTeam, sochiTeam, LocalDateTime.of(2021, Month.AUGUST, 28, 18, 0));
+        match = new Match(omskTeam, moskvaTeam, LocalDateTime.of(2021, Month.AUGUST, 24, 18, 0).atZone(ZoneId.systemDefault()).toEpochSecond());
+        match2 = new Match(omskTeam, petersburgTeam, LocalDateTime.of(2021, Month.AUGUST, 26, 18, 0).atZone(ZoneId.systemDefault()).toEpochSecond());
+        match3 = new Match(moskvaTeam, petersburgTeam, LocalDateTime.of(2021, Month.AUGUST, 27, 18, 0).atZone(ZoneId.systemDefault()).toEpochSecond());
+        match4 = new Match(petersburgTeam, omskTeam, LocalDateTime.of(2021, Month.AUGUST, 21, 19, 0).atZone(ZoneId.systemDefault()).toEpochSecond());
+        match5 = new Match(moskvaTeam, sochiTeam, LocalDateTime.of(2021, Month.AUGUST, 28, 18, 0).atZone(ZoneId.systemDefault()).toEpochSecond());
     }
 
     @Test
@@ -98,7 +99,7 @@ public class MatchDaoTests extends AbstractTestNGSpringContextTests {
 
         assertThat(matchDao.findById(match.getId()).getDateTime()).isEqualTo(match.getDateTime());
 
-        match.setDateTime(LocalDateTime.of(2021, Month.DECEMBER, 10, 12, 35));
+        match.setDateTime(LocalDateTime.of(2021, Month.DECEMBER, 10, 12, 35).atZone(ZoneId.systemDefault()).toEpochSecond());
         matchDao.update(match);
 
         assertThat(matchDao.findById(match.getId()).getDateTime()).isEqualTo(match.getDateTime());

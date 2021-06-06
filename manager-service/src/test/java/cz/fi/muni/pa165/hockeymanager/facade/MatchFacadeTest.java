@@ -2,7 +2,6 @@ package cz.fi.muni.pa165.hockeymanager.facade;
 
 import cz.fi.muni.pa165.hockeymanager.dto.MatchCreateDto;
 import cz.fi.muni.pa165.hockeymanager.dto.MatchDto;
-import cz.fi.muni.pa165.hockeymanager.dto.TeamDto;
 import cz.fi.muni.pa165.hockeymanager.entity.Match;
 import cz.fi.muni.pa165.hockeymanager.entity.Team;
 import cz.fi.muni.pa165.hockeymanager.enums.Championship;
@@ -20,8 +19,10 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTransactionalTestNGSpringContextTests;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
 import java.time.LocalDateTime;
 import java.time.Month;
+import java.time.ZoneId;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -60,13 +61,13 @@ public class MatchFacadeTest extends AbstractTransactionalTestNGSpringContextTes
         match1 = new Match(
                 new Team("Sochi", Championship.KHL),
                 new Team("CSKA Moskva", Championship.KHL),
-                LocalDateTime.of(2021, Month.AUGUST, 24, 18, 0)
+                LocalDateTime.of(2021, Month.AUGUST, 24, 18, 0).atZone(ZoneId.systemDefault()).toEpochSecond()
         );
 
         match2 = new Match(
                 new Team("Sochi", Championship.KHL),
                 new Team("CSKA Moskva", Championship.KHL),
-                LocalDateTime.of(2021, Month.AUGUST, 26, 18, 0)
+                LocalDateTime.of(2021, Month.AUGUST, 26, 18, 0).atZone(ZoneId.systemDefault()).toEpochSecond()
         );
 
         matchCreateDto1 = beanMappingService.mapTo(match1, MatchCreateDto.class);
@@ -95,21 +96,21 @@ public class MatchFacadeTest extends AbstractTransactionalTestNGSpringContextTes
     @Test
     public void findByIdTest() {
         when(matchService.findById(match1.getId())).thenReturn(match1);
-        when(beanMappingService.mapMatchToMatchDto(match1)).thenReturn(matchDto1);
+        when(beanMappingService.mapTo(match1, MatchDto.class)).thenReturn(matchDto1);
         assertThat(matchFacade.findMatchById(match1.getId())).isEqualTo(matchDto1);
     }
 
     @Test
     public void findAllTest() {
         when(matchService.findAll()).thenReturn(matchList);
-        when(beanMappingService.mapMatchesToMatchDtos(matchList)).thenReturn(matchDtoList);
+        when(beanMappingService.mapTo(matchList, MatchDto.class)).thenReturn(matchDtoList);
         assertThat(matchFacade.findAllMatches()).isEqualTo(matchDtoList);
     }
 
     @Test
     public void findNearestTest() {
         when(matchService.findNearest()).thenReturn(match1);
-        when(beanMappingService.mapMatchToMatchDto(match1)).thenReturn(matchDto1);
+        when(beanMappingService.mapTo(match1, MatchDto.class)).thenReturn(matchDto1);
         assertThat(matchFacade.findNearestMatch()).isEqualTo(matchDto1);
     }
 }
