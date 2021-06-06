@@ -35,6 +35,18 @@ public class TeamDto {
     }
 
     @Override
+    public String toString() {
+        return "TeamDto{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", championship=" + championship +
+                ", points=" + points +
+                ", hockeyPlayers=" + hockeyPlayers +
+                ", matches=" + matches +
+                '}';
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;

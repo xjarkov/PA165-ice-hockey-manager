@@ -1,5 +1,7 @@
 package cz.fi.muni.pa165.hockeymanager.mvc.config;
 
+import cz.fi.muni.pa165.hockeymanager.mvc.formatters.IdToTeamConverter;
+import cz.fi.muni.pa165.hockeymanager.mvc.formatters.LocalDateTimeFormatter;
 import cz.fi.muni.pa165.hockeymanager.sampledata.SampleDataConfiguration;
 
 import org.slf4j.Logger;
@@ -7,8 +9,10 @@ import org.slf4j.LoggerFactory;
 
 import javax.validation.Validator;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.ComponentScan;
@@ -30,6 +34,9 @@ public class SpringMvcConfig implements WebMvcConfigurer {
     private final static Logger log = LoggerFactory.getLogger(SpringMvcConfig.class);
 
     private static final String TEXTS = "Texts";
+
+    @Autowired
+    private IdToTeamConverter idToTeamConverter;
 
     /**
      * Maps the main page to a specific view.
@@ -79,6 +86,12 @@ public class SpringMvcConfig implements WebMvcConfigurer {
     public Validator validator() {
         log.debug("registering JSR-303 validator");
         return new LocalValidatorFactoryBean();
+    }
+
+    @Override
+    public void addFormatters(FormatterRegistry registry) {
+        registry.addConverter(idToTeamConverter);
+        registry.addFormatter(new LocalDateTimeFormatter("yyyy-MM-dd'T'HH:mm"));
     }
 }
 

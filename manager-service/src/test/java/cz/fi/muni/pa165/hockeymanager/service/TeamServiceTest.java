@@ -8,7 +8,10 @@ import cz.fi.muni.pa165.hockeymanager.enums.Championship;
 import cz.fi.muni.pa165.hockeymanager.exceptions.ManagerServiceException;
 import cz.fi.muni.pa165.hockeymanager.service.config.ServiceConfiguration;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+
 import org.hibernate.service.spi.ServiceException;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -146,7 +149,7 @@ public class TeamServiceTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void addMatchCorrectTest() {
-        LocalDateTime dateTime = LocalDateTime.of(2000, 1, 1, 1, 1);
+        Long dateTime = LocalDateTime.of(2000, 1, 1, 1, 1).atZone(ZoneId.systemDefault()).toEpochSecond();
         Match match = new Match(team1, team2, dateTime);
 
         teamService.addMatch(team1, match);
@@ -155,7 +158,7 @@ public class TeamServiceTest extends AbstractTestNGSpringContextTests {
 
     @Test(expectedExceptions = ManagerServiceException.class)
     public void addMatchIncorrectTest() {
-        LocalDateTime dateTime = LocalDateTime.of(2000, 1, 1, 1, 1);
+        Long dateTime = LocalDateTime.of(2000, 1, 1, 1, 1).atZone(ZoneId.systemDefault()).toEpochSecond();
         Match match = new Match(new Team("team3", Championship.KHL), team2, dateTime);
 
         teamService.addMatch(team1, match);
@@ -163,9 +166,9 @@ public class TeamServiceTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void removeNearestMatchTest() {
-        LocalDateTime dateTimeFar = LocalDateTime.of(2000, 1, 1, 1, 1);
+        Long dateTimeFar = LocalDateTime.of(2000, 1, 1, 1, 1).atZone(ZoneId.systemDefault()).toEpochSecond();
         Match matchFar = new Match(team1, new Team("team3", Championship.KHL), dateTimeFar);
-        LocalDateTime dateTimeNear = LocalDateTime.of(2020, 1, 1, 1, 1);
+        Long dateTimeNear = LocalDateTime.of(2020, 1, 1, 1, 1).atZone(ZoneId.systemDefault()).toEpochSecond();
         Match matchNear = new Match(team1, team2, dateTimeNear);
 
         teamService.addMatch(team1, matchFar);

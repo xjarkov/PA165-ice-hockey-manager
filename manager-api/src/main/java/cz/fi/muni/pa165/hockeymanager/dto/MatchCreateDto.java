@@ -1,7 +1,9 @@
 package cz.fi.muni.pa165.hockeymanager.dto;
 
 import lombok.Data;
+import lombok.NonNull;
 
+import javax.validation.constraints.Min;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -11,29 +13,32 @@ import java.util.Objects;
  * @author Kristian Kosorin (456620)
  */
 @Data
-public class MatchDto {
-
-    private Long id;
-
+public class MatchCreateDto {
+    @NonNull
     private TeamDto homeTeam;
 
+    @NonNull
     private TeamDto visitingTeam;
 
+    @NonNull
+    @Min(value = 0, message = "Score cannot be negative")
     private Integer homeTeamScore;
 
+    @NonNull
+    @Min(value = 0, message = "Score cannot be negative")
     private Integer visitingTeamScore;
 
     private Long dateTime;
 
-    public MatchDto() {}
+    public MatchCreateDto() {}
 
-    public MatchDto(TeamDto homeTeam, TeamDto visitingTeam, Long dateTime) {
+    public MatchCreateDto(TeamDto homeTeam, TeamDto visitingTeam, Long dateTime) {
         this.homeTeam = homeTeam;
         this.visitingTeam = visitingTeam;
         this.dateTime = dateTime;
     }
 
-    public MatchDto(TeamDto homeTeam, TeamDto visitingTeam, Integer homeTeamScore, Integer visitingTeamScore, Long dateTime) {
+    public MatchCreateDto(TeamDto homeTeam, TeamDto visitingTeam, Integer homeTeamScore, Integer visitingTeamScore, Long dateTime) {
         this.homeTeam = homeTeam;
         this.visitingTeam = visitingTeam;
         this.homeTeamScore = homeTeamScore;
@@ -41,7 +46,7 @@ public class MatchDto {
         this.dateTime = dateTime;
     }
 
-    public String dateFormatted() {
+    public String dateFormated() {
         DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm").withZone(ZoneId.systemDefault());
         Instant dateTimeInst = Instant.ofEpochSecond(dateTime);
         return DATE_TIME_FORMATTER.format(dateTimeInst);
@@ -49,9 +54,8 @@ public class MatchDto {
 
     @Override
     public String toString() {
-        return "MatchDto{" +
-                "id=" + id +
-                ", homeTeam=" + homeTeam +
+        return "MatchCreateDto{" +
+                "homeTeam=" + homeTeam +
                 ", visitingTeam=" + visitingTeam +
                 ", homeTeamScore=" + homeTeamScore +
                 ", visitingTeamScore=" + visitingTeamScore +
@@ -63,7 +67,7 @@ public class MatchDto {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        MatchDto matchDto = (MatchDto) o;
+        MatchCreateDto matchDto = (MatchCreateDto) o;
         return homeTeamScore.equals(matchDto.homeTeamScore) && visitingTeamScore.equals(matchDto.visitingTeamScore) && homeTeam.equals(matchDto.homeTeam) && visitingTeam.equals(matchDto.visitingTeam) && dateTime.equals(matchDto.dateTime);
     }
 

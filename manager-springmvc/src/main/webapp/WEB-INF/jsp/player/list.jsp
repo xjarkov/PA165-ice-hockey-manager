@@ -8,18 +8,20 @@
 
 <head>
     <meta charset="utf-8">
-    <title>List of available hockey players</title>
+    <title>Free agents</title>
 </head>
 
 <my:pagetemplate>
 <jsp:attribute name="body">
-    <table class="table table-hover table-striped table-bordered">
+    <table class="table table-hover table-bordered">
         <thead>
         <tr>
             <th scope="col">Player name</th>
             <th scope="col">Offensive Strength</th>
             <th scope="col">Defensive Strength</th>
-            <th scope="col">Team</th>
+            <c:if test="${authenticatedUser.admin}">
+                <th scope="col"></th>
+            </c:if>
         </tr>
         </thead>
         <tbody>
@@ -28,20 +30,20 @@
                 <td>${player.firstName}&nbsp;${player.lastName}</td>
                 <td>${player.offensiveStrength}</td>
                 <td>${player.defensiveStrength}</td>
-                <td>
-                    <c:choose>
-                        <c:when test="${player.team != null}">
-                            <my:a href="/team/${player.team.id}"><c:out value="${player.team.name}"/></my:a>
-                        </c:when>
-                        <c:otherwise>
-                            <my:a href="/players/recruit/${player.id}" class="btn btn-success btn-sm">Assign to my team</my:a>
-                        </c:otherwise>
-                    </c:choose>
-                </td>
+                <c:if test="${authenticatedUser.admin}">
+                    <td align="right">
+                        <my:a href="/player/admin/edit/${player.id}" class="btn btn-primary btn-sm">Edit</my:a>
+                        <span></span>
+                        <my:a href="/player/admin/remove/${player.id}" class="btn btn-danger btn-sm">Remove</my:a>
+                    </td>
+                </c:if>
             </tr>
         </c:forEach>
         </tbody>
     </table>
+    <c:if test="${authenticatedUser.admin}">
+        <my:a href="/player/admin/create/" class="btn btn-success btn-sm mb-3">Add player</my:a>
+    </c:if>
 </jsp:attribute>
 </my:pagetemplate>
 

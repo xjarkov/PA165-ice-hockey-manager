@@ -1,7 +1,11 @@
 package cz.fi.muni.pa165.hockeymanager.dto;
 
 import lombok.Data;
+
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Objects;
 
 /**
@@ -12,18 +16,24 @@ public class HockeyPlayerDto {
     private Long id;
 
     @NotNull
+    @Size(min = 2, max = 20)
     private String firstName;
 
     @NotNull
+    @Size(min = 2, max = 20)
     private String lastName;
 
     @NotNull
+    @Min(0)
+    @Max(100)
     private Integer offensiveStrength;
 
     @NotNull
+    @Min(0)
+    @Max(100)
     private Integer defensiveStrength;
 
-    private TeamDto team;
+    private TeamDto team = null;
 
     public String getFullName() {
         return this.firstName + " " + this.lastName;
@@ -36,6 +46,17 @@ public class HockeyPlayerDto {
         this.lastName = lastName;
         this.offensiveStrength = offensiveStrength;
         this.defensiveStrength = defensiveStrength;
+    }
+
+    @Override
+    public String toString() {
+        return "HockeyPlayerDto{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", offensiveStrength=" + offensiveStrength +
+                ", defensiveStrength=" + defensiveStrength +
+                '}';
     }
 
     @Override

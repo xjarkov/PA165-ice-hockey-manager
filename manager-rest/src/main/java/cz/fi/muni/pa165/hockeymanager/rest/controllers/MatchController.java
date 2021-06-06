@@ -12,7 +12,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class MatchController {
@@ -22,21 +25,30 @@ public class MatchController {
     private MatchFacade matchFacade;
 
     @GetMapping(value = "/matches", produces = MediaType.APPLICATION_JSON_VALUE)
-    public final List<MatchDto> getAll() {
+    public final List<Map<String, Object>> getAll() {
         logger.info("REST Match findAllMatches()");
-        return matchFacade.findAllMatches();
+        List<MatchDto> matches = matchFacade.findAllMatches();
+        List<Map<String, Object>> matchesMapped = new ArrayList<>();
+
+        for (MatchDto match : matches) {
+            matchesMapped.add(mapMatchData(match));
+        }
+
+        return matchesMapped;
     }
 
     @GetMapping(value = "/match/nearest", produces = MediaType.APPLICATION_JSON_VALUE)
-    public final MatchDto getNearest() {
+    public final Map<String, Object> getNearest() {
         logger.info("REST Match findNearestMatch()");
-        return matchFacade.findNearestMatch();
+        MatchDto match = matchFacade.findNearestMatch();
+        return mapMatchData(match);
     }
 
     @GetMapping(value = "/match/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public final MatchDto getMatch(@PathVariable("id") Long id) {
+    public final Map<String, Object> getMatch(@PathVariable("id") Long id) {
         logger.info("REST Match findMatchById({})", id);
-        return matchFacade.findMatchById(id);
+        MatchDto match = matchFacade.findMatchById(id);
+        return mapMatchData(match);
     }
 
     @GetMapping(value = "/match/{id}/score", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -46,8 +58,27 @@ public class MatchController {
     }
 
     @GetMapping(value = "/match/{id}/winner", produces = MediaType.APPLICATION_JSON_VALUE)
-    public final TeamDto getMatchWinner(@PathVariable("id") Long id) {
+    public final Map<String, Object> getMatchWinner(@PathVariable("id") Long id) {
         logger.info("REST Match getMatchWinner({})", id);
-        return matchFacade.getWinningTeam(id);
+
+        TeamDto teamWinner = matchFacade.getWinningTeam(id);
+        Map<String, Object> winningTeam = new LinkedHashMap<>();
+
+        winningTeam.put("id", teamWinner.getId());
+        winningTeam.put("name", teamWinner.getName());
+
+        return winningTeam;
+    }
+
+    private Map<String, Object> mapMatchData(MatchDto match) {
+        Map<String, Object> matchData = new LinkedHashMap<>();
+
+        matchData.put("id", match.getId());
+        matchData.put("datetime", match.getDateTime());
+        matchData.put("visitingTeamScore", match.getVisitingTeamScore());
+        matchData.put("visitingHomeScore", match.getHomeTeamScore());
+        matchData.put("homeTeamId", match.getHomeTeam().getId());
+        matchData.put("visitingTeamId", match.getVisitingTeam().getId());
+        return matchData;
     }
 }

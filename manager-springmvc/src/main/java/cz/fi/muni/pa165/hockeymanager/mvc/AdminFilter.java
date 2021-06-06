@@ -12,6 +12,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpSession;
 import javax.servlet.annotation.WebFilter;
 
+import cz.fi.muni.pa165.hockeymanager.enums.Role;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -19,8 +20,8 @@ import org.springframework.http.HttpStatus;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebFilter(urlPatterns = {"/", "/user/*", "/player/*", "/team/*", "/match/*", "/team/my_team"})
-public class LoggedInFilter implements Filter {
+@WebFilter(urlPatterns = {"/user/admin/*", "/player/admin/*", "/team/admin/*", "/match/admin/*"})
+public class AdminFilter implements Filter {
     private final static Logger logger = LoggerFactory.getLogger(LoggedInFilter.class);
 
     @Override
@@ -36,12 +37,12 @@ public class LoggedInFilter implements Filter {
             response.setHeader("Location", redirectURL);
 
             logger.info("Redirecting to login from {}", request.getRequestURI());
-        } else if (authUser.getTeam() == null && !request.getRequestURI().equals("/pa165/user/select")) {
-            logger.info("Redirecting to team select from {}", request.getRequestURI());
-
-            String redirectURL = request.getContextPath() + "/user/select";
+        } else if (authUser.getRole() != Role.ADMIN) {
+            String redirectURL = request.getContextPath() + "/";
             response.setStatus(HttpStatus.TEMPORARY_REDIRECT.value());
             response.setHeader("Location", redirectURL);
+
+            logger.info("Redirecting to home page from {}", request.getRequestURI());
         }
 
         filterChain.doFilter(request, response);

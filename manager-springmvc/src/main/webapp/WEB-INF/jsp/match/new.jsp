@@ -12,29 +12,44 @@
 
 <my:pagetemplate>
 <jsp:attribute name="body">
-    <form:form id="matchCreate" action="${pageContext.request.contextPath}/match/create" modelAttribute="matchCreate" method="post">
-        <form:label path="homeTeam">Home team:</form:label>
-        <form:select path="homeTeam">
-            <c:forEach items="${teams}" var="team">
-                <form:option value="${team.name}" label="${team.name}"/>
-            </c:forEach>
-        </form:select><br>
+    <form:form id="matchCreate" action="${pageContext.request.contextPath}/match/admin/create" modelAttribute="matchCreate" method="POST">
+        <div class="form-group">
+            <form:label path="homeTeam">Home team:</form:label>
+            <form:select path="homeTeam">
+                <c:forEach items="${teams}" var="team">
+                    <form:option value="${team.id}" label="${team.name}"/>
+                </c:forEach>
+            </form:select>
+            <form:errors path="homeTeam" cssClass="help-block"/>
+        </div>
 
-        <form:label path="visitingTeam">Visiting team:</form:label>
-        <form:select path="visitingTeam">
-            <c:forEach items="${teams}" var="team">
-                <form:option value="${team.name}" label="${team.name}"/>
-            </c:forEach>
-        </form:select><br>
+        <div class="form-group">
+            <form:label path="visitingTeam">Visiting team:</form:label>
+            <form:select path="visitingTeam">
+                <c:forEach items="${teams}" var="team">
+                    <form:option value="${team.id}" label="${team.name}"/>
+                </c:forEach>
+            </form:select>
+            <form:errors path="visitingTeam" cssClass="help-block"/>
+        </div>
 
-        <form:label path="homeTeamScore">Home team score:</form:label>
-        <form:input type="number" min="0" path="homeTeamScore"/><br>
+        <div class="form-group">
+            <form:label path="homeTeamScore">Home team score:</form:label>
+            <form:input type="number" min="0" path="homeTeamScore"/>
+            <form:errors path="homeTeamScore" cssClass="help-block"/>
+        </div>
 
-        <form:label path="visitingTeamScore">Visiting team score:</form:label>
-        <form:input type="number" min="0" path="visitingTeamScore"/><br>
+        <div class="form-group">
+            <form:label path="visitingTeamScore">Visiting team score:</form:label>
+            <form:input type="number" min="0" path="visitingTeamScore"/>
+            <form:errors path="visitingTeamScore" cssClass="help-block"/>
+        </div>
 
-        <form:label path="dateTimeDto">Date and time:</form:label>
-        <form:input type="datetime-local" path="dateTimeDto"/><br>
+        <div class="form-group">
+            <form:label path="dateTime">Date and time:</form:label>
+            <form:input type="datetime-local" path="dateTime"/>
+            <form:errors path="dateTime" cssClass="help-block"/>
+        </div>
 
         <button class="btn btn-primary" type="submit">Create</button>
     </form:form>
