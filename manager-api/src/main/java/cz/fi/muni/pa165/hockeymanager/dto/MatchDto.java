@@ -17,9 +17,9 @@ public class MatchDto {
 
     private TeamDto visitingTeam;
 
-    private int homeTeamScore;
+    private Integer homeTeamScore;
 
-    private int visitingTeamScore;
+    private Integer visitingTeamScore;
 
     private LocalDateTime dateTimeDto;
 
@@ -31,7 +31,7 @@ public class MatchDto {
         this.dateTimeDto = dateTime;
     }
 
-    public MatchDto(TeamDto homeTeam, TeamDto visitingTeam, int homeTeamScore, int visitingTeamScore, LocalDateTime dateTime) {
+    public MatchDto(TeamDto homeTeam, TeamDto visitingTeam, Integer homeTeamScore, Integer visitingTeamScore, LocalDateTime dateTime) {
         this.homeTeam = homeTeam;
         this.visitingTeam = visitingTeam;
         this.homeTeamScore = homeTeamScore;
@@ -48,7 +48,7 @@ public class MatchDto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         MatchDto matchDto = (MatchDto) o;
-        return homeTeamScore == matchDto.homeTeamScore && visitingTeamScore == matchDto.visitingTeamScore && homeTeam.equals(matchDto.homeTeam) && visitingTeam.equals(matchDto.visitingTeam) && dateTimeDto.equals(matchDto.dateTimeDto);
+        return homeTeamScore.equals(matchDto.homeTeamScore) && visitingTeamScore.equals(matchDto.visitingTeamScore) && homeTeam.equals(matchDto.homeTeam) && visitingTeam.equals(matchDto.visitingTeam) && dateTimeDto.equals(matchDto.dateTimeDto);
     }
 
     @Override

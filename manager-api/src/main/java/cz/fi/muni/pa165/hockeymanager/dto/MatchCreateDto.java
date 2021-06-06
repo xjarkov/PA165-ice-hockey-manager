@@ -21,11 +21,11 @@ public class MatchCreateDto {
 
     @NonNull
     @Min(value = 0, message = "Score cannot be negative")
-    private int homeTeamScore;
+    private Integer homeTeamScore;
 
     @NonNull
     @Min(value = 0, message = "Score cannot be negative")
-    private int visitingTeamScore;
+    private Integer visitingTeamScore;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private LocalDateTime dateTimeDto;
@@ -55,7 +55,7 @@ public class MatchCreateDto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         MatchCreateDto matchDto = (MatchCreateDto) o;
-        return homeTeamScore == matchDto.homeTeamScore && visitingTeamScore == matchDto.visitingTeamScore && homeTeam.equals(matchDto.homeTeam) && visitingTeam.equals(matchDto.visitingTeam) && dateTimeDto.equals(matchDto.dateTimeDto);
+        return homeTeamScore.equals(matchDto.homeTeamScore) && visitingTeamScore.equals(matchDto.visitingTeamScore) && homeTeam.equals(matchDto.homeTeam) && visitingTeam.equals(matchDto.visitingTeam) && dateTimeDto.equals(matchDto.dateTimeDto);
     }
 
     @Override
