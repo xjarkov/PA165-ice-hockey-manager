@@ -4,6 +4,7 @@ import cz.fi.muni.pa165.hockeymanager.dto.HockeyPlayerCreateDto;
 import cz.fi.muni.pa165.hockeymanager.dto.HockeyPlayerDto;
 import cz.fi.muni.pa165.hockeymanager.dto.TeamDto;
 import cz.fi.muni.pa165.hockeymanager.dto.UserDto;
+import cz.fi.muni.pa165.hockeymanager.entity.User;
 import cz.fi.muni.pa165.hockeymanager.facade.HockeyPlayerFacade;
 import cz.fi.muni.pa165.hockeymanager.facade.TeamFacade;
 
@@ -107,11 +108,20 @@ public class HockeyPlayerController {
     }
 
     @GetMapping("/edit/{id}")
-    public String editPlayer() {
-        // TODO: edit player already in database
-        // should be redirected to separate page where
-        // user can edit values and then save it
-        // after that redirected to /players/list
-        return "redirect:/players/list";
+    public String editPlayerForm(@PathVariable("id") Long id, Model model, HttpSession httpSession) {
+        HockeyPlayerDto hockeyPlayerDto = hockeyPlayerFacade.findById(id);
+        model.addAttribute("hockeyPlayerDto", hockeyPlayerDto);
+        UserDto userDto = (UserDto) httpSession.getAttribute("authenticatedUser");
+        model.addAttribute("authenticatedUser", userDto);
+        return "players/edit";
     }
+
+    //    @GetMapping("/edit")
+//    public String createPlayer(Model model, HttpSession httpSession) {
+//        HockeyPlayerCreateDto hockeyPlayerCreateDto = new HockeyPlayerCreateDto();
+//        UserDto userDto = (UserDto) httpSession.getAttribute("authenticatedUser");
+//        model.addAttribute("hockeyPlayerCreateDto", hockeyPlayerCreateDto);
+//        model.addAttribute("authenticatedUser", userDto);
+//        return "players/new";
+//    }
 }
