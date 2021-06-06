@@ -38,7 +38,10 @@ public class HockeyPlayerController {
     private TeamFacade teamFacade;
 
     @GetMapping("/list")
-    public String list(Model model) {
+    public String list(Model model, HttpSession httpSession) {
+        UserDto userDto = (UserDto) httpSession.getAttribute("authenticatedUser");
+        model.addAttribute("authenticatedUser", userDto);
+
         List<HockeyPlayerDto> players = hockeyPlayerFacade.findAll();
         model.addAttribute("players", players);
         return "players/list";
@@ -135,7 +138,6 @@ public class HockeyPlayerController {
             model.addAttribute("authenticatedUser", userDto);
             return "players/edit";
         }
-        hockeyPlayerDto.setId(1L);
         hockeyPlayerFacade.update(hockeyPlayerDto);
         redirectAttributes.addFlashAttribute("alert_success", "review was updated");
         Long id = hockeyPlayerDto.getId();
