@@ -170,10 +170,22 @@ public class TeamController {
     }
 
     @GetMapping("/{id}/delete")
-    public String deleteTeam(Model model, @PathVariable Long id) {
+    public String deleteTeam(Model model, @PathVariable Long id, RedirectAttributes redirectAttributes) {
         TeamDto team = teamFacade.findTeamById(id);
 
         if (team != null) {
+            for(var match : matchFacade.findAllMatches()){
+                if(match.getHomeTeam().getId().equals(team.getId()) || match.getVisitingTeam().getId().equals(team.getId())){
+                    redirectAttributes.addFlashAttribute("failure", "Cant delete a team, that is present in a match.");
+                    return "redirect:/team/list";
+                }
+            }
+
+            if(team.getManager() != null){
+                redirectAttributes.addFlashAttribute("failure", "Cant delete a team, that has a manager.");
+                return "redirect:/team/list";
+            }
+
             //FREE PLAYERS
             if(team.getHockeyPlayers().size() > 0){
                 for(var player : team.getHockeyPlayers()){
@@ -181,34 +193,7 @@ public class TeamController {
                     hockeyPlayerFacade.update(player);
                 }
             }
-            //FREE MANAGER
-            if(team.getManager() != null){
-                UserDto manager = team.getManager();
-                manager.setTeam(null);
-                userFacade.update(manager);
-            }
 
-            //FREE MATCHES
-            for(var match : matchFacade.findAllMatches()){
-                if(match.getHomeTeam().getId().equals(team.getId()) || match.getVisitingTeam().getId().equals(team.getId())){
-                    TeamDto visitingTeam = match.getVisitingTeam();
-                    TeamDto homeTeam = match.getHomeTeam();
-
-                    Set<MatchDto> visitingMatches = visitingTeam.getMatches();
-                    Set<MatchDto> homeMatches = homeTeam.getMatches();
-
-                    visitingMatches.remove(match);
-                    homeMatches.remove(match);
-
-                    visitingTeam.setMatches(visitingMatches);
-                    homeTeam.setMatches(homeMatches);
-
-                    teamFacade.update(visitingTeam);
-                    teamFacade.update(homeTeam);
-
-                    matchFacade.remove(match);
-                }
-            }
             teamFacade.remove(teamFacade.findTeamById(id));
         }
 
@@ -221,6 +206,8 @@ public class TeamController {
         model.addAttribute("championships", Championship.values());
         return "team/new";
     }
+
+
 
     @PostMapping(value = "/create")
     public String create(@Valid @ModelAttribute("teamCreate") TeamDto teamDto,
@@ -240,12 +227,33 @@ public class TeamController {
         return "redirect:/team/list";
     }
 
+    @PostMapping(value = "/edit/{id}")
+    public String edit(@PathVariable("id") Long id,
+                       @Valid @ModelAttribute("teamDto") TeamDto teamDto,
+                         Model model,
+                         BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            for (ObjectError ge : bindingResult.getGlobalErrors()) {
+                System.err.println("ObjectError: " + ge);
+            }
+            for (FieldError fe : bindingResult.getFieldErrors()) {
+                System.err.println(fe.getField() + "_error");
+            }
+            return "/team/list";
+        }
+
+        teamDto.setId(id);
+        teamFacade.update(teamDto);
+        return "redirect:/team/list";
+    }
+
     @GetMapping("/edit/{id}")
     public String editPlayerForm(@PathVariable("id") Long id, Model model, HttpSession httpSession) {
         TeamDto teamDto = teamFacade.findTeamById(id);
         model.addAttribute("teamDto", teamDto);
         UserDto userDto = (UserDto) httpSession.getAttribute("authenticatedUser");
         model.addAttribute("authenticatedUser", userDto);
+        model.addAttribute("championships", Championship.values());
         return "team/edit";
     }
 
