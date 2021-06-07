@@ -1,21 +1,31 @@
 package cz.fi.muni.pa165.hockeymanager.mvc.controllers;
 
 import cz.fi.muni.pa165.hockeymanager.dto.HockeyPlayerDto;
+import cz.fi.muni.pa165.hockeymanager.dto.MatchDto;
 import cz.fi.muni.pa165.hockeymanager.dto.TeamDto;
 import cz.fi.muni.pa165.hockeymanager.dto.UserDto;
+import cz.fi.muni.pa165.hockeymanager.enums.Championship;
 import cz.fi.muni.pa165.hockeymanager.facade.HockeyPlayerFacade;
+import cz.fi.muni.pa165.hockeymanager.facade.MatchFacade;
 import cz.fi.muni.pa165.hockeymanager.facade.TeamFacade;
 import cz.fi.muni.pa165.hockeymanager.facade.UserFacade;
 
 import java.util.List;
+import java.util.Set;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -36,12 +46,16 @@ public class TeamController {
     @Autowired
     private HockeyPlayerFacade hockeyPlayerFacade;
 
+    @Autowired
+    private MatchFacade matchFacade;
+  
     private final static Logger logger = LoggerFactory.getLogger(TeamController.class);
 
     @GetMapping("/list")
-    public String list(Model model) {
+    public String list(Model model, HttpSession httpSession) {
         logger.info("Team list - GET");
-
+        UserDto authUser = (UserDto) httpSession.getAttribute("authenticatedUser");
+        model.addAttribute("authenticatedUser", authUser);
         List<TeamDto> teams = teamFacade.findAllTeams();
         model.addAttribute("teams", teams);
         return "team/list";
@@ -153,5 +167,109 @@ public class TeamController {
         }
 
         return "redirect:/team/my_team";
+    }
+
+    @GetMapping("/{id}/delete")
+    public String deleteTeam(Model model, @PathVariable Long id) {
+        TeamDto team = teamFacade.findTeamById(id);
+
+        if (team != null) {
+            //FREE PLAYERS
+            if(team.getHockeyPlayers().size() > 0){
+                for(var player : team.getHockeyPlayers()){
+                    player.setTeam(null);
+                    hockeyPlayerFacade.update(player);
+                }
+            }
+            //FREE MANAGER
+            if(team.getManager() != null){
+                UserDto manager = team.getManager();
+                manager.setTeam(null);
+                userFacade.update(manager);
+            }
+
+            //FREE MATCHES
+            for(var match : matchFacade.findAllMatches()){
+                if(match.getHomeTeam().getId().equals(team.getId()) || match.getVisitingTeam().getId().equals(team.getId())){
+                    TeamDto visitingTeam = match.getVisitingTeam();
+                    TeamDto homeTeam = match.getHomeTeam();
+
+                    Set<MatchDto> visitingMatches = visitingTeam.getMatches();
+                    Set<MatchDto> homeMatches = homeTeam.getMatches();
+
+                    visitingMatches.remove(match);
+                    homeMatches.remove(match);
+
+                    visitingTeam.setMatches(visitingMatches);
+                    homeTeam.setMatches(homeMatches);
+
+                    teamFacade.update(visitingTeam);
+                    teamFacade.update(homeTeam);
+
+                    matchFacade.remove(match);
+                }
+            }
+            teamFacade.remove(teamFacade.findTeamById(id));
+        }
+
+        return "redirect:/team/list";
+    }
+
+    @GetMapping(value = "/new")
+    public String newTeam(Model model) {
+        model.addAttribute("teamCreate", new TeamDto());
+        model.addAttribute("championships", Championship.values());
+        return "team/new";
+    }
+
+    @PostMapping(value = "/create")
+    public String create(@Valid @ModelAttribute("teamCreate") TeamDto teamDto,
+                         Model model,
+                         BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            for (ObjectError ge : bindingResult.getGlobalErrors()) {
+                System.err.println("ObjectError: " + ge);
+            }
+            for (FieldError fe : bindingResult.getFieldErrors()) {
+                System.err.println(fe.getField() + "_error");
+            }
+            return "/team/new";
+        }
+
+        teamFacade.create(teamDto);
+        return "redirect:/team/list";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String editPlayerForm(@PathVariable("id") Long id, Model model, HttpSession httpSession) {
+        TeamDto teamDto = teamFacade.findTeamById(id);
+        model.addAttribute("teamDto", teamDto);
+        UserDto userDto = (UserDto) httpSession.getAttribute("authenticatedUser");
+        model.addAttribute("authenticatedUser", userDto);
+        return "team/edit";
+    }
+
+    @PostMapping("/save/{id}")
+    public String updateEditedPlayer(@PathVariable("id") Long id,
+                                     @Valid @ModelAttribute("teamDto") TeamDto teamDto,
+                                     Model model,
+                                     BindingResult bindingResult,
+                                     RedirectAttributes redirectAttributes,
+                                     HttpSession httpSession) {
+        UserDto userDto = (UserDto) httpSession.getAttribute("authenticatedUser");
+        if (bindingResult.hasErrors()) {
+            for (ObjectError ge : bindingResult.getGlobalErrors()) {
+                System.err.println("ObjectError: " + ge);
+            }
+            for (FieldError fe : bindingResult.getFieldErrors()) {
+                model.addAttribute(fe.getField() + "_error", true);
+            }
+            model.addAttribute("authenticatedUser", userDto);
+            return "team/edit";
+        }
+        teamDto.setId(id);
+        teamFacade.update(teamDto);
+        redirectAttributes.addFlashAttribute("alert_success", "review was updated");
+        return "redirect:/team/list";
     }
 }
