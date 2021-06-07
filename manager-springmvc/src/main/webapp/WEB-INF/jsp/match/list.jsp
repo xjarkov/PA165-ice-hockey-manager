@@ -13,31 +13,52 @@
 
 <my:pagetemplate>
 <jsp:attribute name="body">
-    <pre>${matches}</pre>
+    <c:if test="${authenticatedUser.admin}">
+        <my:a href="/match/admin/create/" class="btn btn-success btn-sm mb-3">Create new match</my:a>
+        <br>
+    </c:if>
     <table class="table table-hover table-striped table-bordered">
         <thead>
         <tr>
             <th scope="col">Home team</th>
             <th scope="col">Visiting team</th>
+            <th scope="col">Score</th>
             <th scope="col">Date</th>
-            <th scope="col" colspan="2">Score</th>
         </tr>
         </thead>
         <tbody>
         <c:forEach items="${matches}" var="match">
             <tr>
-                <td><my:a href="/team/${match.homeTeam.id}"><c:out value="${match.homeTeam.name}"/></my:a></td>
-                <td><my:a href="/team/${match.visitingTeam.id}"><c:out value="${match.visitingTeam.name}"/></my:a></td>
+                <td>
+                    <my:a href="/team/${match.homeTeam.id}"><c:out value="${match.homeTeam.name}"/></my:a>
+                    <c:if test="${match.homeTeamScore != null && match.homeTeamScore > match.visitingTeamScore}">
+                        <span class="badge bg-success">WIN</span>
+                    </c:if>
+                </td>
+                <td>
+                    <my:a href="/team/${match.visitingTeam.id}"><c:out value="${match.visitingTeam.name}"/></my:a>
+                    <c:if test="${match.visitingTeamScore != null && match.homeTeamScore < match.visitingTeamScore}">
+                        <span class="badge bg-success">WIN</span>
+                    </c:if>
+                </td>
+                <td>
+                    <c:choose>
+                        <c:when test="${match.visitingTeamScore != null && match.homeTeamScore != null}">
+                            ${match.homeTeamScore} : ${match.visitingTeamScore}
+                        </c:when>
+                        <c:otherwise>
+                            Not played
+                             <c:if test="${authenticatedUser.admin}">
+                                (<a href="${pageContext.request.contextPath}/match/admin/simulate/${match.id}">Simulate</a>)
+                            </c:if>
+                        </c:otherwise>
+                    </c:choose>
+                </td>
                 <td>${match.dateFormatted()}</td>
-                <td>${match.homeTeamScore}</td>
-                <td>${match.visitingTeamScore}</td>
             </tr>
         </c:forEach>
         </tbody>
     </table>
-    <c:if test="${authenticatedUser.admin}">
-        <my:a href="/match/admin/create/" class="btn btn-success btn-sm mb-3">Add match</my:a>
-    </c:if>
 </jsp:attribute>
 </my:pagetemplate>
 
