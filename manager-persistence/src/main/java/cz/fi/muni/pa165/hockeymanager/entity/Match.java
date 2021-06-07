@@ -7,6 +7,7 @@ import javax.validation.constraints.NotNull;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.lang.Nullable;
 
 /**
  * @author Lukas Machalek (485196)
@@ -28,12 +29,12 @@ public class Match {
     @Getter
     private Team visitingTeam;
 
-    @NotNull
+    @Nullable
     @Getter
     @Setter
     private Integer homeTeamScore;
 
-    @NotNull
+    @Nullable
     @Getter
     @Setter
     private Integer visitingTeamScore;

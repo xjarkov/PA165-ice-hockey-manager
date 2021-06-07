@@ -7,9 +7,7 @@ import cz.fi.muni.pa165.hockeymanager.dto.UserDto;
 import cz.fi.muni.pa165.hockeymanager.facade.MatchFacade;
 import cz.fi.muni.pa165.hockeymanager.facade.TeamFacade;
 
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -95,15 +93,45 @@ public class MatchController {
                 System.err.println(fe.getField() + "_error");
                 logger.info("Match create - POST - {}", fe.getField());
             }
-            return "match/list";
+            return "redirect:/match/list";
 
         }
 
         logger.info("{}", matchDto);
+        Long matchId = matchFacade.create(matchDto);
 
-        matchFacade.create(matchDto);
-        logger.info("Match create - POST - New match created successfully");
-        return "match/list";
+        TeamDto homeTeam = teamFacade.findTeamById(matchDto.getHomeTeam().getId());
+        Set<MatchDto> matchesHomeTeam = homeTeam.getMatches();
+        matchesHomeTeam.add(matchFacade.findMatchById(matchId));
+        homeTeam.setMatches(matchesHomeTeam);
+
+        TeamDto visitingTeam = teamFacade.findTeamById(matchDto.getVisitingTeam().getId());
+        Set<MatchDto> matchesVisitingTeam = visitingTeam.getMatches();
+        matchesVisitingTeam.add(matchFacade.findMatchById(matchId));
+        visitingTeam.setMatches(matchesVisitingTeam);
+
+        teamFacade.update(homeTeam);
+        teamFacade.update(visitingTeam);
+
+        return "redirect:/match/list";
+    }
+
+    @GetMapping("admin/simulate/{id}")
+    public String simulateMatchById(@PathVariable Long id, Model model, RedirectAttributes redirectAttributes) {
+        logger.info("Match simulate id:{} - GET", id);
+
+        MatchDto matchDto = matchFacade.findMatchById(id);
+
+        if (matchDto == null || matchDto.getHomeTeamScore() != null || matchDto.getVisitingTeamScore() != null) {
+            return "redirect:/match/list";
+        }
+
+        Random random = new Random();
+        matchDto.setHomeTeamScore(random.nextInt(10 - 1));
+        matchDto.setVisitingTeamScore(random.nextInt(10 - 1));
+        matchFacade.update(matchDto);
+
+        return "redirect:/match/list";
     }
 
     @ExceptionHandler

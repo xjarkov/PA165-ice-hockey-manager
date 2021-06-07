@@ -64,7 +64,7 @@ public class MatchDto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         MatchDto matchDto = (MatchDto) o;
-        return homeTeamScore.equals(matchDto.homeTeamScore) && visitingTeamScore.equals(matchDto.visitingTeamScore) && homeTeam.equals(matchDto.homeTeam) && visitingTeam.equals(matchDto.visitingTeam) && dateTime.equals(matchDto.dateTime);
+        return homeTeam.equals(matchDto.homeTeam) && visitingTeam.equals(matchDto.visitingTeam) && dateTime.equals(matchDto.dateTime);
     }
 
     @Override

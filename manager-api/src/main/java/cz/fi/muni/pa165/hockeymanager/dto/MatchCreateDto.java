@@ -2,6 +2,7 @@ package cz.fi.muni.pa165.hockeymanager.dto;
 
 import lombok.Data;
 import lombok.NonNull;
+import org.springframework.lang.Nullable;
 
 import javax.validation.constraints.Min;
 import java.time.Instant;
@@ -20,11 +21,11 @@ public class MatchCreateDto {
     @NonNull
     private TeamDto visitingTeam;
 
-    @NonNull
+    @Nullable
     @Min(value = 0, message = "Score cannot be negative")
     private Integer homeTeamScore;
 
-    @NonNull
+    @Nullable
     @Min(value = 0, message = "Score cannot be negative")
     private Integer visitingTeamScore;
 
@@ -68,7 +69,7 @@ public class MatchCreateDto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         MatchCreateDto matchDto = (MatchCreateDto) o;
-        return homeTeamScore.equals(matchDto.homeTeamScore) && visitingTeamScore.equals(matchDto.visitingTeamScore) && homeTeam.equals(matchDto.homeTeam) && visitingTeam.equals(matchDto.visitingTeam) && dateTime.equals(matchDto.dateTime);
+        return homeTeam.equals(matchDto.homeTeam) && visitingTeam.equals(matchDto.visitingTeam) && dateTime.equals(matchDto.dateTime);
     }
 
     @Override
