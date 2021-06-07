@@ -24,6 +24,9 @@
 
         <button class="btn btn-primary" type="submit">Save</button>
     </form:form>
+    <c:if test="${not empty failure}">
+        <div class="alert alert-danger" role="alert"><c:out value="${failure}"/></div>
+    </c:if>
 </jsp:attribute>
 </my:pagetemplate>
 </html>

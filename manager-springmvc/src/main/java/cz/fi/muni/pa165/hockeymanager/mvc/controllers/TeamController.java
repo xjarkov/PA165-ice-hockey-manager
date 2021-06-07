@@ -212,7 +212,14 @@ public class TeamController {
     @PostMapping(value = "/create")
     public String create(@Valid @ModelAttribute("teamCreate") TeamDto teamDto,
                          Model model,
-                         BindingResult bindingResult) {
+                         BindingResult bindingResult,
+                         RedirectAttributes redirectAttributes) {
+        for(TeamDto team : teamFacade.findAllTeams()){
+            if(team.getName().equals(teamDto.getName())){
+                redirectAttributes.addFlashAttribute("failure", "Can't create team with already existing name.");
+                return "redirect:/team/new";
+            }
+        }
         if (bindingResult.hasErrors()) {
             for (ObjectError ge : bindingResult.getGlobalErrors()) {
                 System.err.println("ObjectError: " + ge);
@@ -231,7 +238,14 @@ public class TeamController {
     public String edit(@PathVariable("id") Long id,
                        @Valid @ModelAttribute("teamDto") TeamDto teamDto,
                          Model model,
-                         BindingResult bindingResult) {
+                         BindingResult bindingResult,
+                       RedirectAttributes redirectAttributes) {
+        for(TeamDto team : teamFacade.findAllTeams()){
+            if(team.getName().equals(teamDto.getName()) && !teamDto.getName().equals(teamFacade.findTeamById(id).getName())){
+                redirectAttributes.addFlashAttribute("failure", "Can't change name to already existing one.");
+                return "redirect:/team/edit/" + id.toString();
+            }
+        }
         if (bindingResult.hasErrors()) {
             for (ObjectError ge : bindingResult.getGlobalErrors()) {
                 System.err.println("ObjectError: " + ge);
