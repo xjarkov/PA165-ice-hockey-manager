@@ -255,7 +255,7 @@ public class TeamController {
             }
             return "/team/list";
         }
-
+        teamDto.setManager(teamFacade.findTeamById(id).getManager());
         teamDto.setId(id);
         teamFacade.update(teamDto);
         return "redirect:/team/list";
