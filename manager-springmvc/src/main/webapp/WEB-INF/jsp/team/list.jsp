@@ -49,6 +49,9 @@
     <c:if test="${authenticatedUser.admin}">
         <my:a href="/team/new/" class="btn btn-success btn-sm mb-3">Add team</my:a>
     </c:if>
+    <c:if test="${not empty failure}">
+        <div class="alert alert-danger" role="alert"><c:out value="${failure}"/></div>
+    </c:if>
 </jsp:attribute>
 </my:pagetemplate>
 
