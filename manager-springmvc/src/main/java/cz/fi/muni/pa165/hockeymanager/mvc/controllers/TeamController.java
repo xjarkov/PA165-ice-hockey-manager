@@ -207,6 +207,8 @@ public class TeamController {
         return "team/new";
     }
 
+
+
     @PostMapping(value = "/create")
     public String create(@Valid @ModelAttribute("teamCreate") TeamDto teamDto,
                          Model model,
@@ -225,12 +227,33 @@ public class TeamController {
         return "redirect:/team/list";
     }
 
+    @PostMapping(value = "/edit/{id}")
+    public String edit(@PathVariable("id") Long id,
+                       @Valid @ModelAttribute("teamDto") TeamDto teamDto,
+                         Model model,
+                         BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            for (ObjectError ge : bindingResult.getGlobalErrors()) {
+                System.err.println("ObjectError: " + ge);
+            }
+            for (FieldError fe : bindingResult.getFieldErrors()) {
+                System.err.println(fe.getField() + "_error");
+            }
+            return "/team/list";
+        }
+
+        teamDto.setId(id);
+        teamFacade.update(teamDto);
+        return "redirect:/team/list";
+    }
+
     @GetMapping("/edit/{id}")
     public String editPlayerForm(@PathVariable("id") Long id, Model model, HttpSession httpSession) {
         TeamDto teamDto = teamFacade.findTeamById(id);
         model.addAttribute("teamDto", teamDto);
         UserDto userDto = (UserDto) httpSession.getAttribute("authenticatedUser");
         model.addAttribute("authenticatedUser", userDto);
+        model.addAttribute("championships", Championship.values());
         return "team/edit";
     }
 
